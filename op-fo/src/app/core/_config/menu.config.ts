@@ -1,5 +1,11 @@
 import { KeycloakService } from 'keycloak-angular';
 import { pdaMenuModule } from "./menu/pda.menu";
+import { administrationMenuModule } from "./menu/administration.menu";
+import { agentMenuModule } from "./menu/agent.menu";
+import { organizationAdminMenuModule } from "./menu/organization_admin.menu";
+import { organizationUserMenuModule } from "./menu/organization_user.menu";
+import { centerManagerMenuModule } from "./menu/center_manager.menu";
+
 
 export class MenuConfig {
 
@@ -44,6 +50,31 @@ export class MenuConfig {
       this.defaults.aside.items.splice(1, 0, pdaMenuModule);
     }
 
+    if(this.keycloakService.isUserInRole('administration_module_view')){
+      this.defaults.header.items.splice(1, 0, administrationMenuModule);
+      this.defaults.aside.items.splice(1, 0, administrationMenuModule);
+    }
+
+    if(this.keycloakService.isUserInRole('agent_module_view'))
+    {
+      this.defaults.header.items.splice(1, 0, agentMenuModule);
+      this.defaults.aside.items.splice(1, 0, agentMenuModule);
+    }
+
+    if(this.keycloakService.isUserInRole('organization_admin_module_view')){
+      this.defaults.header.items.splice(1, 0, organizationAdminMenuModule);
+      this.defaults.aside.items.splice(1, 0, organizationAdminMenuModule);
+    }
+
+    if(this.keycloakService.isUserInRole('organization_user_module_view')){
+      this.defaults.header.items.splice(1, 0, organizationUserMenuModule);
+      this.defaults.aside.items.splice(1, 0, organizationUserMenuModule);
+    }
+
+    if(this.keycloakService.isUserInRole('center_manager_module_view')){
+      this.defaults.header.items.splice(1, 0, centerManagerMenuModule);
+      this.defaults.aside.items.splice(1, 0, centerManagerMenuModule);
+    }
    
     this.defaults.header.items = this.prepareComponentsUrls(
       this.defaults.header.items

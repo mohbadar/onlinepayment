@@ -10,8 +10,8 @@ import {
 // Add here your keycloak configuration information
 const keycloakConfig: KeycloakConfig = {
   url: "http://localhost:8080/auth",
-  realm: "nid_service_kit",
-  clientId: "pda",
+  realm: "onlinepament",
+  clientId: "op",
 };
 
 const keycloakInitOptions: KeycloakInitOptions = {

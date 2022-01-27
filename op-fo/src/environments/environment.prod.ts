@@ -6,8 +6,8 @@ import { KeycloakConfig, KeycloakInitOptions, KeycloakOptions } from 'keycloak-a
 // Add here your keycloak configuration information
 const keycloakConfig: KeycloakConfig = {
     url: 'http://149.54.11.58:8080/auth',
-    realm: 'nid_service_kit',
-    clientId: 'pda'
+    realm: 'onlinepayment',
+    clientId: 'op'
 };
 
 const keycloakInitOptions: KeycloakInitOptions = {
