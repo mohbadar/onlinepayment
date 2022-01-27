@@ -20,5 +20,5 @@ public class Tariff extends BaseEntity {
     private String name;
     private String type;
     private String code;
-    private String orgnizationId;
+    private String organizationId;
 }

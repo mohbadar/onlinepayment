@@ -6,6 +6,7 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 
 @Entity
 @Table()
@@ -17,4 +18,16 @@ import javax.persistence.Table;
 @ToString
 @Where(clause = "deleted is false")
 public class BillPayment extends BaseEntity {
+    private String agentId;
+    private String billId;
+    private String tarrifId;
+    private String channelId;
+    private String centerId;
+    private String organizationId;
+    private String billTypeId;
+    private String feeModelId;
+    private String paymentDate;
+    private BigDecimal amount;
+    private String cycleYear;
+    private String cycle;
 }

@@ -17,4 +17,6 @@ import javax.persistence.Table;
 @ToString
 @Where(clause = "deleted is false")
 public class CenterUserRelation extends BaseEntity {
+    private String userId;
+    private String centerId;
 }

@@ -17,4 +17,9 @@ import javax.persistence.Table;
 @ToString
 @Where(clause = "deleted is false")
 public class ReconciliationTracker extends BaseEntity {
+    private String centerId;
+    private String organizationId;
+    private String result;
+    private String type; // centerbased / organizationbased
+    private String date;
 }

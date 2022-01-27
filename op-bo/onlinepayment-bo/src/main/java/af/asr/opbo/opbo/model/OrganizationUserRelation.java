@@ -16,5 +16,7 @@ import javax.persistence.Table;
 @Builder
 @ToString
 @Where(clause = "deleted is false")
-public class StatementTracker extends BaseEntity {
+public class OrganizationUserRelation extends BaseEntity {
+    private String userId;
+    private String organizationId;
 }

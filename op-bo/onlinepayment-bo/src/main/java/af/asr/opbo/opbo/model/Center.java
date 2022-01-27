@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @ToString
 @Where(clause = "deleted is false")
 public class Center extends BaseEntity {
-    private String orgnizationId;
+    private String organizationId;
     private String parentCenter;
     private String name;
     private String code;

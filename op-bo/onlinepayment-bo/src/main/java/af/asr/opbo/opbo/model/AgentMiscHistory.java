@@ -17,4 +17,6 @@ import javax.persistence.Table;
 @ToString
 @Where(clause = "deleted is false")
 public class AgentMiscHistory extends BaseEntity {
+    private String agentId;
+    private String changes;
 }

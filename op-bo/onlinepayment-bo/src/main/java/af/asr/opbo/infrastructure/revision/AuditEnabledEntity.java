@@ -51,6 +51,7 @@ public class AuditEnabledEntity {
 
     @JsonIgnore
     private Date deletedAt;
+
     @JsonIgnore
     @LastModifiedBy
     private String deletedBy;
