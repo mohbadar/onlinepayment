@@ -1,0 +1,98 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/op-fo/dist
+/op-fo/tmp
+/op-fo/out-tsc
+/op-fo/report.*
+
+# dependencies
+/op-fo/node_modules
+
+# IDEs and editors
+/op-fo/.idea
+/op-fo/.project
+/op-fo/.classpath
+/op-fo/.c9/
+/op-fo/*.launch
+/op-fo/.settings/
+/op-fo/*.sublime-workspace
+
+# IDE - VSCode
+/op-fo/.vscode/*
+/op-fo/!.vscode/settings.json
+/op-fo/!.vscode/tasks.json
+/op-fo/!.vscode/launch.json
+/op-fo/!.vscode/extensions.json
+
+# misc
+/op-fo/.sass-cache
+/op-fo/connect.lock
+/op-fo/coverage
+/op-fo/libpeerconnection.log
+/op-fo/npm-debug.log
+/op-fo/testem.log
+/op-fo/typings
+
+# e2e
+/op-fo/e2e/*.js
+/op-fo/e2e/*.map
+
+# System Files
+/op-fo/.DS_Store
+/op-fo/Thumbs.db
+
+
+
+HELP.md
+/op-bo/target/
+/op-bo/logs/
+/op-bo/!.mvn/wrapper/maven-wrapper.jar
+/op-bo/!**/src/main/**
+/op-bo/!**/src/test/**
+
+# remove anar framework libraries and modules form breshna repo
+/op-bo/logs
+/op-bo/anar-lib-api
+/op-bo/anar-lib-audit
+/op-bo/anar-lib-core
+/op-bo/anar-lib-cors
+/op-bo/anar-lib-crypto-jce
+/op-bo/anar-lib-date
+/op-bo/anar-lib-file
+/op-bo/anar-lib-hmac
+/op-bo/anar-lib-logger
+/op-bo/anar-lib-mail
+/op-bo/anar-lib-workflow
+/op-bo/anar-lib-metrics
+/op-bo/anar-lib-reportutil
+/op-bo/anar-lib-json
+/op-bo/anar-lib-math
+/op-bo/anar-lib-jasper
+/op-bo/anar-*
+/op-bo/anar/
+### STS ###
+/op-bo/.apt_generated
+/op-bo/.classpath
+/op-bo/.factorypath
+/op-bo/.project
+/op-bo/.settings
+/op-bo/.springBeans
+/op-bo/.sts4-cache
+
+### IntelliJ IDEA ###
+/op-bo/.idea
+/op-bo/*.iws
+/op-bo/*.iml
+/op-bo/*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+/op-bo/.vscode/

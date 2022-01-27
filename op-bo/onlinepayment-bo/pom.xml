@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.2.3.RELEASE</version>
+		<relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>af.gov.anar.ebreshna</groupId>
+	<artifactId>onlinepayment-bo-core</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>onlinepayment-bo-core</name>
+	<description>Online Payment System BO</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<tss.version>0.3.0</tss.version>
+		<keycloak.version>11.0.0</keycloak.version>
+		<springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+		<spring.retry.version>1.2.4.RELEASE</spring.retry.version>
+		<kafka.connect.client.version>2.1.0</kafka.connect.client.version>
+		<kafka.version>2.2.1</kafka.version>
+		<modelmapper.version>2.1.1</modelmapper.version>
+<!--		<apache.camel.version>3.0.0-RC3</apache.camel.version>-->
+	</properties>
+
+	<dependencies>
+
+
+		<!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>3.0.0-RC1</version>
+		</dependency>
+
+
+		<!-- Camel Starter -->
+		<!-- https://mvnrepository.com/artifact/org.apache.camel/camel-spring-boot-starter -->
+<!--		<dependency>-->
+<!--			<groupId>org.apache.camel</groupId>-->
+<!--			<artifactId>camel-spring-boot-starter</artifactId>-->
+<!--			<version>${apache.camel.version}</version>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--			<groupId>org.apache.camel</groupId>-->
+<!--			<artifactId>camel-servlet-starter</artifactId>-->
+<!--			<version>${apache.camel.version}</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.apache.camel</groupId>-->
+<!--			<artifactId>camel-core</artifactId>-->
+<!--			<version>${apache.camel.version}</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.apache.camel</groupId>-->
+<!--			<artifactId>camel-gson</artifactId>-->
+<!--			<version>${apache.camel.version}</version>-->
+<!--		</dependency>-->
+
+
+		<!-- https://mvnrepository.com/artifact/net.kaczmarzyk/specification-arg-resolver -->
+		<dependency>
+			<groupId>net.kaczmarzyk</groupId>
+			<artifactId>specification-arg-resolver</artifactId>
+			<version>2.6.2</version>
+		</dependency>
+
+
+		<!--		Production Reading Matrics-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>io.micrometer</groupId>-->
+<!--			<artifactId>micrometer-registry-elastic</artifactId>-->
+<!--		</dependency>-->
+
+		<dependency>
+			<groupId>com.github.eloyzone</groupId>
+			<artifactId>jalali-calendar</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.keycloak</groupId>
+			<artifactId>keycloak-admin-client</artifactId>
+			<version>11.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.keycloak</groupId>
+			<artifactId>keycloak-authz-client</artifactId>
+			<version>${keycloak.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+<!--		<dependency>-->
+<!--			<groupId>org.keycloak</groupId>-->
+<!--			<artifactId>keycloak-spring-security-adapter</artifactId>-->
+<!--			<version>${keycloak.version}</version>-->
+<!--		</dependency>-->
+		<!-- <dependency>
+			<groupId>af.gov.anar.lib</groupId>
+			<artifactId>anar-lib-mail</artifactId>
+			<version>${project.version}</version>
+		</dependency> -->
+
+
+<!--		<dependency>-->
+<!--			<groupId>af.gov.anar.lib</groupId>-->
+<!--			<artifactId>anar-lib-math</artifactId>-->
+<!--			<version>${project.version}</version>-->
+<!--		</dependency>-->
+		<!-- <dependency>
+			<groupId>af.gov.anar.lib</groupId>
+			<artifactId>anar-lib-core</artifactId>
+			<version>${project.version}</version>
+		</dependency> -->
+
+<!--		<dependency>-->
+<!--			<groupId>af.gov.anar.lib</groupId>-->
+<!--			<artifactId>anar-lib-kafka</artifactId>-->
+<!--			<version>${project.version}</version>-->
+<!--		</dependency>-->
+
+
+<!--		Migration Section-->
+
+		<!--Kafka Connect Framework -->
+		<dependency>
+			<groupId>org.sourcelab</groupId>
+			<artifactId>kafka-connect-client</artifactId>
+			<version>${kafka.connect.client.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.logging.log4j</groupId>
+					<artifactId>log4j-slf4j-impl</artifactId>
+<!--					<version>${kafka.connect.client.version}</version>-->
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+
+		<!--		End Migration Section-->
+
+		<dependency>
+			<groupId>af.gov.anar.lib</groupId>
+			<artifactId>anar-lib-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+<!--		<dependency>-->
+<!--			<groupId>af.gov.anar.lib</groupId>-->
+<!--			<artifactId>anar-lib-metrics</artifactId>-->
+<!--			<version>${project.version}</version>-->
+<!--		</dependency>-->
+
+		<dependency>
+			<groupId>af.gov.anar.lib</groupId>
+			<artifactId>anar-lib-crypto-jce</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>af.gov.anar.lib</groupId>
+			<artifactId>anar-lib-hmac</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>af.gov.anar.lib</groupId>
+			<artifactId>anar-lib-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+<!--		<dependency>-->
+<!--			<groupId>af.gov.anar.lib</groupId>-->
+<!--			<artifactId>anar-lib-audit</artifactId>-->
+<!--			<version>${project.version}</version>-->
+<!--		</dependency>-->
+
+		<dependency>
+			<groupId>af.gov.anar.lib</groupId>
+			<artifactId>anar-lib-file</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+          <!-- https://mvnrepository.com/artifact/com.github.xuwei-k/html2image -->
+        <dependency>
+            <groupId>com.github.xuwei-k</groupId>
+            <artifactId>html2image</artifactId>
+            <version>0.1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.jhonnymertz</groupId>
+            <artifactId>java-wkhtmltopdf-wrapper</artifactId>
+            <version>1.1.12-RELEASE</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.github.jknack/handlebars -->
+        <dependency>
+            <groupId>com.github.jknack</groupId>
+            <artifactId>handlebars</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+
+
+                    <!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest-all -->
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-all</artifactId>
+                <version>1.3</version>
+                <scope>test</scope>
+            </dependency>
+
+
+
+<!--		<dependency>-->
+<!--			<groupId>af.gov.anar.lib</groupId>-->
+<!--			<artifactId>anar-lib-cors</artifactId>-->
+<!--			<version>${project.version}</version>-->
+<!--		</dependency>-->
+
+		<!-- <dependency>
+			<groupId>af.gov.anar.lib</groupId>
+			<artifactId>anar-lib-workflow</artifactId>
+			<version>${project.version}</version>
+		</dependency> -->
+
+<!--		<dependency>-->
+<!--			<groupId>af.gov.anar.lib</groupId>-->
+<!--			<artifactId>anar-lib-reportutil</artifactId>-->
+<!--			<version>${project.version}</version>-->
+<!--		</dependency>-->
+
+
+		<dependency>
+			<groupId>af.gov.anar.lib</groupId>
+			<artifactId>anar-lib-logger</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>af.gov.anar.lib</groupId>
+			<artifactId>anar-lib-date</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+        <!-- <dependency>
+	        <groupId>af.gov.anar.lib</groupId>
+	        <artifactId>anar-lib-pdf</artifactId>
+            <version>${project.version}</version>
+		</dependency> -->
+
+        <dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>${modelmapper.version}</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.keycloak/keycloak-spring-boot-starter -->
+		<dependency>
+			<groupId>org.keycloak</groupId>
+			<artifactId>keycloak-spring-boot-starter</artifactId>
+			<version>${keycloak.version}</version>
+		</dependency>
+
+
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-security</artifactId>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-validation</artifactId>-->
+<!--		</dependency>-->
+
+		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+<!--		<dependency>-->
+<!--			<groupId>com.google.guava</groupId>-->
+<!--			<artifactId>guava</artifactId>-->
+<!--			<version>30.0-jre</version>-->
+<!--		</dependency>-->
+
+
+		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${springfox-swagger2.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${springfox-swagger2.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.retry/spring-retry -->
+		<dependency>
+			<groupId>org.springframework.retry</groupId>
+			<artifactId>spring-retry</artifactId>
+			<version>1.2.5.RELEASE</version>
+		</dependency>
+
+		<!--AOP-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
+
+		<!-- spring-data-envers -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-envers</artifactId>
+		</dependency>
+
+
+
+		<!-- Spring Framework Caching Support -->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-cache</artifactId>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>com.hazelcast</groupId>-->
+<!--			<artifactId>hazelcast</artifactId>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>com.hazelcast</groupId>-->
+<!--			<artifactId>hazelcast-spring</artifactId>-->
+<!--		</dependency>-->
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+<!--			<exclusions>-->
+<!--				<exclusion>-->
+<!--					<groupId>org.springframework.boot</groupId>-->
+<!--					<artifactId>spring-boot-starter-logging</artifactId>-->
+<!--				</exclusion>-->
+<!--			</exclusions>-->
+		</dependency>
+
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jul-to-slf4j</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>log4j-over-slf4j</artifactId>
+			</dependency>
+
+
+		<dependency>
+			<groupId>it.ozimov</groupId>
+			<artifactId>spring-boot-email-core</artifactId>
+			<version>0.6.3</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.ullink.slack/simpleslackapi -->
+		<dependency>
+			<groupId>com.ullink.slack</groupId>
+			<artifactId>simpleslackapi</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+
+
+
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-log4j2</artifactId>-->
+<!--		</dependency>-->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.2.10</version>
+			<scope>runtime</scope>
+		</dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.vladmihalcea/hibernate-types-52 -->
+		<dependency>
+			<groupId>com.vladmihalcea</groupId>
+			<artifactId>hibernate-types-52</artifactId>
+			<version>2.9.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.github.microsoft/TSS.Java -->
+		<dependency>
+			<groupId>com.github.microsoft</groupId>
+			<artifactId>TSS.Java</artifactId>
+			<version>${tss.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>af.gov.anar.lib</groupId>
+			<artifactId>anar-lib-jasper</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+	</dependencies>
+    
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>30.0-jre</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

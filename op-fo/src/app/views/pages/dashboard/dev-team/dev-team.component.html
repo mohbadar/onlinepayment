@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-xl-12">
+    <div class="row row-full-height">
+      <div class="col-sm-12 col-md-3 col-lg-3" *ngFor="let m of modules">
+        <kt-portlet [class]="'kt-portlet--border-bottom-brand'">
+          <kt-portlet-body [class]="'kt-portlet__body--fluid'">
+            <a class="m__wrapper text-center">
+              <div class="feature_icon">
+                <img
+                  [src]="'../../../../assets/media/dev/' + m.icon"
+                  alt=""
+                  srcset=""
+                />
+              </div>
+              <div class="__title">
+                <h5>{{ m.name }}</h5>
+                <h5>{{ m.position }}</h5>
+              </div>
+            </a>
+          </kt-portlet-body>
+        </kt-portlet>
+      </div>
+    </div>
+  </div>
+</div>

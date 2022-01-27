@@ -1,0 +1,52 @@
+HELP.md
+target/
+logs/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+# remove anar framework libraries and modules form breshna repo
+/logs
+/anar-lib-api
+/anar-lib-audit
+/anar-lib-core
+/anar-lib-cors
+/anar-lib-crypto-jce
+/anar-lib-date
+/anar-lib-file
+/anar-lib-hmac
+/anar-lib-logger
+/anar-lib-mail
+/anar-lib-workflow
+/anar-lib-metrics
+/anar-lib-reportutil
+/anar-lib-json
+/anar-lib-math
+/anar-lib-jasper
+/anar-*
+/anar/
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/

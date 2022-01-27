@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.2.3.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>af.gov.anar</groupId>
+	<artifactId>onlinepayment-bo</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>ONLINEPAYMENT_BO</name>
+	<description>Online Payment System BackOffice</description>
+	<packaging>pom</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<tss.version>0.3.0</tss.version>
+		<keycloak.version>8.0.1</keycloak.version>
+		<springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+		<spring.retry.version>1.2.4.RELEASE</spring.retry.version>
+	</properties>
+
+	<modules>
+        <module>anar-lib-mail</module>
+        <module>anar-lib-api</module>
+		<module>anar-lib-crypto-jce</module>
+		<module>anar-lib-hmac</module>
+		<module>anar-lib-core</module>
+		<module>anar-lib-audit</module>
+		<module>anar-lib-file</module>
+		<module>anar-lib-json</module>
+		<module>anar-lib-logger</module>
+		<module>anar-lib-date</module>
+		<module>onlinepayment-bo</module>
+    </modules>
+</project>

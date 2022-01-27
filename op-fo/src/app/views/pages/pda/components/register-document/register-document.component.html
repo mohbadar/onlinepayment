@@ -1,0 +1,75 @@
+<kt-portlet class="_p_collections">
+  <kt-portlet-body>
+    <div class="kt-heading kt-heading--md">
+      {{'NEW_NID_FORM'|translate}}
+    </div>
+    <div class="row">
+      <div class=" col-lg-12">
+
+
+
+        <form [formGroup]="myForm" (ngSubmit)="submit()" class="kt-form" id="kt_form">
+          <!--begin: Form Wizard Step 1-->
+          <div class="kt-wizard-v2__content" data-ktwizard-type="step-content" data-ktwizard-state="current">
+
+            <div class="kt-form__section kt-form__section--first">
+              <div class="kt-wizard-v2__form">
+
+                <div class="form-group">
+                  <label>{{'FAMILY_NO'|translate}}</label><br />
+                  <input type="text" class="form-control" formControlName="familyNo" placeholder="00000-00-0000" />
+                  <div
+                    *ngIf="!myForm.controls.familyNo.valid && (myForm.controls.familyNo.dirty ||myForm.controls.familyNo.touched)"
+                    class="error">
+                    <div *ngIf="myForm.controls.familyNo.errors.invalidMsg">
+                      {{myForm.controls.familyNo.errors?.invalidMsg}}
+                    </div>
+                  </div>
+
+                  <print-error [control]="myForm.get('familyNo')"></print-error>
+                </div>
+
+
+                <div class="form-group">
+                  <label>{{'ONLINE_FORM_FAMILY_NO'|translate}}</label><br />
+                  <input type="text" class="form-control" formControlName="onlineFormFamilyNo" />
+                  <print-error [control]="myForm.get('onlineFormFamilyNo')"></print-error>
+                </div>
+
+                <div class="form-group">
+                  <label>{{'FILE'|translate}}</label><br />
+                  <input type="file" accept="application/pdf" class="form-control" (change)="onFileSelected($event)"
+                    formControlName="file" />
+                  <div
+                    *ngIf="!myForm.controls.file.valid && (myForm.controls.file.dirty ||myForm.controls.file.touched)"
+                    class="error">
+                    <div *ngIf="myForm.controls.file.errors.invalidMsg">
+                      {{myForm.controls.file.errors?.invalidMsg}}
+                    </div>
+                  </div>
+                  <print-error [control]="myForm.get('file')"></print-error>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--end: Form Wizard Step 1-->
+
+          <!--begin: Form Actions -->
+          <div class="kt-form__actions">
+            <button class="btn btn-primary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+              data-ktwizard-type="action-submit" type="submit" [disabled]="myForm.invalid">
+              {{'STORE'|translate}}
+            </button>
+          </div>
+          <!--end: Form Actions -->
+        </form>
+
+
+      </div>
+    </div>
+    <hr>
+
+  </kt-portlet-body>
+</kt-portlet>
+<ngx-spinner></ngx-spinner>

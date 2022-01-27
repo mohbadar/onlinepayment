@@ -1,0 +1,267 @@
+# How deploy on Ubuntu Server
+- ssh to the aws server
+- Run: sudo apt update
+
+
+Install NGNIX
+- sudo apt install nginx
+- sudo ufw app list
+- sudo service nginx status
+
+########################################
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    root /var/www/html/ebreshna_web;
+
+    # Add index.php to the list if you are using PHP
+    index index.html index.htm index.nginx-debian.html;
+
+    server_name _;
+
+    proxy_redirect           off;
+    proxy_set_header         X-Real-IP $remote_addr;
+    proxy_set_header         X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header         Host $http_host;
+
+    location /api/ {
+        proxy_pass http://localhost:8070;
+    }
+     location /auth/ {
+        proxy_pass http://localhost:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+}
+########################################
+
+Install Tomcat 8
+sudo apt-get install tomcat8
+sudo service tomcat8 status
+- change port 8080 to 8070
+/var/lib/tomcat8/conf/server.xml
+
+Install Tomcat 9
+sudo useradd -r -m -U -d /opt/tomcat -s /bin/false tomcat
+sudo wget https://downloads.apache.org/tomcat/tomcat-9/v9.0.33/bin/apache-tomcat-9.0.33.tar.gz -P /tmp/
+sudo tar xf /tmp/apache-tomcat-9*.tar.gz -C /opt/tomcat
+sudo ln -s /opt/tomcat/apache-tomcat-9.0.33 /opt/tomcat/latest
+sudo chown -RH tomcat: /opt/tomcat/latest
+sudo sh -c 'chmod +x /opt/tomcat/latest/bin/*.sh'
+sudo nano /etc/systemd/system/tomcat.service
+
+[Unit]
+Description=Tomcat 9 servlet container
+After=network.target
+
+[Service]
+Type=forking
+
+User=tomcat
+Group=tomcat
+
+Environment="JAVA_HOME=/usr/lib/jvm/default-java"
+Environment="JAVA_OPTS=-Djava.security.egd=file:///dev/urandom -Djava.awt.headless=true"
+
+Environment="CATALINA_BASE=/opt/tomcat/latest"
+Environment="CATALINA_HOME=/opt/tomcat/latest"
+Environment="CATALINA_PID=/opt/tomcat/latest/temp/tomcat.pid"
+Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
+
+ExecStart=/opt/tomcat/latest/bin/startup.sh
+ExecStop=/opt/tomcat/latest/bin/shutdown.sh
+
+[Install]
+WantedBy=multi-user.target
+#####################################################
+sudo nano /opt/tomcat/latest/conf/server.xml
+- change port from 8080 to 8070
+sudo systemctl daemon-reload
+sudo service tomcat start
+sudo service tomcat status
+sudo systemctl enable tomcat
+
+sudo ufw allow 8080/tcp
+https://linuxize.com/post/how-to-install-tomcat-9-on-ubuntu-18-04/
+
+
+Install Postgresql
+- sudo apt install postgresql postgresql-contrib
+Data directory: /var/lib/postgresql/10/main
+Log file: /var/log/postgresql/postgresql-10-main.log
+- sudo service postgresql status
+- sudo su - postgres
+- psql
+- CREATE DATABASE ebreshna;
+- CREATE ROLE ebreshna_user LOGIN PASSWORD 'secret';
+OR create user ebreshna_user with encrypted password 'secret';
+- GRANT CONNECT ON DATABASE ebreshna TO ebreshna_user;
+- grant all privileges on database ebreshna to ebreshna_user;
+
+\c ebreshna;
+create schema revision;
+- GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA revision TO ebreshna_user;
+- GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA revision TO ebreshna_user;
+- GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA revision TO ebreshna_user;
+- GRANT ALL PRIVILEGES ON SCHEMA revision TO ebreshna_user;
+
+
+Install unzip
+- sudo apt-get install unzip
+
+Setup redirection in NGNIX
+- cd /etc/nginx/sites-available
+- sudo nano default
+
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+    server_name _;
+
+    proxy_redirect           off;
+    proxy_set_header         X-Real-IP $remote_addr;
+    proxy_set_header         X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header         Host $http_host;
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+    }
+}
+
+
+- sudo service nginx restart
+
+
+Install Keycloak
+- sudo wget -c https://downloads.jboss.org/keycloak/9.0.2/keycloak-9.0.2.tar.gz -P /opt/
+- sudo tar -xvzf /opt/keycloak-9.0.2.tar.gz
+- sudo mv /opt/keycloak-9.0.2 /opt/keycloak
+- sudo groupadd keycloak
+- sudo useradd -r -g keycloak -d /opt/keycloak -s /sbin/nologin keycloak
+- sudo chown -R keycloak: keycloak
+- sudo chmod o+x /opt/keycloak/bin/
+- sudo mkdir /etc/keycloak
+- sudo cp /opt/keycloak/docs/contrib/scripts/systemd/wildfly.conf /etc/keycloak/keycloak.conf
+- sudo cp /opt/keycloak/docs/contrib/scripts/systemd/launch.sh /opt/keycloak/bin/
+- sudo chown keycloak: /opt/keycloak/bin/launch.sh
+- sudo nano /opt/keycloak/bin/launch.sh
+WILDFLY_HOME="/opt/wildfly" => WILDFLY_HOME="/opt/keycloak"
+
+- sudo cp /opt/keycloak/docs/contrib/scripts/systemd/wildfly.service /etc/systemd/system/keycloak.service
+- sudo nano /etc/systemd/system/keycloak.service
+
+    sudo /opt/keycloak/bin/add-user-keycloak.sh -r master -u admin -p secret
+
+sudo /opt/keycloak/bin/kcadm.sh config credentials --server http://localhost:8080/auth --realm master --user admin –-password secret
+
+sudo /opt/keycloak/bin/kcadm.sh update realms/master -s sslRequired=NONE
+
+[Unit]
+Description=The eBreshna Auth Server
+After=syslog.target network.target
+Before=httpd.service
+[Service]
+Environment=LAUNCH_JBOSS_IN_BACKGROUND=1
+EnvironmentFile=/etc/keycloak/keycloak.conf
+User=keycloak
+Group=keycloak
+LimitNOFILE=102642
+PIDFile=/var/run/keycloak/keycloak.pid
+ExecStart=/opt/keycloak/bin/launch.sh $WILDFLY_MODE $WILDFLY_CONFIG $WILDFLY_BIND
+StandardOutput=null
+[Install]
+WantedBy=multi-user.target
+
+- sudo systemctl daemon-reload
+- sudo systemctl enable keycloak
+- sudo service keycloak start
+- sudo service keycloak status
+- sudo tail -f /opt/keycloak/standalone/log/server.log
+
+https://medium.com/@hasnat.saeed/setup-keycloak-server-on-ubuntu-18-04-ed8c7c79a2d9
+
+
+=============================================================
+
+Deploy Application to Tomcat
+
+upload the .war file using sftp (FileZilla)
+
+$ sudo service tomcat8 stop
+$ cd /var/lib/tomcat8/webapps/
+$ sudo rm -rf /var/lib/tomcat8/webapps/ROOT.war
+$ sudo rm -rf /var/lib/tomcat8/webapps/ROOT
+    $ sudo rm -rf /var/lib/tomcat8/logs/*
+$ sudo mv ROOT.war /var/lib/tomcat8/webapps/
+$ sudo service tomcat8 restart
+
+$ sudo tail -f /var/lib/tomcat8/logs/catalina.out
+
+
+//if ssh required error
+kcadm.sh config credentials --server http://localhost:8080/auth --realm master --user admin
+kcadm.sh update realms/realmname -s sslRequired=NONE
+
+
+================================================
+Spring Application As a Service
+
+add
+
+      <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <configuration>
+                <executable>true</executable>
+            </configuration>
+        </plugin>
+
+Build Application
+
+mvn clean package
+sudo ln -s /path/to/application.jar /etc/init.d/application
+sudo service application start
+Create application.service in /etc/systemd/system
+
+add to application.service
+[Unit]
+Description=sBreshna Application
+After=syslog.target
+
+[Service]
+User=baeldung
+ExecStart=/path/to/application.jar SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
+
+###################################################################
+As init service
+As init.d service
+
+The executable jar has the usual start, stop, restart, and status commands. It will also set up a PID file in the usual /var/run directory and logging in the usual /var/log directory by default.
+You just need to symlink your jar into /etc/init.d like so
+
+sudo link -s /var/myapp/myapp.jar /etc/init.d/myapp
+OR
+sudo ln -s ~/myproject/build/libs/myapp-1.0.jar /etc/init.d/myapp_servicename
+
+After that you can do the usual
+sudo    /etc/init.d/myapp start
+
+Then setup a link in whichever runlevel you want the app to start/stop in on boot if so desired.
+
+
+
+#################################################
+Metabase Config
+https://www.metabase.com/docs/latest/operations-guide/running-metabase-on-debian.html

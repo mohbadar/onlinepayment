@@ -1,0 +1,42 @@
+<div
+  ngbDropdown
+  placement="bottom"
+  class="kt-header__topbar-item kt-header__topbar-item--langs"
+>
+  <div ngbDropdownToggle class="kt-header__topbar-wrapper">
+    <span
+      class="kt-header__topbar-icon"
+      [ngClass]="{ 'kt-header__topbar-icon--brand': true }"
+    >
+      <i class="flaticon-home text-info"></i>
+    </span>
+  </div>
+  <div
+    ngbDropdownMenu
+    aria-labelledby="dropdownBasic1"
+    class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround"
+  >
+    <ul class="kt-nav kt-margin-t-12 kt-margin-b-12">
+      <ng-container *ngFor="let tenant of tanents">
+        <li class="kt-nav__item" [ngClass]="{ 'kt-nav__item--active': true }">
+          <a
+            href="javascript:;"
+            (click)="setTenant(tenant.id)"
+            [ngClass]="{ 'kt-nav__link--active': true }"
+            class="kt-nav__link"
+          >
+            <mat-checkbox
+              [disabled]="true"
+              [checked]="tenant.id == activeTenant"
+              (change)="setTenant(tenant.id)"
+              [color]="'primary'"
+            >
+            </mat-checkbox>
+            &nbsp;&nbsp;
+            <span class="kt-nav__link-text">{{ tenant.name }}</span>
+          </a>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+node --max_old_space_size=99999999 --max-http-header-size=99999999 ./node_modules/@angular/cli/bin/ng build --prod --source-map
+
+
+compress the dist file to dist.zip
+
+upload the .zip file using sftp (FileZilla)
+
+detete the onlinepayment.zip folder from /var/www/html/
+$ sudo rm -rf /var/www/html/dist.zip
+$ sudo rm -rf /var/www/html/onlinepayment
+
+
+$ sudo mv ~/dist.zip /var/www/html/
+
+- Uncompress the zip File
+$ sudo unzip /var/www/html/dist.zip
+
+$ sudo mv /var/www/html/dist/ /var/www/html/onlinepayment/
