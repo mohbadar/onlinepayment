@@ -46,6 +46,12 @@ const routes: Routes = [
                 loadChildren: () =>
                   import("./views/pages/onlinepayment/agent/agent.module").then((m) => m.AgentModule),
             },
+
+            {
+                path: "fee-model",
+                loadChildren: () =>
+                  import("./views/pages/onlinepayment/fee-model/fee-model.module").then((m) => m.FeeModelModule),
+            },
             {
                 path: 'pda',
                 canActivate: [TranslateGuard],

@@ -52,18 +52,18 @@ const routes: Routes = [
         path: '',
         component: FeeModelComponent,
         children: [
-            // {
-            //     path: '',
-            //     component: ListAgentComponent
-            // },
-            // {
-            //     path: 'add',
-            //     component: CreateAgentComponent
-            // },
-            // {
-            //     path: 'update',
-            //     component: UpdateAgentComponent
-            // },
+            {
+                path: '',
+                component: ListFeemodelComponent
+            },
+            {
+                path: 'add',
+                component: CreateFeemodelComponent
+            },
+            {
+                path: 'update',
+                component: UpdateFeemodelComponent
+            },
         ]
 
     }
@@ -105,6 +105,7 @@ const routes: Routes = [
     entryComponents: [
         ActionNotificationComponent,
         NotificationComponent,
+        ViewFeemodelComponent
     ],
     declarations: [
         FeeModelComponent,
@@ -114,5 +115,5 @@ const routes: Routes = [
         ListFeemodelComponent
     ],
 })
-export class AgentModule {
+export class FeeModelModule {
 }
