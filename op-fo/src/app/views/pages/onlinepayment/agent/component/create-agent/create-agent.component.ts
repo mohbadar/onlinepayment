@@ -6,15 +6,17 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ProvinceService } from '../../../province/service/province.service';
-import { Center } from '../../model/center.model';
-import { CenterService } from '../../service/center.service';
+import { AgentService } from '../../service/agent.service';
+import { Agent } from '../../model/agent.model';
+import { OrganizationService } from '../../../organization/service/organization.service';
+import { CenterService } from '../../../center/service/center.service';
 
 
 @Component({
-    selector: 'kt-create-center',
-    templateUrl: './create-center.component.html',
+    selector: 'kt-create-agent',
+    templateUrl: './create-agent.component.html',
 })
-export class CreateCenterComponent implements OnInit {
+export class CreateAgentComponent implements OnInit {
 
     @ViewChild('wizard', { static: true }) el: ElementRef;
 
@@ -25,18 +27,20 @@ export class CreateCenterComponent implements OnInit {
     passwordMatch: boolean;
 
     submitted = false;
-    record: Center;
+    record: Agent;
     provinces$: Observable<any>;
     centers$: Observable<any>;
+    organizations$: Observable<any>;
 
     constructor(
         private formBuilder: FormBuilder,
         private layoutUtilService: LayoutUtilsService,
         private router: Router,
-        private centerService: CenterService,
+        private agentService: AgentService,
         private spinner: NgxSpinnerService,
-        private provinceService: ProvinceService
-
+        private provinceService: ProvinceService,
+        private organizationService: OrganizationService,
+        private centerService: CenterService
     ) {
     }
 
@@ -44,17 +48,24 @@ export class CreateCenterComponent implements OnInit {
     ngOnInit() {
 
         this.provinces$ = this.provinceService.get();
+        this.organizations$ = this.organizationService.get();
         this.centers$ = this.centerService.get();
 
 
         this.myForm = this.formBuilder.group({
-            name: [, [Validators.required]],
-            code: [, [Validators.required]],
+            firstname: [, [Validators.required]],
+            lastname: [, [Validators.required]],
             address: [, [Validators.required]],
             email: [, [Validators.required]],
             phone: [, [Validators.required]],
             provinceId: [, [Validators.required]],
-            parentCenter: []
+            organizationId: [, []],
+            centerId: [,[]],
+            grantFathername: [, [Validators.required]],
+            tazkiraNo: [, [Validators.required]],
+            friendAccountNo1: [, []],
+            friendAccountNo2: [, []],
+            fathername: [, [Validators.required]]
         });
 
 
@@ -86,19 +97,24 @@ export class CreateCenterComponent implements OnInit {
 
 
 
-        this.record = new Center;
-        this.record.name = this.myForm.get('name').value;
-        this.record.code = this.myForm.get('code').value;
+        this.record = new Agent;
+        this.record.firstname = this.myForm.get('firstname').value;
         this.record.phone = this.myForm.get('phone').value;
         this.record.email = this.myForm.get('email').value;
         this.record.address = this.myForm.get('address').value;
         this.record.provinceId = this.myForm.get('provinceId').value;
-        this.record.parentCenter = this.myForm.get('parentCenter').value;
-
+        this.record.lastname = this.myForm.get('lastname').value;
+        this.record.fathername = this.myForm.get('fathername').value;
+        this.record.grantFathername = this.myForm.get('grantFathername').value;
+        this.record.organizationId = this.myForm.get('organizationId').value;
+        this.record.centerId = this.myForm.get('centerId').value;
+        this.record.frientAccountNo1 = this.myForm.get('friendAccountNo1').value;
+        this.record.friendAccountNo2 = this.myForm.get('friendAccountNo2').value;
+        this.record.tazkiraNo = this.myForm.get('tazkiraNo').value;
 
         console.log("Form Data", this.record)
         this.spinner.show();
-        this.centerService.create(this.record).subscribe((response) => {
+        this.agentService.create(this.record).subscribe((response) => {
             this.myForm.reset({});
             const _createMessage = `Object has been registered!`;
             this.spinner.hide();
@@ -117,6 +133,6 @@ export class CreateCenterComponent implements OnInit {
 
 
     routeHome() {
-        this.router.navigate(['/center']);
+        this.router.navigate(['/agent']);
     }
 }

@@ -7,10 +7,9 @@ import { HttpClientModule } from "@angular/common/http";
 import { PartialsModule } from "../partials/partials.module";
 // Pages
 import { CoreModule } from "../../core/core.module";
-import { AgentComponent } from './onlinepayment/agent/agent.component';
 
 @NgModule({
-  declarations: [AgentComponent],
+  declarations: [],
   exports: [],
   imports: [
     CommonModule,

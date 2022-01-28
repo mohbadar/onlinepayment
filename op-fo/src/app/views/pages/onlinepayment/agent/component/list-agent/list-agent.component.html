@@ -18,12 +18,12 @@
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'NAME'|translate}}</th>
-      <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+      <td mat-cell *matCellDef="let row">{{ row.firstname + " "+ row.lastname }}</td>
     </ng-container>
 
     <ng-container matColumnDef="code">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'CODE'|translate}}</th>
-      <td mat-cell *matCellDef="let row">{{ row.code }}</td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'ACCOUNT_NO'|translate}}</th>
+      <td mat-cell *matCellDef="let row">{{ row.accountNo }}</td>
     </ng-container>
 
     <ng-container matColumnDef="Status">
@@ -42,7 +42,7 @@
           <mat-icon> visibility </mat-icon>
         </button>&nbsp;
 
-        <button mat-icon-button color="primary" (click)="addCenterUserRelation(row)" *ngIf="!row.deleted">
+        <button mat-icon-button color="primary" (click)="addAgentUserRelation(row)" *ngIf="!row.deleted">
           <mat-icon>accessibility</mat-icon>
         </button>&nbsp;
 

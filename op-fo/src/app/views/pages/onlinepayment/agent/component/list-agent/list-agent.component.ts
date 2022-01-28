@@ -10,15 +10,16 @@ import {MatTableDataSource} from '@angular/material/table';
 import { LayoutUtilsService, MessageType } from '../../../../../../core/_base/crud';
 import { Router } from '@angular/router';
 import { DataExchangeService } from '../../../../../../core/service/data.exchange.service';
-import { CenterService } from '../../service/center.service';
-import { CenterUserRelationComponent } from '../center-user-relation/center-user-relation.component';
-import { ViewCenterComponent } from '../view-center/view-center.component';
+import { AgentService } from '../../service/agent.service';
+import { ViewAgentComponent } from '../view-agent/view-agent.component';
+import { AgentUserRelation } from '../../model/agent-user-relation.mode';
+import { AgentUserRelationComponent } from '../agent-user-relation/agent-user-relation.component';
 
 @Component({
-  selector: 'kt-list-center',
-  templateUrl: './list-center.component.html',
+  selector: 'kt-list-agent',
+  templateUrl: './list-agent.component.html',
 })
-export class ListCenterComponent implements OnInit {
+export class ListAgentComponent implements OnInit {
 
 
   displayedColumns: string[] = [ 'name', 'code', "Status" ,'actions'];
@@ -28,7 +29,7 @@ export class ListCenterComponent implements OnInit {
 	@ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(
-    private centerService: CenterService,
+    private agentService: AgentService,
 		private layoutUtilsService: LayoutUtilsService,
 		public dialog: MatDialog,
     private router: Router,
@@ -55,7 +56,7 @@ export class ListCenterComponent implements OnInit {
 	 * @param _item: 
 	 */
 	delete(_item) {
-		const _title: string = 'Center';
+		const _title: string = 'Agent';
 		const _description: string = 'Are you sure to permanently delete?';
 		const _waitDesciption: string = 'deleting...';
 		const _deleteMessage = `Object has been deleted`;
@@ -67,7 +68,7 @@ export class ListCenterComponent implements OnInit {
 				return;
       }
 
-      this.centerService.delete(_item.id).subscribe((response) => {
+      this.agentService.delete(_item.id).subscribe((response) => {
         this.layoutUtilsService.showActionNotification(_deleteMessage, MessageType.Delete);
         this.reloadData();
       });
@@ -78,12 +79,12 @@ export class ListCenterComponent implements OnInit {
   add()
   {
     
-		this.router.navigate(['/center/add']);
+		this.router.navigate(['/agent/add']);
   }
 
   reloadData()
   {
-    this.centerService.get().subscribe((data) => {	
+    this.agentService.get().subscribe((data) => {	
           console.log("orgs: ", data)	
           this.dataSource = new MatTableDataSource(data);
           this.dataSource.paginator = this.paginator;
@@ -101,7 +102,7 @@ export class ListCenterComponent implements OnInit {
 
 
   view(item) {
-    const dialogRef = this.dialog.open(ViewCenterComponent,{ data: { item: item } });
+    const dialogRef = this.dialog.open(ViewAgentComponent,{ data: { item: item } });
 		dialogRef.afterClosed().subscribe(res => {
 			if (!res) {
 				return;
@@ -109,8 +110,8 @@ export class ListCenterComponent implements OnInit {
 		});
   }
 
-  addCenterUserRelation(item) {
-    const dialogRef = this.dialog.open(CenterUserRelationComponent,{ data: { item: item } });
+  addAgentUserRelation(item) {
+    const dialogRef = this.dialog.open(AgentUserRelationComponent,{ data: { item: item } });
 		dialogRef.afterClosed().subscribe(res => {
 			if (!res) {
 				return;
@@ -121,7 +122,7 @@ export class ListCenterComponent implements OnInit {
 
   update(item) {
     this.dataExchangeService.changeData(item);
-    this.router.navigate(['/center/update']);
+    this.router.navigate(['/agent/update']);
   }
 
 }

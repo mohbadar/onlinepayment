@@ -34,36 +34,36 @@ import {
 } from '@angular/material';
 
 
-import { ListCenterComponent} from './component/list-center/list-center.component';
-import { CreateCenterComponent } from './component/create-center/create-center.component';
-import { ViewCenterComponent } from './component/view-center/view-center.component';
-import { UpdateCenterComponent } from './component/update-center/update-center.component';
+import { ListAgentComponent} from './component/list-agent/list-agent.component';
+import { CreateAgentComponent } from './component/create-agent/create-agent.component';
+import { ViewAgentComponent } from './component/view-agent/view-agent.component';
+import { UpdateAgentComponent } from './component/update-agent/update-agent.component';
 import { NotificationComponent } from 'app/views/partials/layout';
 import { PartialsModule } from 'app/views/partials/partials.module';
 import { ActionNotificationComponent } from 'app/views/partials/content/crud';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { CenterUserRelationComponent} from './component/center-user-relation/center-user-relation.component';
+import { AgentUserRelationComponent} from './component/agent-user-relation/agent-user-relation.component';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { CenterComponent} from './center.component';
+import { AgentComponent} from './agent.component';
 
 
 const routes: Routes = [
     {
 
         path: '',
-        component: CenterComponent,
+        component: AgentComponent,
         children: [
             {
                 path: '',
-                component: ListCenterComponent
+                component: ListAgentComponent
             },
             {
                 path: 'add',
-                component: CreateCenterComponent
+                component: CreateAgentComponent
             },
             {
                 path: 'update',
-                component: UpdateCenterComponent
+                component: UpdateAgentComponent
             },
         ]
 
@@ -106,16 +106,16 @@ const routes: Routes = [
     entryComponents: [
         ActionNotificationComponent,
         NotificationComponent,
-        ViewCenterComponent
+        ViewAgentComponent
     ],
     declarations: [
-        ListCenterComponent,
-        CreateCenterComponent,
-        CenterComponent,
-        ViewCenterComponent,
-        UpdateCenterComponent,
-        CenterUserRelationComponent
+        ListAgentComponent,
+        CreateAgentComponent,
+        AgentComponent,
+        ViewAgentComponent,
+        UpdateAgentComponent,
+        AgentUserRelationComponent
     ],
 })
-export class CenterModule {
+export class AgentModule {
 }

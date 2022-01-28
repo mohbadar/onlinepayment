@@ -3,22 +3,22 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LayoutUtilsService, MessageType } from 'app/core/_base/crud';
 import { PagesService } from 'app/views/pages/pages.service';
-import { CenterUserRelation } from '../../model/center-user-relation.mode';
-import { CenterService } from '../../service/center.service';
+import { AgentUserRelation } from '../../model/agent-user-relation.mode';
+import { AgentService } from '../../service/agent.service';
 
 @Component({
-    selector: 'kt-center-user-relation',
-    templateUrl: './center-user-relation.component.html',
+    selector: 'kt-agent-user-relation',
+    templateUrl: './agent-user-relation.component.html',
 })
-export class CenterUserRelationComponent implements OnInit {
+export class AgentUserRelationComponent implements OnInit {
     item: any;
     eBreshnaForm: FormGroup;
     userMasters: any;
 
 
     constructor(
-        private centerService: CenterService,
-        public dialogRef: MatDialogRef<CenterUserRelationComponent>,
+        private agentService: AgentService,
+        public dialogRef: MatDialogRef<AgentUserRelationComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any,
         private formBuilder: FormBuilder,
         private layoutUtilService: LayoutUtilsService,
@@ -28,7 +28,7 @@ export class CenterUserRelationComponent implements OnInit {
     ngOnInit() {
 
         this.item = this.data.item;
-        this.userMasters = this.centerService.getUsers();
+        this.userMasters = this.agentService.getUsers();
         this.eBreshnaForm = this.formBuilder.group({
             userId: ['', Validators.required]
         });
@@ -37,12 +37,12 @@ export class CenterUserRelationComponent implements OnInit {
 
 
     submit() {
-        let record = new CenterUserRelation;
+        let record = new AgentUserRelation;
         record.userIds = this.eBreshnaForm.get('userId').value;
-        record.centerId = this.item.id;
+        record.agentId = this.item.id;
 
         console.log("Form data:", record);
-        this.centerService.createCenterUserRelation(record).subscribe((response) => {
+        this.agentService.createAgentUserRelation(record).subscribe((response) => {
             this.eBreshnaForm.reset();
             this.dialogRef.close();
             const _createMessage = `Object has been registered!`;

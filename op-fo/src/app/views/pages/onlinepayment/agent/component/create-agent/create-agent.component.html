@@ -27,31 +27,58 @@
                                     <print-error [control]="myForm.get('name')"></print-error>
                                 </div>
 
-
                                 <div class="form-group required">
-                                    <label class="col-form-label">{{'PARENT_CENTER'|translate}}</label>
-                                    <ng-select [items]="centers$ | async " bindLabel="name" bindValue="id"
-                                    [placeholder]="'PARENT_CENTER'|translate" formControlName="parentCenter">
+                                    <label class="col-form-label">{{'ORGANIZATION'|translate}}</label>
+                                    <ng-select [items]="organizations$ | async " bindLabel="name" bindValue="id"
+                                    [placeholder]="'ORGANIZATION'|translate" formControlName="organizationId">
                                     </ng-select>
-                                    <print-error [control]="myForm.get('parentCenter')"></print-error>
+                                    <print-error [control]="myForm.get('organizationId')"></print-error>
                                 </div>
 
                                 <div class="form-group required">
-                                    <label class="col-form-label">{{'NAME'|translate}}</label>
-                                    <input type="text" class="form-control" name="name"
-                                        [placeholder]="'NAME'|translate" formControlName="name">
-                                    <!-- <span class="form-text text-muted">{{'PLEASE_ENTER_PROVINCE_NAME'|translate}}</span> -->
-                                    <print-error [control]="myForm.get('name')"></print-error>
+                                    <label class="col-form-label">{{'CENTER'|translate}}</label>
+                                    <ng-select [items]="centers$ | async " bindLabel="name" bindValue="id"
+                                    [placeholder]="'CENTER'|translate" formControlName="centerId">
+                                    </ng-select>
+                                    <print-error [control]="myForm.get('centerId')"></print-error>
+                                </div>
+
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'FIRSTNAME'|translate}}</label>
+                                    <input type="text" class="form-control" name="firstname"
+                                        [placeholder]="'FIRSTNAME'|translate" formControlName="firstname">
+                                    <print-error [control]="myForm.get('firstname')"></print-error>
                                 </div>
 
                                 <div class="form-group required">
-                                    <label class="col-form-label">{{'CODE'|translate}}</label>
-                                    <input type="number" class="form-control" name="code"
-                                        [placeholder]="'CODE'|translate" formControlName="code">
-                                    <span class="form-text text-muted">{{'PLEASE_ENTER_CODE'|translate}}</span>
-                                    <print-error [control]="myForm.get('code')"></print-error>
+                                    <label class="col-form-label">{{'LASTNAME'|translate}}</label>
+                                    <input type="text" class="form-control" name="lastname"
+                                        [placeholder]="'LASTNAME'|translate" formControlName="lastname">
+                                    <print-error [control]="myForm.get('lastname')"></print-error>
                                 </div>
 
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'FATHERNAME'|translate}}</label>
+                                    <input type="text" class="form-control" name="fathername"
+                                        [placeholder]="'FATHERNAME'|translate" formControlName="fathername">
+                                    <print-error [control]="myForm.get('fathername')"></print-error>
+                                </div>
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'GRANT_FATHERNAME'|translate}}</label>
+                                    <input type="text" class="form-control" name="grantFathername"
+                                        [placeholder]="'GRANT_FATHERNAME'|translate" formControlName="grantFathername">
+                                    <print-error [control]="myForm.get('grantFathername')"></print-error>
+                                </div>
+
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'TAZKIRA_NO'|translate}}</label>
+                                    <input type="text" class="form-control" name="tazkiraNo"
+                                        [placeholder]="'TAZKIRA_NO'|translate" formControlName="tazkiraNo">
+                                    <print-error [control]="myForm.get('tazkiraNo')"></print-error>
+                                </div>
                                 
                                 <div class="form-group required">
                                     <label class="col-form-label">{{'PHONE'|translate}}</label>
@@ -74,6 +101,19 @@
                                     <print-error [control]="myForm.get('address')"></print-error>
                                 </div>
 
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'FRIEND_ACCOUNT_NO1'|translate}}</label>
+                                    <input type="text" class="form-control" name="friendAccountNo1"
+                                        [placeholder]="'FRIEND_ACCOUNT_NO1'|translate" formControlName="friendAccountNo1">
+                                    <print-error [control]="myForm.get('friendAccountNo1')"></print-error>
+                                </div>
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'FRIEND_ACCOUNT_NO2'|translate}}</label>
+                                    <input type="text" class="form-control" name="friendAccountNo2"
+                                        [placeholder]="'FRIEND_ACCOUNT_NO2'|translate" formControlName="friendAccountNo2">
+                                    <print-error [control]="myForm.get('friendAccountNo2')"></print-error>
+                                </div>
 
                             </div>
                         </div>

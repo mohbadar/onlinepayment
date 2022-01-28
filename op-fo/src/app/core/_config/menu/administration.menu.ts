@@ -23,27 +23,27 @@ export const administrationMenuModule = {
             },
             {
               title: 'AGENT',
-              page: '/verify-nid-process-docs',
+              page: '/agent',
               translate: "MENU.AGENT"
             },
             {
               title: 'BILLTYPE',
-              page: '/verify-nid-process-docs',
+              page: '/bill-type',
               translate: "MENU.BILLTYPE"
             },
             {
                 title: 'FEE_MODEL',
-                page: '/verify-nid-process-docs',
+                page: '/fee-model',
                 translate: "MENU.FEE_MODEL"
             },
             {
                 title: 'TARIFF',
-                page: '/verify-nid-process-docs',
+                page: '/tariff',
                 translate: "MENU.TARIFF"
             },
             {
                 title: 'TARIFF_CHARGES',
-                page: '/verify-nid-process-docs',
+                page: '/tariff-charges',
                 translate: "MENU.TARIFF_CHARGES"
             },
        

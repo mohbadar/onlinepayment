@@ -4,16 +4,16 @@ import { Observable } from 'rxjs';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { LayoutUtilsService, MessageType } from '../../../../../../core/_base/crud';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Center } from '../../model/center.model';
-import { CenterService } from '../../service/center.service';
+import { AgentService } from '../../service/agent.service';
+import { Agent } from '../../model/agent.model';
 
 @Component({
-    selector: 'kt-view-center',
-    templateUrl: './view-center.component.html',
+    selector: 'kt-view-agent',
+    templateUrl: './view-agent.component.html',
 })
-export class ViewCenterComponent implements OnInit {
+export class ViewAgentComponent implements OnInit {
 
-    item: Center;
+    item: Agent;
     isLoading = false;
     readonly = true;
     hasFormErrors: boolean = false;
@@ -22,9 +22,9 @@ export class ViewCenterComponent implements OnInit {
     revisions;
 
     constructor(
-        private service: CenterService,
+        private service: AgentService,
         private layoutUtilService: LayoutUtilsService,
-        public dialogRef: MatDialogRef<ViewCenterComponent>,
+        public dialogRef: MatDialogRef<ViewAgentComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any,
     ) {
 

@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const _BASE_URL = "/api/centers";
+const _BASE_URL = "/api/agents";
 @Injectable({
   providedIn: 'root'
 })
-export class CenterService {
+export class AgentService {
 
   constructor(private httpClient: HttpClient) { }
 
@@ -43,22 +43,22 @@ export class CenterService {
     return this.httpClient.delete(`${_BASE_URL}/${id}`);
   }
 
-  public createCenterUserRelation(data): Observable<any> {
-    return this.httpClient.post(`${_BASE_URL}/center-user-relation`, data);
+  public createAgentUserRelation(data): Observable<any> {
+    return this.httpClient.post(`${_BASE_URL}/agent-user-relation`, data);
   }
 
   public getUserTenants(userName): Observable<any> {
-    return this.httpClient.get(`${_BASE_URL}/user-centers`, {
+    return this.httpClient.get(`${_BASE_URL}/user-agents`, {
       params: {
         "userName": userName
       }
     });
   }
 
-  public setTenant(centerId: String, userName: String): Observable<any> {
+  public setTenant(agentId: String, userName: String): Observable<any> {
     return this.httpClient.post(`/api/config/user-management/user-tenant`, {
       "userId": userName,
-      "tenant": centerId
+      "tenant": agentId
     });
   }
 

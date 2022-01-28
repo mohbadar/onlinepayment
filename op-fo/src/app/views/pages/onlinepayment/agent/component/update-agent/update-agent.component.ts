@@ -4,14 +4,14 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LayoutUtilsService, MessageType } from 'app/core/_base/crud';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Center } from '../../model/center.model';
-import { CenterService } from '../../service/center.service';
+import { Agent } from '../../model/agent.model';
+import { AgentService } from '../../service/agent.service';
 
 @Component({
-    selector: 'kt-update-center',
-    templateUrl: './update-center.component.html',
+    selector: 'kt-update-agent',
+    templateUrl: './update-agent.component.html',
 })
-export class UpdateCenterComponent implements OnInit {
+export class UpdateAgentComponent implements OnInit {
 
     item: any;
 
@@ -25,11 +25,11 @@ export class UpdateCenterComponent implements OnInit {
     passwordMatch: boolean;
 
     submitted = false;
-    record: Center;
+    record: Agent;
 
     constructor(
         private formBuilder: FormBuilder,
-        private centerService: CenterService,
+        private agentService: AgentService,
         private dataExchangeService: DataExchangeService,
         private router: Router,
         private layoutUtilService: LayoutUtilsService,
@@ -95,7 +95,7 @@ export class UpdateCenterComponent implements OnInit {
         this.record = this.myForm.value;
         const data = { ...this.item, ...this.record };
         this.spinner.show();
-        this.centerService.update(data.id, data).subscribe((response) => {
+        this.agentService.update(data.id, data).subscribe((response) => {
             this.myForm.reset({});
             const _createMessage = `Object has been registered!`;
             this.spinner.hide();
