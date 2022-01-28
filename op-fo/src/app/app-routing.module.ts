@@ -53,6 +53,11 @@ const routes: Routes = [
                   import("./views/pages/onlinepayment/fee-model/fee-model.module").then((m) => m.FeeModelModule),
             },
             {
+                path: "bill-type",
+                loadChildren: () =>
+                  import("./views/pages/onlinepayment/bill-type/bill-type.module").then((m) => m.BillTypeModule),
+            },
+            {
                 path: 'pda',
                 canActivate: [TranslateGuard],
                 data: { moduleName: 'pda' },

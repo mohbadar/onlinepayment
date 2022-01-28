@@ -24,7 +24,27 @@ export const administrationMenuModule = {
             {
               title: 'AGENT',
               page: '/agent',
-              translate: "MENU.AGENT"
+              translate: "MENU.AGENT",
+              alignment: "center",
+              toggle: "click",
+              submenu: [
+                  {
+                      title: "AGENT_MANAGEMETN",
+                      page: "",
+                      translate: "MENU.AGENT_MANAGEMENT",
+                    },
+                    {
+                      title: "CREDIT_AGENT",
+                      page: "/credit",
+                      translate: "MENU.CREDIT_AGENT",
+                    },
+                    {
+                      title: "DEBIT_AGENT",
+                      page: "/debit",
+                      translate: "MENU.DEBIT_AGENT",
+                    },
+                   
+                  ],            
             },
             {
               title: 'BILLTYPE',
@@ -36,16 +56,18 @@ export const administrationMenuModule = {
                 page: '/fee-model',
                 translate: "MENU.FEE_MODEL"
             },
-            {
-                title: 'TARIFF',
-                page: '/tariff',
-                translate: "MENU.TARIFF"
-            },
-            {
-                title: 'TARIFF_CHARGES',
-                page: '/tariff-charges',
-                translate: "MENU.TARIFF_CHARGES"
-            },
+
+            
+            // {
+            //     title: 'TARIFF',
+            //     page: '/tariff',
+            //     translate: "MENU.TARIFF"
+            // },
+            // {
+            //     title: 'TARIFF_CHARGES',
+            //     page: '/tariff-charges',
+            //     translate: "MENU.TARIFF_CHARGES"
+            // },
        
     ]
 }

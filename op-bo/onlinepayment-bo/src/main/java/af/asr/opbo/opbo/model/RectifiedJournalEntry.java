@@ -17,11 +17,13 @@ import java.math.BigDecimal;
 @Builder
 @ToString
 @Where(clause = "deleted is false")
-public class AgentAccountPayment extends BaseEntity {
+public class RectifiedJournalEntry extends BaseEntity {
+    private String rjno;
+    private String rjdate;
     private String agentId;
-    private String channelId;
-    private String paymentDate;
-    private String cycle;
-    private String cycleYear;
-    private BigDecimal amount;
+    private BigDecimal creditAmount;
+    private BigDecimal debitAmount;
+    private String rjReason;
+    private String rjType;
+    private String effectedDate;
 }

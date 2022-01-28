@@ -19,6 +19,7 @@ import javax.persistence.Table;
 public class BillType extends BaseEntity {
     private String name;
     private String tariffId;
+    private String provinceId;
     private String organizationId;
     private String centerId;
     private String feeModelId;

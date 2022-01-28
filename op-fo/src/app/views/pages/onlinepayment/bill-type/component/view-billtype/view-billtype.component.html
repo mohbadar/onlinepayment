@@ -26,19 +26,25 @@
 
 
                 <mat-form-field>
-                    <input matInput #input [placeholder]="'TYPE'|translate" [value]="item.type"
+                    <input matInput #input [placeholder]="'PROVINCE'|translate" [value]="item.provinceId"
                         readonly>
                 </mat-form-field>
 
                 
                 <mat-form-field>
-                    <input matInput #input [placeholder]="'PERCENTAGE'|translate" [value]="item.percentage"
+                    <input matInput #input [placeholder]="'ORGANIZATION'|translate" [value]="item.organizationId"
                         readonly>
                 </mat-form-field>
 
                 
                 <mat-form-field>
-                    <input matInput #input [placeholder]="'AMOUNT'|translate" [value]="item.amount"
+                    <input matInput #input [placeholder]="'CENTER'|translate" [value]="item.centerId"
+                        readonly>
+                </mat-form-field>
+
+                
+                <mat-form-field>
+                    <input matInput #input [placeholder]="'FEE_MODEL'|translate" [value]="item.feeModelId"
                         readonly>
                 </mat-form-field>
 

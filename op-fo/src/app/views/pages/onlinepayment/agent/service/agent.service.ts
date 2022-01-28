@@ -7,6 +7,7 @@ const _BASE_URL = "/api/agents";
   providedIn: 'root'
 })
 export class AgentService {
+  
 
   constructor(private httpClient: HttpClient) { }
 
@@ -20,12 +21,12 @@ export class AgentService {
   }
 
 
-  public loadByName(name: string): Observable<any> {
-    return this.httpClient.get(`${_BASE_URL}/name/${name}`);
+  public loadByPhone(phone: string): Observable<any> {
+    return this.httpClient.get(`${_BASE_URL}/phone/${phone}`);
   }
 
-  public loadByCode(code: string): Observable<any> {
-    return this.httpClient.get(`${_BASE_URL}/code/${code}`);
+  public loadByAccountNo(accountNo: string): Observable<any> {
+    return this.httpClient.get(`${_BASE_URL}/account-no/${accountNo}`);
   }
 
 
@@ -69,6 +70,13 @@ export class AgentService {
 
   getUsers(): Observable<any> {
     return this.httpClient.get(`${_BASE_URL}/users`);
+  }
+
+
+  saveRectifiedJournalCredit(data: any) : Observable<any>{
+    // throw new Error('Method not implemented.');
+    return this.httpClient.post(`${_BASE_URL}/agent-account-credit`, data);
+    
   }
 
 }

@@ -3,6 +3,7 @@ package af.asr.opbo.opbo.controller;
 
 import af.asr.opbo.infrastructure.audit.annotation.Auditable;
 import af.asr.opbo.infrastructure.base.UserService;
+import af.asr.opbo.opbo.dto.AgentAccountCreditDTO;
 import af.asr.opbo.opbo.dto.AgentUserRelationDTO;
 import af.asr.opbo.opbo.dto.CenterUserRelationDTO;
 import af.asr.opbo.opbo.model.Agent;
@@ -123,6 +124,14 @@ public class AgentController {
     @GetMapping("/users")
     public ResponseEntity<List> getUsers() {
         return ResponseEntity.ok(userService.getUsers());
+    }
+
+
+    @Auditable
+    @PostMapping("/agent-account-credit")
+    public ResponseEntity<Map<String, Object>> creditAgentAccount(@RequestBody AgentAccountCreditDTO dto)
+    {
+        return ResponseEntity.ok(service.creditAgentAccount(dto));
     }
 
 }

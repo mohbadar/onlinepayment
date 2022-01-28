@@ -45,6 +45,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { AgentUserRelationComponent} from './component/agent-user-relation/agent-user-relation.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AgentComponent} from './agent.component';
+import { CreditAgentAccountComponent } from './component/credit-agent-account/credit-agent-account.component';
+import { DebitAgentAccountComponent } from './component/debit-agent-account/debit-agent-account.component';
 
 
 const routes: Routes = [
@@ -64,6 +66,14 @@ const routes: Routes = [
             {
                 path: 'update',
                 component: UpdateAgentComponent
+            },
+            {
+                path: 'credit',
+                component: CreditAgentAccountComponent
+            },
+            {
+                path: 'debit',
+                component: DebitAgentAccountComponent
             },
         ]
 
@@ -114,7 +124,9 @@ const routes: Routes = [
         AgentComponent,
         ViewAgentComponent,
         UpdateAgentComponent,
-        AgentUserRelationComponent
+        AgentUserRelationComponent,
+        CreditAgentAccountComponent,
+        DebitAgentAccountComponent
     ],
 })
 export class AgentModule {

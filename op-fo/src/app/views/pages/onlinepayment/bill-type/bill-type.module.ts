@@ -40,6 +40,10 @@ import { ActionNotificationComponent } from 'app/views/partials/content/crud';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { BillTypeComponent } from './bill-type.component';
+import { CreateBilltypeComponent } from './component/create-billtype/create-billtype.component';
+import { UpdateBilltypeComponent } from './component/update-billtype/update-billtype.component';
+import { ListBilltypeComponent } from './component/list-billtype/list-billtype.component';
+import { ViewBilltypeComponent } from './component/view-billtype/view-billtype.component';
 
 
 const routes: Routes = [
@@ -48,18 +52,18 @@ const routes: Routes = [
         path: '',
         component: BillTypeComponent,
         children: [
-            // {
-            //     path: '',
-            //     component: ListAgentComponent
-            // },
-            // {
-            //     path: 'add',
-            //     component: CreateAgentComponent
-            // },
-            // {
-            //     path: 'update',
-            //     component: UpdateAgentComponent
-            // },
+            {
+                path: '',
+                component: ListBilltypeComponent
+            },
+            {
+                path: 'add',
+                component: CreateBilltypeComponent
+            },
+            {
+                path: 'update',
+                component: UpdateBilltypeComponent
+            },
         ]
 
     }
@@ -101,10 +105,15 @@ const routes: Routes = [
     entryComponents: [
         ActionNotificationComponent,
         NotificationComponent,
+        ViewBilltypeComponent
     ],
     declarations: [
-        BillTypeComponent
+        BillTypeComponent,
+        CreateBilltypeComponent,
+        UpdateBilltypeComponent,
+        ListBilltypeComponent,
+        ViewBilltypeComponent
     ],
 })
-export class AgentModule {
+export class BillTypeModule {
 }

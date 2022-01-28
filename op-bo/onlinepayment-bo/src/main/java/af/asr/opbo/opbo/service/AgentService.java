@@ -1,18 +1,20 @@
 package af.asr.opbo.opbo.service;
 
 import af.asr.opbo.infrastructure.base.UserService;
-import af.asr.opbo.opbo.model.Agent;
-import af.asr.opbo.opbo.model.AgentUserRelation;
-import af.asr.opbo.opbo.repository.AgentRepository;
-import af.asr.opbo.opbo.repository.AgentUserRelationRepository;
-import af.asr.opbo.opbo.repository.CenterRepository;
-import af.asr.opbo.opbo.repository.CenterUserRelationRepository;
+import af.asr.opbo.opbo.dto.AgentAccountCreditDTO;
+import af.asr.opbo.opbo.mapper.ObjectMapper;
+import af.asr.opbo.opbo.model.*;
+import af.asr.opbo.opbo.repository.*;
 import af.asr.opbo.usermanagement.service.UserManagementService;
+import af.asr.opbo.util.HijriDateUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AgentService {
@@ -31,6 +33,13 @@ public class AgentService {
 
     @Autowired
     private AccountNumberService accountNumberService;
+
+    @Autowired
+    private RectifiedJournalEntryRepository rectifiedJournalEntryRepository;
+
+    @Autowired
+    private AgentLedgerRespository agentLedgerRespository;
+
 
 
 
@@ -98,6 +107,29 @@ public class AgentService {
                 agents.add(agent);
         });
         return agents;
+    }
+
+    public Map<String, Object> creditAgentAccount(AgentAccountCreditDTO dto) {
+
+        Map<String, Object> response = new HashMap<>();
+
+        Agent agent = repository.findByAccountNo(dto.getAccountNumber());
+
+        if(agent == null)
+            throw  new RuntimeException("AgentNotFoundException");
+
+        dto.setAgentId(agent.getId());
+
+        RectifiedJournalEntry rectifiedJournalEntry = rectifiedJournalEntryRepository.save(ObjectMapper.map(dto));
+
+        AgentLedger agentLedger = new AgentLedger();
+        agentLedger.setAgentId(agent.getId());
+        agentLedger.setCredit(dto.getAmount());
+        agentLedger.setDebit(new BigDecimal(0));
+        agentLedger.setBalanceDate(HijriDateUtility.getCurrentJalaliDateAsString());
+        agentLedger.setRectifiedJournalEntryId(rectifiedJournalEntry.getId());
+        agentLedgerRespository.save(agentLedger);
+        return response;
     }
 
 //    public Map<String, Object> getObjectAndRevisions(String id) {
