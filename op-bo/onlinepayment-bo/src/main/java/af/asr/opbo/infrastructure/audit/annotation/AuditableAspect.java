@@ -35,7 +35,7 @@ public class AuditableAspect {
     private UserService userService;
 
 //    @Async
-    @Before("@annotation(af.gov.anar.service_kit.infrastructure.audit.annotation.Auditable)")
+    @Before("@annotation(af.asr.opbo.infrastructure.audit.annotation.Auditable)")
     public void annotatedBeforeLoggingAdvice(JoinPoint joinPoint) throws Throwable{
         String desc = "[" + joinPoint.getSignature().getDeclaringTypeName() + "]" +
                 "[" + ((MethodSignature) joinPoint.getSignature()).getMethod().getName() + "] " +

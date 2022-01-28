@@ -4,6 +4,7 @@ import af.asr.opbo.infrastructure.base.BaseEntity;
 import lombok.*;
 import org.hibernate.annotations.Where;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -16,12 +17,11 @@ import javax.persistence.Table;
 @Builder
 @ToString
 @Where(clause = "deleted is false")
-public class Organization extends BaseEntity {
-    private String name;
-    private String code;
-    private String address;
-    private String phone;
-    private String email;
-    private boolean servicesEnabled;
+public class ProvinceUserRelation extends BaseEntity {
+
+    @Column(nullable = false, name = "app_user_id")
+    private String appUserId;
+
+    @Column(nullable = false)
     private String provinceId;
 }

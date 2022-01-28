@@ -24,4 +24,6 @@ public class Center extends BaseEntity {
     private String address;
     private String phone;
     private String email;
+    private boolean servicesEnabled;
+    private String provinceId;
 }

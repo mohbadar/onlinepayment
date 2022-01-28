@@ -16,12 +16,8 @@ import javax.persistence.Table;
 @Builder
 @ToString
 @Where(clause = "deleted is false")
-public class Organization extends BaseEntity {
+public class Province extends BaseEntity {
     private String name;
-    private String code;
-    private String address;
-    private String phone;
-    private String email;
+    private String provinceCode;
     private boolean servicesEnabled;
-    private String provinceId;
 }

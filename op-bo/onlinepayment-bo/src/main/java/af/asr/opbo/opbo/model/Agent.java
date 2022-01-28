@@ -30,4 +30,5 @@ public class Agent extends BaseEntity {
     private String imagePath;
     private String friedAccountNo1;
     private String friedAccountNo2;
+    private String provinceId;
 }
