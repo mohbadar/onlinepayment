@@ -27,6 +27,12 @@ const routes: Routes = [
                 loadChildren: () =>
                   import("./views/pages/onlinepayment/province/province.module").then((m) => m.ProvinceModule),
             },
+
+            {
+                path: "organization",
+                loadChildren: () =>
+                  import("./views/pages/onlinepayment/organization/organization.module").then((m) => m.OrganizationModule),
+            },
            
             {
                 path: 'pda',

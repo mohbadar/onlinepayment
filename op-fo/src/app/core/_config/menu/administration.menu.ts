@@ -13,7 +13,7 @@ export const administrationMenuModule = {
             },
             {
               title: 'Organization',
-              page: '/store-nid-process-docs',
+              page: '/organization',
               translate: "MENU.ORGANIZATION"
             },
             {
