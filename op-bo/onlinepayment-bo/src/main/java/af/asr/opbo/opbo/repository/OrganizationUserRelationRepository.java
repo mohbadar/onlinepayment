@@ -15,7 +15,7 @@ public interface OrganizationUserRelationRepository extends CrudRepository<Organ
 
     @Query(nativeQuery = true, value = "select distinct on(organization_id) * from organization_user_relation  WHERE app_user_id=:userId")
     List<OrganizationUserRelation> findDistinctByAppUserId(@Param("userId") String userId);
-    List<OrganizationUserRelation> findByOrganizationId(String provinceId);
+    List<OrganizationUserRelation> findByOrganizationId(String organizationId);
 
     OrganizationUserRelation findTopByAppUserIdAndOrganizationId(String appUserId, String organizationId);
 }

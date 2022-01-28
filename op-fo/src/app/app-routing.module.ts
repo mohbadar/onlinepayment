@@ -39,6 +39,13 @@ const routes: Routes = [
                 loadChildren: () =>
                   import("./views/pages/onlinepayment/center/center.module").then((m) => m.CenterModule),
             },
+
+            
+            {
+                path: "agent",
+                loadChildren: () =>
+                  import("./views/pages/onlinepayment/agent/agent.module").then((m) => m.AgentModule),
+            },
             {
                 path: 'pda',
                 canActivate: [TranslateGuard],
