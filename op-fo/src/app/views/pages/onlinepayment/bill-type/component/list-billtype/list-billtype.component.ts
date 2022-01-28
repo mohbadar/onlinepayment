@@ -21,7 +21,7 @@ import { ViewBilltypeComponent } from '../view-billtype/view-billtype.component'
 export class ListBilltypeComponent implements OnInit {
 
   
-  displayedColumns: string[] = [ 'name', "Status" ,'actions'];
+  displayedColumns: string[] = [ 'name', "pricePerItem", "Status" ,'actions'];
 	dataSource: MatTableDataSource<any>;
   
 	@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

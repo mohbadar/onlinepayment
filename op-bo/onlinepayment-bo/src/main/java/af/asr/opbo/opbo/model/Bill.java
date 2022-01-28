@@ -19,6 +19,9 @@ import java.math.BigDecimal;
 @Where(clause = "deleted is false")
 public class Bill extends BaseEntity {
     private String billNo;
+    private Integer numberOfItems;
+    private BigDecimal princePerItem;
+    private String organizationUniqueBillIdentifier;
     private BigDecimal billAmount;
     private BigDecimal feeAmount;
     private BigDecimal totalAmount;

@@ -4,6 +4,7 @@ package af.asr.opbo.opbo.controller;
 import af.asr.opbo.infrastructure.audit.annotation.Auditable;
 import af.asr.opbo.infrastructure.base.UserService;
 import af.asr.opbo.opbo.dto.CenterUserRelationDTO;
+import af.asr.opbo.opbo.dto.IssueBillDTO;
 import af.asr.opbo.opbo.model.Center;
 import af.asr.opbo.opbo.model.CenterUserRelation;
 import af.asr.opbo.opbo.model.Organization;
@@ -130,6 +131,13 @@ public class CenterController {
     @GetMapping("/users")
     public ResponseEntity<List> getUsers() {
         return ResponseEntity.ok(userService.getUsers());
+    }
+
+
+    @Auditable
+    @PostMapping("/issue-bill")
+    public ResponseEntity<Map<String, Object>> issueBill(@RequestBody(required = true) IssueBillDTO dto) {
+        return ResponseEntity.ok(service.issueBill(dto));
     }
 
 }

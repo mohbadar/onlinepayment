@@ -63,6 +63,7 @@ export class CreateBilltypeComponent implements OnInit {
           organizationId: [, [Validators.required]],
           centerId: [,[Validators.required]],
           feeModelId: [, [Validators.required]],
+          pricePerItem: [, [Validators.required]]
           });
 
 
@@ -100,6 +101,7 @@ export class CreateBilltypeComponent implements OnInit {
       this.record.provinceId = this.myForm.get('provinceId').value;
       this.record.organizationId = this.myForm.get('organizationId').value;
       this.record.centerId = this.myForm.get('centerId').value;
+      this.record.pricePerItem = this.myForm.get('pricePerItem').value;
 
 
       console.log("Form Data", this.record)

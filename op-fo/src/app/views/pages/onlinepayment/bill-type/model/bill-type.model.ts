@@ -7,4 +7,5 @@ export class BillType extends BaseModel {
     centerId:string;
     feeModelId:string;
     provinceId:string;
+    pricePerItem:number;
 }

@@ -4,21 +4,21 @@ export const organizationUserMenuModule = {
     alignment: 'left',
     toggle: 'click',
     translate: 'MENU.ORGANIZATION_USER',
-    page: '/agent',
+    page: '/center',
     submenu: [
            {
                 title: 'ISSUE_BILL',
-                page: '/store-nid-process-docs',
+                page: '/issue-bill',
                 translate: "MENU.ISSUE_BILL"
             },
             {
                 title: 'CONFIRM_BILL_PAYMENT',
-                page: '/store-nid-process-docs',
+                page: '/confirm-bill-payment',
                 translate: "MENU.CONFIRM_BILL_PAYMENT"
             },
             {
               title: 'STATEMENT',
-              page: '/store-nid-process-docs',
+              page: '/user-statement',
               translate: "MENU.STATEMENT"
             },
        

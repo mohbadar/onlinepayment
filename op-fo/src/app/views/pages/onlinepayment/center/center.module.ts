@@ -45,6 +45,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { CenterUserRelationComponent} from './component/center-user-relation/center-user-relation.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CenterComponent} from './center.component';
+import { IssueBillComponent } from './component/centeruser/issue-bill/issue-bill.component';
+import { ConfirmBillPaymentComponent } from './component/centeruser/confirm-bill-payment/confirm-bill-payment.component';
+import { GenerateStatementComponent } from './component/centeruser/generate-statement/generate-statement.component';
+import { BillDetailRepesentationComponent } from './component/centeruser/bill-detail-repesentation/bill-detail-repesentation.component';
 
 
 const routes: Routes = [
@@ -64,6 +68,18 @@ const routes: Routes = [
             {
                 path: 'update',
                 component: UpdateCenterComponent
+            },
+            {
+                path: 'issue-bill',
+                component: IssueBillComponent
+            },
+            {
+                path: 'confirm-bill-payment',
+                component: ConfirmBillPaymentComponent
+            },
+            {
+                path: 'user-statement',
+                component: GenerateStatementComponent
             },
         ]
 
@@ -114,7 +130,11 @@ const routes: Routes = [
         CenterComponent,
         ViewCenterComponent,
         UpdateCenterComponent,
-        CenterUserRelationComponent
+        CenterUserRelationComponent,
+        IssueBillComponent,
+        ConfirmBillPaymentComponent,
+        GenerateStatementComponent,
+        BillDetailRepesentationComponent
     ],
 })
 export class CenterModule {

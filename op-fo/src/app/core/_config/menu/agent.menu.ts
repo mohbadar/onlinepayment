@@ -6,20 +6,20 @@ export const agentMenuModule = {
     translate: 'MENU.AGENT',
     page: '/agent',
     submenu: [
-           {
-                title: 'BILL_PAYMENT',
-                page: '/store-nid-process-docs',
-                translate: "MENU.BILL_PAYMENT"
+            {
+                title: 'AGENT_BILL_PAYMENT',
+                page: '/bill-payment',
+                translate: "MENU.AGENT_BILL_PAYMENT"
             },
             {
-              title: 'SLIP',
-              page: '/store-nid-process-docs',
-              translate: "MENU.SLIP_PRINT"
+              title: 'AGENT_SLIP_PRINT',
+              page: '/slip-print',
+              translate: "MENU.AGENT_SLIP_PRINT"
             },
             {
-              title: 'BALANCE_SHEET',
-              page: '/find-nid-process-docs',
-              translate: "MENU.BALANCE_SHEET"
+              title: 'AGENT_BALANCE_SHEET',
+              page: '/agent-balance-sheet',
+              translate: "MENU.AGENT_BALANCE_SHEET"
             },
        
     ]

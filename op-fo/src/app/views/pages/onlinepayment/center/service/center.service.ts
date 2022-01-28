@@ -71,4 +71,9 @@ export class CenterService {
     return this.httpClient.get(`${_BASE_URL}/users`);
   }
 
+
+  public issueBill(data): Observable<any> {
+    return this.httpClient.post(`${_BASE_URL}/issue-bill`, data);
+  }
+
 }

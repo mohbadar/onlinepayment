@@ -6,6 +6,7 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 
 @Entity
 @Table()
@@ -23,4 +24,5 @@ public class BillType extends BaseEntity {
     private String organizationId;
     private String centerId;
     private String feeModelId;
+    private BigDecimal pricePerItem;
 }

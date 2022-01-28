@@ -1,21 +1,21 @@
 package af.asr.opbo.opbo.service;
 
 import af.asr.opbo.infrastructure.base.UserService;
-import af.asr.opbo.opbo.model.Center;
-import af.asr.opbo.opbo.model.CenterUserRelation;
-import af.asr.opbo.opbo.model.Organization;
-import af.asr.opbo.opbo.model.OrganizationUserRelation;
-import af.asr.opbo.opbo.repository.CenterRepository;
-import af.asr.opbo.opbo.repository.CenterUserRelationRepository;
-import af.asr.opbo.opbo.repository.OrganizationRepository;
-import af.asr.opbo.opbo.repository.OrganizationUserRelationRepository;
+import af.asr.opbo.opbo.dto.IssueBillDTO;
+import af.asr.opbo.opbo.model.*;
+import af.asr.opbo.opbo.repository.*;
 import af.asr.opbo.usermanagement.service.UserManagementService;
+import af.asr.opbo.util.AccountNumberUtility;
+import af.asr.opbo.util.HijriDateUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -33,6 +33,15 @@ public class CenterService {
 
     @Autowired
     private CenterUserRelationRepository centerUserRelationRepository;
+
+    @Autowired
+    private FeeModelService feeModelService;
+
+    @Autowired
+    private BillTypeService billTypeService;
+
+    @Autowired
+    private BillRepository billRepository;
 
 
 
@@ -95,6 +104,107 @@ public class CenterService {
         });
         return centers;
     }
+
+    public Map<String, Object> issueBill(IssueBillDTO dto) {
+        Map<String, Object> response= new HashMap<>();
+
+
+        BillType billType = billTypeService.findById(dto.getBillTypeId());
+        if (billType == null)
+            throw new RuntimeException("BillTypeNotFoundException");
+
+        FeeModel feeModel= feeModelService.findById(billType.getFeeModelId());
+        if (feeModel == null)
+            throw new RuntimeException("FeeModelNotFoundException");
+
+        Center center = repository.findById(dto.getCenterId()).orElse(null);
+        if (center ==null)
+            throw new RuntimeException("CenterNotFoundException");
+
+        BigDecimal billAmount = calculateIssuedBill(dto);
+        BigDecimal feeAmount = calculateFee(dto);
+
+        Bill bill = new Bill();
+        bill.setBillAmount(billAmount);
+        bill.setBillDate(HijriDateUtility.getCurrentJalaliDateAsString());
+
+        String billNo = AccountNumberUtility.generateSequence();
+        while(billRepository.findByBillNo(billNo) !=null)
+            billNo = AccountNumberUtility.generateSequence();
+
+        bill.setBillNo(billNo);
+        bill.setBillTypeId(dto.getBillTypeId());
+        bill.setCenterId(dto.getCenterId());
+        bill.setFeeAmount(feeAmount);
+        bill.setFeeModelId(feeModel.getId());
+        bill.setCenterId(center.getId());
+        bill.setOrganizationId(center.getOrganizationId());
+        bill.setPrincePerItem(billType.getPricePerItem());
+        bill.setNumberOfItems(dto.getNumberOfItems());
+        bill.setOrganizationUniqueBillIdentifier(dto.getOrganizationUniqueBillIdentifier());
+        bill.setTotalAmount(billAmount);
+        bill.setStationaryAmount(new BigDecimal(0));
+        bill.setOtherChargesAmount(new BigDecimal(0));
+
+        Bill savedBill = billRepository.save(bill);
+
+        response.put("billId", savedBill.getId());
+        response.put("billNo", savedBill.getBillNo());
+        response.put("billAmount", savedBill.getBillAmount());
+        response.put("billDate", savedBill.getBillDate());
+        return response;
+    }
+
+    private BigDecimal calculateIssuedBill(IssueBillDTO dto)
+    {
+        BigDecimal billTotalAmount = new BigDecimal(0);
+
+        BillType billType = billTypeService.findById(dto.getBillTypeId());
+        if (billType == null)
+            throw new RuntimeException("BillTypeNotFoundException");
+
+        FeeModel feeModel= feeModelService.findById(billType.getFeeModelId());
+        if (feeModel == null)
+            throw new RuntimeException("FeeModelNotFoundException");
+
+        BigDecimal pricePerItem= billType.getPricePerItem();
+        Integer numberOfItems = dto.getNumberOfItems();
+
+        // calculate Bill
+        billTotalAmount= pricePerItem.multiply(new BigDecimal(numberOfItems));
+        return billTotalAmount;
+    }
+
+    private BigDecimal calculatePercentage(BigDecimal rate, BigDecimal total) {
+        BigDecimal percentageAmount = total.multiply(BigDecimal.valueOf((double)rate.floatValue()/100.0));
+        return percentageAmount;
+    }
+
+    private BigDecimal calculateFee(IssueBillDTO dto)
+    {
+        BillType billType = billTypeService.findById(dto.getBillTypeId());
+        if (billType == null)
+            throw new RuntimeException("BillTypeNotFoundException");
+
+        FeeModel feeModel= feeModelService.findById(billType.getFeeModelId());
+        if (feeModel == null)
+            throw new RuntimeException("FeeModelNotFoundException");
+
+        BigDecimal pricePerItem= billType.getPricePerItem();
+        Integer numberOfItems = dto.getNumberOfItems();
+
+        BigDecimal totalFee = new BigDecimal(0);
+        if (feeModel.getType()=="PERCENTAGE")
+        {
+            for (int i=0; i<numberOfItems; i++){
+                totalFee.add(calculatePercentage(feeModel.getPercentage(),pricePerItem));
+            }
+        }else {
+            totalFee = feeModel.getAmount().multiply(new BigDecimal(numberOfItems));
+        }
+        return totalFee;
+    }
+
 
 //    public Map<String, Object> getObjectAndRevisions(String id) {
 //        Map<String, Object> data =  new HashMap<>();

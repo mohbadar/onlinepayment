@@ -47,6 +47,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { AgentComponent} from './agent.component';
 import { CreditAgentAccountComponent } from './component/credit-agent-account/credit-agent-account.component';
 import { DebitAgentAccountComponent } from './component/debit-agent-account/debit-agent-account.component';
+import { AgentBillPaymentComponent } from './component/agent-bill-payment/agent-bill-payment.component';
+import { AgentSlipPrintComponent } from './component/agent-slip-print/agent-slip-print.component';
+import { AgentBalanceSheetComponent } from './component/agent-balance-sheet/agent-balance-sheet.component';
 
 
 const routes: Routes = [
@@ -126,7 +129,10 @@ const routes: Routes = [
         UpdateAgentComponent,
         AgentUserRelationComponent,
         CreditAgentAccountComponent,
-        DebitAgentAccountComponent
+        DebitAgentAccountComponent,
+        AgentBillPaymentComponent,
+        AgentSlipPrintComponent,
+        AgentBalanceSheetComponent
     ],
 })
 export class AgentModule {

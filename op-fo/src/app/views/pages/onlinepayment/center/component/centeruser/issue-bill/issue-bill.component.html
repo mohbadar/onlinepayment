@@ -20,19 +20,11 @@
                             <div class="kt-wizard-v2__form">
 
                                 <div class="form-group required">
-                                    <label class="col-form-label">{{'PROVINCE'|translate}}</label>
-                                    <ng-select [items]="provinces$ | async " bindLabel="name" bindValue="id"
-                                    [placeholder]="'PROVINCE'|translate" formControlName="provinceId">
+                                    <label class="col-form-label">{{'BILL_TYPE'|translate}}</label>
+                                    <ng-select [items]="billTypes$ | async " bindLabel="name" bindValue="id"
+                                    [placeholder]="'BILL_TYPE'|translate" formControlName="billTypeId">
                                     </ng-select>
-                                    <print-error [control]="myForm.get('name')"></print-error>
-                                </div>
-
-                                <div class="form-group required">
-                                    <label class="col-form-label">{{'ORGANIZATION'|translate}}</label>
-                                    <ng-select [items]="organizations$ | async " bindLabel="name" bindValue="id"
-                                    [placeholder]="'ORGANIZATION'|translate" formControlName="organizationId">
-                                    </ng-select>
-                                    <print-error [control]="myForm.get('organizationId')"></print-error>
+                                    <print-error [control]="myForm.get('billTypeId')"></print-error>
                                 </div>
 
                                 <div class="form-group required">
@@ -43,28 +35,22 @@
                                     <print-error [control]="myForm.get('centerId')"></print-error>
                                 </div>
 
-                                
-                                <div class="form-group required">
-                                    <label class="col-form-label">{{'FEE_MODEL'|translate}}</label>
-                                    <ng-select [items]="feemodels$ | async " bindLabel="name" bindValue="id"
-                                    [placeholder]="'FEE_MODEL'|translate" formControlName="feeModelId">
-                                    </ng-select>
-                                    <print-error [control]="myForm.get('feeModelId')"></print-error>
-                                </div>
 
                                 <div class="form-group required">
-                                    <label class="col-form-label">{{'NAME'|translate}}</label>
-                                    <input type="text" class="form-control" name="name"
-                                        [placeholder]="'NAME'|translate" formControlName="name">
-                                    <print-error [control]="myForm.get('name')"></print-error>
+                                    <label class="col-form-label">{{'NUMBER_OF_ITEMS'|translate}}</label>
+                                    <input type="number" class="form-control" name="numberOfItems"
+                                        [placeholder]="'NUMBER_OF_ITEMS'|translate" formControlName="numberOfItems">
+                                    <print-error [control]="myForm.get('numberOfItems')"></print-error>
                                 </div>
 
+
                                 <div class="form-group required">
-                                    <label class="col-form-label">{{'PRICE_PER_ITEM'|translate}}</label>
-                                    <input type="number" class="form-control" name="pricePerItem"
-                                        [placeholder]="'PRICE_PER_ITEM'|translate" formControlName="pricePerItem">
-                                    <print-error [control]="myForm.get('pricePerItem')"></print-error>
+                                    <label class="col-form-label">{{'IDENTIFIER'|translate}}</label>
+                                    <input type="text" class="form-control" name="organizationUniqueBillIdentifier"
+                                        [placeholder]="'IDENTIFIER'|translate" formControlName="organizationUniqueBillIdentifier">
+                                    <print-error [control]="myForm.get('organizationUniqueBillIdentifier')"></print-error>
                                 </div>
+
 
                             </div>
                         </div>

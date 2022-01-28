@@ -20,6 +20,11 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'NAME'|translate}}</th>
         <td mat-cell *matCellDef="let row">{{ row.name }}</td>
       </ng-container>
+
+      <ng-container matColumnDef="pricePerItem">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'PRICE_PER_ITEM'|translate}}</th>
+        <td mat-cell *matCellDef="let row">{{ row.pricePerItem }}</td>
+      </ng-container>
   
   
       <ng-container matColumnDef="Status">
