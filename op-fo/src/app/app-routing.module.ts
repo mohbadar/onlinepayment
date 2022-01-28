@@ -35,6 +35,11 @@ const routes: Routes = [
             },
            
             {
+                path: "center",
+                loadChildren: () =>
+                  import("./views/pages/onlinepayment/center/center.module").then((m) => m.CenterModule),
+            },
+            {
                 path: 'pda',
                 canActivate: [TranslateGuard],
                 data: { moduleName: 'pda' },

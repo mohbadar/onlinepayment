@@ -18,7 +18,7 @@ export const administrationMenuModule = {
             },
             {
               title: 'CENTER',
-              page: '/find-nid-process-docs',
+              page: '/center',
               translate: "MENU.CENTER"
             },
             {
