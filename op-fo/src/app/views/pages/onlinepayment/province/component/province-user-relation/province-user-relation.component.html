@@ -1,0 +1,33 @@
+<kt-portlet>
+  <kt-portlet-body>
+    <div class="kt-heading kt-heading--md">
+      {{ "M.PROVINCE_USER_RELATION" | translate }}
+    </div>
+    <div class="row">
+      <div class="col-lg-1"></div>
+      <div class="col-lg-10">
+        <!--begin::Form-->
+        <form [formGroup]="eBreshnaForm" (ngSubmit)="submit()">
+          <div class="form-group row required">
+            <div class="col-lg-2"></div>
+            <label class="col-lg-2 col-form-label">{{ "M.USER_NAME" | translate }}</label>
+            <div class="col-lg-6">
+              <ng-select [items]="userMasters | async" bindLabel="username" bindValue="id" multiple="true"
+                [placeholder]="'M.USER_NAME' | translate" formControlName="userId">
+              </ng-select>
+              <print-error [control]="eBreshnaForm.get('userId')"></print-error>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <button [disabled]="eBreshnaForm.invalid" type="submit"
+              class="btn btn-primary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u">
+              {{ "SUBMIT" | translate }}</button>&nbsp;
+            <button type="button" mat-raised-button [mat-dialog-close]="" cdkFocusInitial matTooltip="Cancel changes">
+              {{ "CLOSE" | translate }}</button>&nbsp;
+          </div>
+        </form>
+        <!--end::Form-->
+      </div>
+    </div>
+  </kt-portlet-body>
+</kt-portlet>

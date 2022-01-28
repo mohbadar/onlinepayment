@@ -21,6 +21,12 @@ const routes: Routes = [
                 data: { moduleName: 'dashboard' },
                 loadChildren: () => import('./views/pages/dashboard/dashboard.module').then(m => m.DashboardModule)
             },
+
+            {
+                path: "province",
+                loadChildren: () =>
+                  import("./views/pages/onlinepayment/province/province.module").then((m) => m.ProvinceModule),
+            },
            
             {
                 path: 'pda',

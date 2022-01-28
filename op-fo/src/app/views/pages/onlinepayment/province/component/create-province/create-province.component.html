@@ -1,0 +1,67 @@
+<!-- 
+<kt-notice [icon]="'flaticon-warning kt-font-primary'">
+	We know that you are authorized to access this part of the system. 
+	Considering that, this is a critical module. Please be careful!
+</kt-notice> -->
+
+
+<kt-portlet>
+    <kt-portlet-body>
+
+        <!--begin: Wizard -->
+        <div #wizard class="kt-grid kt-wizard-v2 kt-wizard-v2--white" id="kt_wizard_v2"
+            data-ktwizard-state="step-first">
+            <div class="kt-grid__item kt-grid__item--fluid kt-wizard-v2__wrapper">
+                <!--begin: Form Wizard Form-->
+                <form [formGroup]="myForm" (ngSubmit)="submit()" class="kt-form" id="kt_form">
+                    <!--begin: Form Wizard Step 1-->
+                    <div class="kt-wizard-v2__content" data-ktwizard-type="step-content" data-ktwizard-state="current">
+                        <div class="kt-heading kt-heading--md">{{'ENTER_UNIQUE_NAME'|translate}} </div>
+                        <div class="kt-form__section kt-form__section--first">
+                            <div class="kt-wizard-v2__form">
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'NAME'|translate}}</label>
+                                    <input type="text" class="form-control" name="name"
+                                        [placeholder]="'PROVINCE_NAME'|translate" formControlName="name">
+                                    <!-- <span class="form-text text-muted">{{'PLEASE_ENTER_PROVINCE_NAME'|translate}}</span> -->
+                                    <print-error [control]="myForm.get('name')"></print-error>
+                                </div>
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'PROVINCE_CODE'|translate}}</label>
+                                    <input type="number" class="form-control" name="provinceCode"
+                                        [placeholder]="'PROVINCE_CODE'|translate" formControlName="provinceCode">
+                                    <span class="form-text text-muted">{{'PLEASE_ENTER_PROVINCE_CODE'|translate}}</span>
+                                    <print-error [control]="myForm.get('provinceCode')"></print-error>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end: Form Wizard Step 1-->
+
+
+
+
+                    <!--begin: Form Actions -->
+                    <div class="kt-form__actions text-center">
+                        <button (click)="routeHome()" type="button"
+                            class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u">
+                            {{'BACK'|translate}}
+                        </button>&nbsp;&nbsp;
+                        <button [disabled]="myForm.invalid"
+                            class="btn btn-primary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                            data-ktwizard-type="action-submit">
+                            {{'SUBMIT'|translate}}
+                        </button>
+                    </div>
+                    <!--end: Form Actions -->
+                </form>
+                <!--end: Form Wizard Form-->
+            </div>
+        </div>
+        <!--end: Wizard -->
+
+    </kt-portlet-body>
+</kt-portlet>
+<ngx-spinner></ngx-spinner>

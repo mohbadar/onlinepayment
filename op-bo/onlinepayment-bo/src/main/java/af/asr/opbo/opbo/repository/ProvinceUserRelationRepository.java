@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface ProvinceUserRelationRepository extends CrudRepository<ProvinceUserRelation, String> {
-    @Query(nativeQuery = true, value = "select distinct on(province_id) * from province_user_relation_t  WHERE app_user_id=:userId")
+    @Query(nativeQuery = true, value = "select distinct on(province_id) * from province_user_relation  WHERE app_user_id=:userId")
     List<ProvinceUserRelation> findDistinctByAppUserId(@Param("userId") String userId);
     List<ProvinceUserRelation> findByProvinceId(String provinceId);
     ProvinceUserRelation findTopByAppUserIdAndProvinceId(String appUserId, String provinceId);

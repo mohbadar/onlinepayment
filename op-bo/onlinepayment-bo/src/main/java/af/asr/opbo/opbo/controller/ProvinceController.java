@@ -1,6 +1,7 @@
 package af.asr.opbo.opbo.controller;
 
 import af.asr.opbo.infrastructure.audit.annotation.Auditable;
+import af.asr.opbo.infrastructure.base.UserService;
 import af.asr.opbo.opbo.dto.ProvinceUserRelationDTO;
 import af.asr.opbo.opbo.model.Province;
 import af.asr.opbo.opbo.model.ProvinceUserRelation;
@@ -17,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/api/administration/provinces", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/provinces", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProvinceController {
 
     @Autowired
@@ -25,6 +26,9 @@ public class ProvinceController {
 
     @Autowired
     private ProvinceUserRelationRepository provinceUserRelationRepository;
+
+    @Autowired
+    private UserService userService;
 
     @Auditable
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -111,6 +115,13 @@ public class ProvinceController {
     public ResponseEntity<List<Province>> getUserProvinces(@RequestParam Map<String, String> params)
     {
         return ResponseEntity.ok(service.getUserProvinces(params.get("userName")));
+    }
+
+
+    @Auditable
+    @GetMapping("/users")
+    public ResponseEntity<List> getUsers() {
+        return ResponseEntity.ok(userService.getUsers());
     }
 
 }

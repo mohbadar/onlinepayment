@@ -4,11 +4,11 @@ export const administrationMenuModule = {
     alignment: 'left',
     toggle: 'click',
     translate: 'MENU.ADMINISTRATION',
-    page: '/administration',
+    page: '',
     submenu: [
            {
                 title: 'PROVINCE',
-                page: '/store-nid-process-docs',
+                page: '/province',
                 translate: "MENU.PROVINCE"
             },
             {

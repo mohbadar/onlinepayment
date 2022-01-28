@@ -10,7 +10,7 @@ import {
 // Add here your keycloak configuration information
 const keycloakConfig: KeycloakConfig = {
   url: "http://localhost:8080/auth",
-  realm: "onlinepament",
+  realm: "onlinepayment",
   clientId: "op",
 };
 
