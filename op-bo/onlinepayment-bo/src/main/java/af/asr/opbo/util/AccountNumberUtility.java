@@ -21,7 +21,7 @@ public class AccountNumberUtility {
     {
         /**
          * Sudo Code
-         * if lastRecord for consumer is null:
+         * if lastRecord for agent is null:
          *        generate new initAccountNo
          *        return initAccountNo
          * else if lastRecord exist

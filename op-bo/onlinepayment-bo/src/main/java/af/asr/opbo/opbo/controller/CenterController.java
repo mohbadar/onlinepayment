@@ -77,6 +77,7 @@ public class CenterController {
 //        item.setCode(obj.getCode());
 //        item.setServicesEnabled(true);
 
+        obj.setId(id);
         return ResponseEntity.ok(service.save(obj));
     }
 

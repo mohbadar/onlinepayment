@@ -19,7 +19,9 @@ import java.math.BigDecimal;
 @Where(clause = "deleted is false")
 public class FeeModel extends BaseEntity {
     private String name;
+    private  boolean isItemBased;
     private String type; //percentage or exact amount
     private Double percentage;
     private BigDecimal amount;
+
 }
