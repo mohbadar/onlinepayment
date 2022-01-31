@@ -14,6 +14,7 @@ import { } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Breadcrumb, SubheaderService } from '../../../core/_base/layout/services/subheader.service';
 import { TranslateService } from '@ngx-translate/core';
+import { KeycloakService } from 'keycloak-angular';
 // Layout
 
 @Component({
@@ -33,85 +34,144 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     title: string = '';
     desc: string = '';
     breadcrumbs: Breadcrumb[] = [];
-    modules = [
+
+
+    centeruser_modules = [
         {
             id: 1,
-            name: 'Register Document',
-            translate: 'REGISTER_PDA',
+            name: 'ISSUE_BILL',
+            translate: 'ISSUE_BILL',
             icon: 'eConfiguration.svg',
-            link: '/pda/store-nid-process-docs'
+            link: '/center/issue-bill'
         }, 
         {
-            id: 1,
-            name: 'Verify Document',
-            translate: 'VERIFY_PDA',
+            id: 2,
+            name: 'Confirm Bill Payment',
+            translate: 'CONFIRM_BILL_PAYMENT',
             icon: 'eCustomerService.svg',
-            link: '/pda/verify-nid-process-docs'
+            link: '/center/confirm-bill-payment'
         }, 
 
          {
-            id: 7,
-            name: 'Search Document',
+            id: 3,
+            name: 'Statement',
             icon: 'eAudit.svg',
-            link: '/pda/find-nid-process-docs',
-            translate: 'SEARCH_PDA'
+            link: '/center/user-statement',
+            translate: 'STATEMENT'
         }, 
-        // {
-        //     id: 2,
-        //     name: 'Service Connection',
-        //     translate: 'MENU.SERVICE_CONNECTION.MODULE_NAME',
-        //     icon: 'eNSC.svg',
-        //     link: "/service-connection/service-connection-menu/offline-service-connection/nsc-offline/add"
-        // }, {
-        //     id: 3,
-        //     name: 'Customer Service',
-        //     translate: 'MENU.CUSTOMER_SERVICE.MODULE_NAME',
-        //     icon: 'eCustomerService.svg',
-        //     link: '/billing/other-activities/crmd'
-        // }, {
-        //     id: 4,
-        //     name: 'Metering',
-        //     translate: 'MENU.METERING.MODULE_NAME',
-        //     icon: 'eMeter.svg',
-        //     link: '/metering/meter-reading/meter-reading-sheet/reading-sheet-generation'
-        // }, {
-        //     id: 5,
-        //     name: 'Billing',
-        //     translate: 'MENU.BILLING.MODULE_NAME',
-        //     icon: 'eBilling.svg',
-        //     link: '/billing/billing/bill-preview/meter-reader-bill-preview'
-        // }, {
-        //     id: 6,
-        //     name: 'Payments',
-        //     translate: 'MENU.PAYMENTS.MODULE_NAME',
-        //     icon: 'ePayment.svg',
-        //     link: '/payments/offline-payment'
-        // },
-        // // {
-        // //     id: 7,
-        // //     name: 'Energy Audit System',
-        // //     icon: 'eAudit.svg',
-        // //     link: '/energy-audit',
-        // //     translate: 'MENU.ENERGY_AUDIT_SYSTEM'
-        // // }, 
-        // {
-        //     id: 8,
-        //     name: 'CAAD',
-        //     translate: 'MENU.POOHESH.CAAD',
-        //     icon: 'eHelpdesk.svg',
-        //     link: '/billing/other-activities/caad'
-        // },
+        
     ]
 
+
+
+    agentuser_modules = [
+        {
+            id: 1,
+            name: 'AGENT_BILL_PAYMENT',
+            translate: 'AGENT_BILL_PAYMENT',
+            icon: 'eConfiguration.svg',
+            link: '/agent/bill-payment'
+        }, 
+        {
+            id: 2,
+            name: 'AGENT_SLIP_PRINT',
+            translate: 'AGENT_SLIP_PRINT',
+            icon: 'eCustomerService.svg',
+            link: '/agent/slip-print'
+        }, 
+
+         {
+            id: 3,
+            name: 'AGENT_BALANCE_SHEET',
+            icon: 'eAudit.svg',
+            link: '/agent/agent-balance-sheet',
+            translate: 'AGENT_BALANCE_SHEET'
+        }, 
+        
+    ]
+
+
+    administration_modules = [
+        {
+            id: 1,
+            name: 'PROVINCE',
+            translate: 'MENU.PROVINCE',
+            icon: 'eConfiguration.svg',
+            link: '/province'
+        }, 
+        {
+            id: 2,
+            name: 'MENU.ORGANIZATION',
+            translate: 'MENU.ORGANIZATION',
+            icon: 'eCustomerService.svg',
+            link: '/organization'
+        }, 
+
+         {
+            id: 3,
+            name: 'MENU.CENTER',
+            icon: 'eAudit.svg',
+            link: '/center',
+            translate: 'MENU.CENTER'
+        }, 
+
+        {
+            id: 4,
+            name: 'MENU.AGENT',
+            icon: 'eAudit.svg',
+            link: '/agent',
+            translate: 'MENU.AGENT'
+        }, 
+
+
+        {
+            id: 3,
+            name: 'MENU.CREDIT_AGENT',
+            icon: 'eAudit.svg',
+            link: '/agent/credit',
+            translate: 'MENU.CREDIT_AGENT'
+        }, 
+
+
+        {
+            id: 5,
+            name: 'MENU.DEBIT_AGENT',
+            icon: 'eAudit.svg',
+            link: '/agent/debit',
+            translate: 'MENU.DEBIT_AGENT'
+        }, 
+
+        {
+            id: 6,
+            name: 'MENU.BILLTYPE',
+            icon: 'eAudit.svg',
+            link: '/bill-type',
+            translate: 'MENU.BILLTYPE'
+        }, 
+
+        {
+            id: 7,
+            name: 'MENU.FEE_MODEL',
+            icon: 'eAudit.svg',
+            link: '/fee-model',
+            translate: 'MENU.FEE_MODEL'
+        },
+
+        
+        
+    ]
     // Private properties
     private subscriptions: Subscription[] = [];
+    modules: { id: number; name: string; translate: string; icon: string; link: string; }[];
 
 	/**
 	 * Component constructor
 	 *
 	 * @param subheaderService: SubheaderService
 	 */
-    constructor(public subheaderService: SubheaderService, private translate: TranslateService) {
+    constructor(public subheaderService: SubheaderService, 
+        private translate: TranslateService,
+        private keycloakService: KeycloakService) {
     }
 
 	/**
@@ -122,6 +182,18 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 	 * On init
 	 */
     ngOnInit() {
+
+        if(this.keycloakService.isUserInRole("agent_module_view")){
+            this.modules = this.agentuser_modules;
+        }
+        
+        if(this.keycloakService.isUserInRole("organization_user_module_view")){
+            this.modules = this.centeruser_modules;
+        }
+
+        if(this.keycloakService.isUserInRole("administration_module_view")){
+            this.modules = this.administration_modules;
+        }
     }
 
 	/**

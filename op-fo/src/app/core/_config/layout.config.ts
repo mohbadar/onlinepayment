@@ -10,16 +10,16 @@ export class LayoutConfig {
                 // 'background-image': './assets/media/flags/nsia.svg',
             },
             'logo': {
-                'desktop': './assets/media/nsia.jpg',
-                'sticky': './assets/media/nsia.jpg',
-                'mobile': './assets/media/nsia.jpg',
+                'desktop': './assets/media/flags/afghanistan.png',
+                'sticky': './assets/media/flags/afghanistan.png',
+                'mobile': './assets/media/flags/afghanistan.png',
             },
         },
         // == Page Splash Screen loading
         'loader': {
             'enabled': true,
             'type': 'spinner-logo',
-            'logo': './assets/media/nsia.jpg',
+            'logo': './assets/media/flags/afghanistan.png',
             'message': 'Please wait...',
         },
         // == Colors for javascript

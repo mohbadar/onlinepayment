@@ -35,60 +35,7 @@ export class DevTeamComponent implements OnInit {
             link: 'https://github.com/mohbadar'
         },
 
-        
-        {
-            id: 1,
-            name: 'Mirwais Akrami',
-            position: 'Engineer',
-            icon: 'akrami.jpg',
-            link: 'https://github.com/MirwaisAkrami'
-        },
-
-        
-        {
-            id: 1,
-            name: 'Jamila Maqsoudi',
-            position: 'Engineer',
-            icon: 'jamila.jpg',
-            link: 'https://github.com/jmaqsoudi'
-        },
-
-        
-        {
-            id: 1,
-            name: 'Safiullah Ahmadzai',
-            position: 'Engineer',
-            icon: 'safi.jpg',
-            link: 'https://github.com/SafiAhmadzai'
-        },
-
-                
-        {
-            id: 1,
-            name: 'Sediqa Mousavi',
-            position: 'Engineer',
-            icon: 'sediqa.jpg',
-            link: 'https://github.com/sediqamousavi'
-        },
-
-                
-        {
-            id: 1,
-            name: 'Walid Mashal',
-            position: 'Engineer',
-            icon: 'mashal.jpg',
-            link: 'https://github.com/walid-mashal'
-        },
-
-    
-
-        {
-            id: 1,
-            name: 'Suhrab Ahadi',
-            position: 'Mobile Engineer',
-            icon: 'suhrab.jpg',
-            link: 'https://github.com/SuhrabAhdi'
-        },
+       
     ]
 
     // Private properties

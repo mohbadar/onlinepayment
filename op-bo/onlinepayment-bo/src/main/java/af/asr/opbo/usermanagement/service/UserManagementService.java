@@ -220,20 +220,23 @@ public class UserManagementService {
         return response;
     }
 
-    public boolean canMigrate(String username, String password)
+    public void resetUserPassword(UserDTO userDTO)
     {
-//        try {
-//            Keycloak keycloak = Keycloak.getInstance(keycloakServerUrl, keycloackRealm, username, password,
-//                    "admin-cli");
-//            RealmResource realm = keycloak.realm(keycloackRealm);
-//            if (realm.roles().list().size() > 0) return true;
-//        }catch (Exception e){
-//            return false;
-//        }
-//        return false;
-        if(StringUtils.isNotBlank(userService.getPreferredUsername()))
-            return true;
-        return false;
+        Keycloak keycloak = Keycloak.getInstance(keycloakServerUrl, keycloackRealm, keycloackUser, keycloackPassword,
+                "admin-cli");
+
+        RealmResource realm = keycloak.realm(keycloackRealm);
+        UsersResource users = realm.users();
+        UserRepresentation userRepresentation = this.getUserByUserName(userDTO.getUsername());
+
+        if(userRepresentation == null)
+            throw new RuntimeException("No Such User Has Been Found!");
+
+        UserResource user = users.get(userRepresentation.getId());
+        user.resetPassword(createCredential(userDTO.getPassword()));
+
+        // userRepresentation.setCredentials(Collections.singletonList(createCredential(userDTO.getPassword())));
+        // users.create(userRepresentation);
     }
 
  }

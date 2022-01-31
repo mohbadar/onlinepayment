@@ -112,5 +112,11 @@ public class UserManagementController extends ResponseHandler {
         return ResponseEntity.ok(response);
     }
 
+    @Auditable
+    @PostMapping(value = "/change-password", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> resetUserPassword(@RequestBody(required = true) UserDTO userDTO)throws Exception {
+        userManagementService.resetUserPassword(userDTO);
+        return ResponseEntity.ok(true);
+    }
 
 }
