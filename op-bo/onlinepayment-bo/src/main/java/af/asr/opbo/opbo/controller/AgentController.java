@@ -164,4 +164,27 @@ public class AgentController {
         return ResponseEntity.ok(service.getBalanceSheet(accountNo));
     }
 
+    @Auditable
+    @PostMapping("/query-bill-payment")
+    public ResponseEntity<Map<String, Object>> queryBillPayment(@RequestBody String receiptNo)
+    {
+        return ResponseEntity.ok(service.queryBillPayment(receiptNo));
+    }
+
+
+    @Auditable
+    @PostMapping("/confirm-payment")
+    public ResponseEntity<BillPayment> confirmPayment(@RequestBody String paymentId)
+    {
+        return ResponseEntity.ok(service.confirmPayment(paymentId));
+    }
+
+
+    @Auditable
+    @PostMapping("/confirm-payment")
+    public ResponseEntity<Map<String, Object>> getUserBillStatement()
+    {
+        return ResponseEntity.ok(service.getUserBillStatement());
+    }
+
 }

@@ -1,1 +1,127 @@
-<p>confirm-bill-payment works!</p>
+<div class="_form_wrapper">
+    <div class="kt-heading kt-heading--md">{{ "BILL_PAYMENT_CONFIRMATION" | translate }}</div>
+  
+    <hr />
+    <!-- Getting bill information first -->
+    <div class="row">
+
+
+      <div class="col-xl-8">
+        <div class="form-group">
+          <label>{{ "RECEIPT_NUMBER" | translate }}</label>
+          <input
+            type="text"
+            class="form-control"
+            name="fname"
+            [(ngModel)]="billModel.receiptNumber"
+          />
+        </div>
+      </div>
+
+
+      <div class="col-xl-4">
+        <div class="form-group">
+          <button
+            class="btn btn-primary btn-fill _abs_btn"
+            (click)="getBillInfo()"
+            type="button"
+            [disabled]="!billModel.receiptNumber"
+          >
+            {{ "DISPLAY" | translate }}
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+  
+<kt-portlet *ngIf="isBillInfoFetched">
+    <kt-portlet-body>
+      <div class="kt-heading kt-heading--md">
+        {{ "BILL_DETAILS" | translate }}
+      </div>
+      <div class="col-lg-12 row">
+        <hr />
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td class="font-weight-bold">
+                  {{ "BILL_NO" | translate }}
+                </td>
+                <td>{{ bill.billNo }}</td>
+              </tr>
+              <tr>
+                <td class="font-weight-bold">{{ "BILL_AMOUNT" | translate }}</td>
+                <td>{{ bill.billAmount}}</td>
+              </tr>
+              <tr>
+                <td class="font-weight-bold">{{ "NUMBER_OF_ITEMS" | translate }}</td>
+                <td>{{ bill.numberOfItems }}</td>
+              </tr>
+              <tr>
+                <td class="font-weight-bold">{{ "BILL_DATE" | translate }}</td>
+                <td>{{ bill.billDate}}</td>
+              </tr>
+              <tr>
+                <td class="font-weight-bold">{{ "AGENT_NAME" | translate }}</td>
+                <td>{{ agent.firstname + ' ' + agent.lastname }}</td>
+              </tr>
+
+              <tr>
+                <td class="font-weight-bold">{{ "AGENT_ACCOUNT_NO" | translate }}</td>
+                <td>{{ agent.accountNo }}</td>
+              </tr>
+
+              <tr>
+                <td class="font-weight-bold">{{ "AGENT_PHONE_NO" | translate }}</td>
+                <td>{{ agent.phone }}</td>
+              </tr>
+
+              <tr>
+                <td class="font-weight-bold">{{ "RECEIPT_NUMBER" | translate }}</td>
+                <td>{{ billPayment.receiptNo }}</td>
+              </tr>
+
+              <tr>
+                <td class="font-weight-bold">{{ "PAYMENT_AMOUNT" | translate }}</td>
+                <td>{{ billPayment.paidAmount }}</td>
+              </tr>
+
+              <tr>
+                <td class="font-weight-bold">{{ "PAYMENT_DATE" | translate }}</td>
+                <td>{{ billPayment.paymentDate }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <br /><br />
+        <div class="col-lg-12">
+          <div class="col-lg-3 offset-9">
+            <button (click)="
+                confirmPayment(billPayment.id)
+              " class="
+                btn btn-primary btn-md btn-tall btn-wide
+                kt-font-bold kt-font-transform-u
+              ">
+              {{ "CONFIRM_PAYMENT" | translate }}
+            </button>
+          </div>
+        </div>
+      
+        </div>
+      </div>
+
+    </kt-portlet-body>
+  </kt-portlet>
+
+
+
+  <ngx-spinner></ngx-spinner>
+  

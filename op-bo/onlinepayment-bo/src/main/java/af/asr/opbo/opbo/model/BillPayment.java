@@ -35,4 +35,10 @@ public class BillPayment extends BaseEntity {
     private String paymentType;
     private BigDecimal tenderedAmount;
     private boolean posted;
+
+    private boolean confirmed;
+    private String confirmUserId;
+    private String confirmUserName;
+    private String confirmDate;
+
 }

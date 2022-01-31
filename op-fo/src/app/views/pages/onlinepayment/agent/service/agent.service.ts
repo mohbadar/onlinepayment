@@ -94,5 +94,13 @@ export class AgentService {
   getBalanceSheet(accountNo) :Observable<any> {
     return this.httpClient.post(`${_BASE_URL}/get-balance-sheet`, accountNo);
   }
+  
+  queryBillPaymentInfo(receiptNo):Observable<any> {
+    return this.httpClient.post(`${_BASE_URL}/query-bill-payment`, receiptNo);
+  }
+
+  confirmPayment(paymentId) :Observable<any> {
+    return this.httpClient.post(`${_BASE_URL}/confirm-payment`, paymentId);
+  }
 
 }

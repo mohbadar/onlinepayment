@@ -3,16 +3,20 @@ package af.asr.opbo.opbo.service;
 import af.asr.opbo.infrastructure.base.UserService;
 import af.asr.opbo.opbo.dto.AgentAccountCreditDTO;
 import af.asr.opbo.opbo.dto.BillCollectionDTO;
+import af.asr.opbo.opbo.dto.UserBillPaymentStatementDTO;
 import af.asr.opbo.opbo.mapper.ObjectMapper;
 import af.asr.opbo.opbo.model.*;
 import af.asr.opbo.opbo.repository.*;
 import af.asr.opbo.usermanagement.service.UserManagementService;
 import af.asr.opbo.util.AccountNumberUtility;
 import af.asr.opbo.util.HijriDateUtility;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -255,6 +259,54 @@ public class AgentService {
         data.put("ledgers", agentLedgerRespository.findByAgentId(agent.getId()));
         data.put("balance", agentLedgerRespository.getAgentBalanceByAgentId(agent.getId()));
         return data;
+    }
+
+    public Map<String, Object> queryBillPayment(String receiptNo) {
+
+        Map<String, Object> data = new HashMap<>();
+        BillPayment billPayment = billPaymentRepository.findByReceiptNo(receiptNo.trim());
+        if(billPayment==null)
+            throw new RuntimeException("BillPaymentNotFoundException");
+
+        Bill bill = billRepository.findById(billPayment.getBillId()).orElse(null);
+        if(bill == null )
+            throw  new RuntimeException("BillNotFoundException");
+
+        Agent agent= repository.findById(billPayment.getAgentId()).orElse(null);
+        if(agent==null)
+            throw new RuntimeException("AgentNotFoundException");
+
+        data.put("agent", agent);
+        data.put("billPayment", billPayment);
+        data.put("bill", bill);
+        return data;
+    }
+
+    public BillPayment confirmPayment(String paymentId) {
+        BillPayment billPayment = billPaymentRepository.findById(paymentId.trim()).orElse(null);
+        if(billPayment==null)
+            throw new RuntimeException("BillPaymentNotFoundException");
+
+        billPayment.setConfirmed(true);
+        billPayment.setConfirmUserId(userService.getId());
+        billPayment.setConfirmUserName(userService.getPreferredUsername());
+        billPayment.setConfirmDate(HijriDateUtility.getCurrentJalaliDateAsString());
+        return billPaymentRepository.save(billPayment);
+    }
+
+    public Map<String, Object> getUserBillStatement() {
+        Map<String, Object> response = new HashMap<>();
+
+        String userName = userService.getPreferredUsername();
+
+        List<String> statements = billPaymentRepository.getUserBillStatement(userName);
+
+        Gson gson = new Gson();
+        Type type = new TypeToken<List<UserBillPaymentStatementDTO>>() {
+        }.getType();
+        List<UserBillPaymentStatementDTO> responseDTO = gson.fromJson(String.valueOf(statements), type);
+
+        return responseDTO;
     }
 
 //    public Map<String, Object> getObjectAndRevisions(String id) {
