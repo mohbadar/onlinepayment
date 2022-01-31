@@ -13,8 +13,8 @@ import java.util.List;
 @Repository
 public interface AgentUserRelationRepository extends CrudRepository<AgentUserRelation,String> {
     @Query(nativeQuery = true, value = "select distinct on(agent_id) * from agent_user_relation  WHERE app_user_id=:userId")
-    List<AgentUserRelation> findDistinctByAppUserId(@Param("userId") String userId);
-    List<AgentUserRelation> findByAgentId(String agentId);
+    AgentUserRelation findDistinctByAppUserId(@Param("userId") String userId);
+    AgentUserRelation findByAgentId(String agentId);
 
     AgentUserRelation findTopByAppUserIdAndAgentId(String appUserId, String agentId);
 }

@@ -19,6 +19,14 @@
                     {{'OH_SNAP_CHANGE_A_FEW_THINGS_UP_AND_TRY_SUBMITTING_AGAIN'|translate}}
                 </kt-alert>
 
+                <button type="button" mat-raised-button [mat-dialog-close]=""
+                                matTooltip="Print Bill"
+                                class="btn btn-primary"
+                                (change)="printBill(item.billId)"
+                                >
+                                {{'PRINT'|translate}}
+                </button>&nbsp;
+
 
                 <mat-form-field>
                     <input style="font-size:30px" matInput #input [placeholder]="'BILLNO'|translate" [value]="item.billNo" readonly>
@@ -48,13 +56,7 @@
                                 {{'CLOSE'|translate}}
                             </button>&nbsp;
 
-                            <button type="button" mat-raised-button [mat-dialog-close]=""
-                                matTooltip="Print Bill"
-                                class="btn btn-primary"
-                                (change)="printBill(item.billId)"
-                                >
-                                {{'PRINT'|translate}}
-                            </button>&nbsp;
+                            
 
                         </div>
                     </div>

@@ -35,4 +35,6 @@ public class Bill extends BaseEntity {
     private String billTypeId;
     private String centerId;
     private String organizationId;
+    private String billDueDate;
+    private boolean amountPayFlag;
 }

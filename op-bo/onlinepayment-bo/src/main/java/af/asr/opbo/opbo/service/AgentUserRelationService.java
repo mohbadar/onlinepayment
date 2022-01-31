@@ -19,11 +19,11 @@ public class AgentUserRelationService {
     @Autowired
     private UserManagementService userManagementService;
 
-    public List<AgentUserRelation> findByAppUserId(String appUserId){
+    public AgentUserRelation findByAppUserId(String appUserId){
         return repository.findDistinctByAppUserId(appUserId);
     }
 
-    public List<AgentUserRelation> findByAgentId(String id){
+    public AgentUserRelation findByAgentId(String id){
         return repository.findByAgentId(id);
     }
 

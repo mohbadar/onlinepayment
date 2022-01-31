@@ -5,11 +5,9 @@ import af.asr.opbo.infrastructure.audit.annotation.Auditable;
 import af.asr.opbo.infrastructure.base.UserService;
 import af.asr.opbo.opbo.dto.AgentAccountCreditDTO;
 import af.asr.opbo.opbo.dto.AgentUserRelationDTO;
+import af.asr.opbo.opbo.dto.BillCollectionDTO;
 import af.asr.opbo.opbo.dto.CenterUserRelationDTO;
-import af.asr.opbo.opbo.model.Agent;
-import af.asr.opbo.opbo.model.AgentUserRelation;
-import af.asr.opbo.opbo.model.Center;
-import af.asr.opbo.opbo.model.CenterUserRelation;
+import af.asr.opbo.opbo.model.*;
 import af.asr.opbo.opbo.repository.AgentUserRelationRepository;
 import af.asr.opbo.opbo.repository.CenterUserRelationRepository;
 import af.asr.opbo.opbo.service.AgentService;
@@ -132,6 +130,38 @@ public class AgentController {
     public ResponseEntity<Map<String, Object>> creditAgentAccount(@RequestBody AgentAccountCreditDTO dto)
     {
         return ResponseEntity.ok(service.creditAgentAccount(dto));
+    }
+
+
+    @Auditable
+    @PostMapping("/query-bill")
+    public ResponseEntity<Bill> queryBill(@RequestBody String billNo)
+    {
+        return ResponseEntity.ok(service.queryBill(billNo));
+    }
+
+
+    @Auditable
+    @PostMapping("/collect")
+    public ResponseEntity<Map<String, Object>> collectPayment(@RequestBody BillCollectionDTO dto)
+    {
+        return ResponseEntity.ok(service.collectBillPayment(dto));
+    }
+
+
+    @Auditable
+    @PostMapping("/print-duplicate-slip")
+    public ResponseEntity<Map<String, Object>> printDuplicateSlip(@RequestBody String billNo)
+    {
+        return ResponseEntity.ok(service.printDuplicateSlip(billNo));
+    }
+
+
+    @Auditable
+    @PostMapping("/get-balance-sheet")
+    public ResponseEntity<Map<String, Object>> getBalanceSheet(@RequestBody String accountNo)
+    {
+        return ResponseEntity.ok(service.getBalanceSheet(accountNo));
     }
 
 }

@@ -24,10 +24,15 @@ public class BillPayment extends BaseEntity {
     private String channelId;
     private String centerId;
     private String organizationId;
+    private String provinceId;
     private String billTypeId;
     private String feeModelId;
     private String paymentDate;
-    private BigDecimal amount;
+    private BigDecimal paidAmount;
     private String cycleYear;
     private String cycle;
+    private String receiptNo;
+    private String paymentType;
+    private BigDecimal tenderedAmount;
+    private boolean posted;
 }

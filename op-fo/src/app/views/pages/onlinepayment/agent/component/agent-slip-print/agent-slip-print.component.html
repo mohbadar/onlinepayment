@@ -1,1 +1,318 @@
-<p>agent-slip-print works!</p>
+    <button
+  [printStyle]="{ h1: { color: 'red' }, h2: { border: 'solid 1px' } }"
+  printSectionId="print-section"
+  [useExistingCss]="true"
+  ngxPrint
+>
+  print
+</button>
+
+
+<div *ngIf="isPrinting" id="print-section">
+  <table
+    class="table"
+    style="width: 100%; background-color: #d8d8d8"
+    style="direction: rtl"
+  >
+    <tr>
+      <td
+        style="
+          text-align: right;
+          width: 33%;
+          padding-right: 1%;
+          vertical-align: top;
+          border: none;
+          float: right;
+        "
+      >
+ <!--
+            <img
+          src="../../../../../../../assets/media/dabs_logo.png"
+          style="max-width: 100px"
+        />
+ -->
+      </td>
+      <td
+        style="
+          margin: 0 auto;
+          text-align: center;
+          width: 33%;
+          vertical-align: top;
+          border: none;
+          float: right;
+        "
+      >
+        <p style="margin-top: 5px; font-size: 14px; font-weight: bolder">
+          سیستم پرداخت آنلاین خدمات دولتی
+        </p>
+        <p style="margin-top: 5px; font-weight: bold">{{ item.agent.firstname + ' '+ item.agent.lastname }}</p>
+        <p style="margin-top: 5px; font-weight: bold">رسید بل</p>
+      </td>
+
+      <!--
+                <td style="text-align:left;width:33%;padding-left:1%;vertical-align:top;padding-top:0%; border: none;">
+                <img src="../../../../../../../assets/media/dabs_logo.png" style="max-width: 100px">
+            </td>
+         -->
+    </tr>
+  </table>
+  <hr />
+  <table class="table" style="width: 100%">
+    <tr>
+      <td
+        style="text-align: right; width: 38%; padding-right: 10%; border: none"
+      >
+        <table class="table">
+          <tr>
+            <td
+              style="
+                padding-right: 10%;
+                width: 50%;
+                padding-top: 2%;
+                font-weight: bolder;
+              "
+            >
+              اسم اجنت:
+            </td>
+            <td
+              style="
+                padding-right: 2%;
+                width: 50%;
+                padding-top: 2%;
+                font-weight: bold;
+              "
+            >
+              {{ item.agent.firstname + ' '+ item.agent.lastname }}
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="
+                padding-right: 10%;
+                width: 50%;
+                padding-top: 2%;
+                font-weight: bolder;
+              "
+            >
+              شماره حساب:
+            </td>
+            <td
+              style="
+                padding-right: 2%;
+                width: 50%;
+                padding-top: 2%;
+                font-weight: bold;
+              "
+            >
+              {{ item.agent.accountNo }}
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="
+                padding-right: 10%;
+                width: 50%;
+                padding-top: 2%;
+                font-weight: bolder;
+              "
+            >
+              شماره رسید :
+            </td>
+            <td
+              style="
+                padding-right: 2%;
+                width: 50%;
+                padding-top: 2%;
+                font-weight: bold;
+              "
+            >
+              {{ item.billPayment.receiptNo }}
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="
+                padding-right: 10%;
+                width: 50%;
+                padding-top: 2%;
+                font-weight: bolder;
+              "
+            >
+              شماره بل:
+            </td>
+            <td
+              style="
+                padding-right: 2%;
+                width: 50%;
+                padding-top: 2%;
+                font-weight: bold;
+              "
+            >
+              {{ item.bill.billNo }}
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="
+                padding-right: 10%;
+                width: 50%;
+                padding-top: 2%;
+                font-weight: bolder;
+              "
+            >
+              مبلغ پرداخت   :
+            </td>
+            <td
+              style="
+                padding-right: 2%;
+                width: 50%;
+                padding-top: 2%;
+                font-weight: bold;
+              "
+            >
+              {{ item.billPayment.paidAmount }}
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="
+                padding-right: 10%;
+                width: 50%;
+                padding-top: 2%;
+                font-weight: bolder;
+              "
+            >
+              سال:
+            </td>
+            <td
+              style="
+                padding-right: 2%;
+                width: 50%;
+                padding-top: 2%;
+                font-weight: bold;
+              "
+            >
+              {{ item.billPayment.year }}
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td
+        style="text-align: left; width: 38%; padding-right: 10%; border: none"
+      >
+        <table class="table">
+          <tr>
+            <td
+              style="
+                padding-right: 10%;
+                width: 50%;
+                padding-top: 2%;
+                font-weight: bolder;
+              "
+            >
+              تاریخ تادیات:
+            </td>
+            <td
+              style="
+                padding-right: 2%;
+                width: 50%;
+                padding-top: 4%;
+                font-weight: bold;
+              "
+            >
+              {{ item.billPayment.paymentDate }}
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="
+                padding-right: 10%;
+                width: 50%;
+                padding-top: 4%;
+                font-weight: bolder;
+              "
+            >
+              شماره تماس اجنت:
+            </td>
+            <td
+              style="
+                padding-right: 2%;
+                width: 50%;
+                padding-top: 4%;
+                font-weight: bold;
+              "
+            >
+              {{ item.agent.phone }}
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="
+                padding-right: 10%;
+                width: 50%;
+                padding-top: 2%;
+                font-weight: bolder;
+              "
+            >
+              دوره :
+            </td>
+            <td
+              style="
+                padding-right: 2%;
+                width: 50%;
+                padding-top: 2%;
+                font-weight: bold;
+              "
+            >
+              {{ item.billPayment.cycle }}
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="
+                padding-right: 10%;
+                width: 50%;
+                padding-top: 2%;
+                font-weight: bolder;
+              "
+            >
+              مبلغ بل:
+            </td>
+            <td
+              style="
+                padding-right: 2%;
+                width: 50%;
+                padding-top: 2%;
+                font-weight: bold;
+              "
+            >
+              {{ item.bill.billAmount }}
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="
+                padding-right: 10%;
+                width: 50%;
+                padding-top: 2%;
+                font-weight: bolder;
+              "
+            >
+              نوعه پرداخت:
+            </td>
+            <td
+              style="
+                padding-right: 2%;
+                width: 50%;
+                padding-top: 2%;
+                font-weight: bold;
+              "
+            >
+            {{ item.billPayment.paymentType }}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>

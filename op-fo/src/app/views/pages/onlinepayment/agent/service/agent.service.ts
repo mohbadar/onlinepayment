@@ -79,4 +79,20 @@ export class AgentService {
     
   }
 
+  queryBill(billNo) : Observable<any>{
+    return this.httpClient.post(`${_BASE_URL}/query-bill`, billNo);
+  }
+
+  postCollection(data: any): Observable<any>{
+    return this.httpClient.post(`${_BASE_URL}/collect`, data);
+  }
+  queryDuplicateBillForAwizPrint(billNo): Observable<any> {
+    return this.httpClient.post(`${_BASE_URL}/print-duplicate-slip`, billNo);
+  }
+
+
+  getBalanceSheet(accountNo) :Observable<any> {
+    return this.httpClient.post(`${_BASE_URL}/get-balance-sheet`, accountNo);
+  }
+
 }

@@ -1,1 +1,154 @@
-<p>agent-bill-payment works!</p>
+<div class="_form_wrapper">
+    <div class="kt-heading kt-heading--md">{{ "BILL_PAYMENT" | translate }}</div>
+  
+    <hr />
+    <!-- Getting bill information first -->
+    <div class="row">
+      <!--
+              <div class="col-xl-4">
+              <div class="form-group">
+                  <label>{{ 'DECODED_IMAGE_TEXT'|translate }}</label>
+                  <input type="text" class="form-control" name="fname" [(ngModel)]="billModel.dImageText"
+                      [placeholder]="'DECODED_IMAGE_TEXT'|translate" readonly>
+              </div>
+          </div>
+  -->
+      <div class="col-xl-8">
+        <div class="form-group">
+          <label>{{ "BILL_NUMBER" | translate }}</label>
+          <input
+            type="text"
+            class="form-control"
+            name="fname"
+            [(ngModel)]="billModel.billNumber"
+          />
+        </div>
+      </div>
+      <div class="col-xl-4">
+        <div class="form-group">
+          <button
+            class="btn btn-primary btn-fill _abs_btn"
+            (click)="getBillInfo()"
+            type="button"
+            [disabled]="!billModel.billNumber"
+          >
+            {{ "DISPLAY" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  
+  
+    <div class="kt-heading kt-heading--md">
+      {{ "BILL_INFORMATION" | translate }}
+    </div>
+    <hr />
+  
+    <div class="_bill_details">
+        
+      <table class="table">
+        <thead>
+          <tr>
+            <th>{{ "BILL_DATE" | translate }}</th>
+            <th>{{ "BILL_DUE_DATE" | translate }}</th>
+            <th>{{ "CYCLE" | translate }}</th>
+            <th>{{ "YEAR" | translate }}</th>
+            <th>{{ "BILL_AMOUNT" | translate }}</th>
+          </tr>
+        </thead>
+  
+        <tbody>
+          <tr>
+            <td>{{ billInformation.billDate | date: "yyyy-MM-dd" }}</td>
+            <td>{{ toDayDate | date: "yyyy-MM-dd" }}</td>
+            <td>{{ billInformation.cycle }}</td>
+            <td>{{ billInformation.year }}</td>
+            <td>{{ billInformation.billAmount }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div class="kt-heading kt-heading--md">
+      {{ "PAYMENT_DETAILS" | translate }}
+    </div>
+    <hr />
+    <div class="_payment_details">
+      <div class="row">
+        <div class="col-xl-3">
+          <div class="form-group">
+            <label>{{ "MODE_OF_PAYMENT" | translate }}</label>
+            <select
+              type="text"
+              class="form-control"
+              name="paymentmode"
+              [(ngModel)]="paymentMode"
+            >
+              <option value="cash" selected>{{ "CASH" | translate }}</option>
+              <option value="electronic" selected>{{ "ELECTRONIC" | translate }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-xl-3">
+          <div class="form-group">
+            <label>{{ "TENDERED_AMOUNT" | translate }}</label>
+            <input
+              type="number"
+              class="form-control"
+              name="tenderedmode"
+              [(ngModel)]="tenderedAmount"
+              [placeholder]="'TENDERED_AMOUNT' | translate"
+              readonly
+            />
+          </div>
+        </div>
+        <div class="col-xl-3">
+          <div class="form-group">
+            <label>{{ "AMOUNT_PAID" | translate }}</label>
+            <input
+              type="number"
+              class="form-control"
+              name="fname"
+              readonly
+              [(ngModel)]="paidAmount"
+              [placeholder]="'AMOUNT_PAID' | translate"
+            />
+          </div>
+        </div>
+        <div class="col-xl-3">
+          <div class="form-group">
+            <label>{{ "RETURN_AMOUNT" | translate }}</label>
+            <input
+              disabled
+              type="number"
+              class="form-control"
+              name="return_amount"
+              [(ngModel)]="tenderedAmount - paidAmount"
+              [placeholder]="'RETURN_AMOUNT' | translate"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="form-group">
+            <button
+              class="btn btn-primary btn-fill _abs_btn"
+              type="button"
+              [disabled]="
+                !isBillInfoFetched ||
+                !billModel.billNumber ||
+                !tenderedAmount ||
+                !paidAmount
+              "
+              (click)="saveCollection()"
+            >
+              {{ "SUBMIT" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ngx-spinner></ngx-spinner>
+  

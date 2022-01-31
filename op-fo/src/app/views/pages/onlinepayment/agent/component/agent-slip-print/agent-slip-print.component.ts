@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'kt-agent-slip-print',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AgentSlipPrintComponent implements OnInit {
 
-  constructor() { }
+  item: any;
+    isPrinting = false;
 
-  ngOnInit(): void {
-  }
+    constructor(
+        public dialogRef: MatDialogRef<AgentSlipPrintComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: any,
+    ) {
+        this.item = this.data.item;
+        console.log("Item", this.item);
+        this.isPrinting = true;
+    }
 
+    ngOnInit(): void {
+    }
+
+    //DABS361846
 }

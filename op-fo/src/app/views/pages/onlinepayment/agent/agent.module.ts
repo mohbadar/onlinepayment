@@ -33,7 +33,7 @@ import {
     MatTooltipModule,
 } from '@angular/material';
 
-
+import {NgxPrintModule} from 'ngx-print';
 import { ListAgentComponent} from './component/list-agent/list-agent.component';
 import { CreateAgentComponent } from './component/create-agent/create-agent.component';
 import { ViewAgentComponent } from './component/view-agent/view-agent.component';
@@ -50,6 +50,7 @@ import { DebitAgentAccountComponent } from './component/debit-agent-account/debi
 import { AgentBillPaymentComponent } from './component/agent-bill-payment/agent-bill-payment.component';
 import { AgentSlipPrintComponent } from './component/agent-slip-print/agent-slip-print.component';
 import { AgentBalanceSheetComponent } from './component/agent-balance-sheet/agent-balance-sheet.component';
+import { DuplicateSlipPrintComponent } from './component/duplicate-slip-print/duplicate-slip-print.component';
 
 
 const routes: Routes = [
@@ -78,6 +79,19 @@ const routes: Routes = [
                 path: 'debit',
                 component: DebitAgentAccountComponent
             },
+            {
+                path: 'bill-payment',
+                component: AgentBillPaymentComponent
+            },
+            {
+                path: 'slip-print',
+                component: DuplicateSlipPrintComponent
+            },
+            {
+                path: 'agent-balance-sheet',
+                component: AgentBalanceSheetComponent
+            },
+            
         ]
 
     }
@@ -113,7 +127,8 @@ const routes: Routes = [
         MatTooltipModule,
         MatDialogModule,
         NgxSpinnerModule,
-        NgSelectModule
+        NgSelectModule,
+        NgxPrintModule
     ],
 
     entryComponents: [
@@ -132,7 +147,8 @@ const routes: Routes = [
         DebitAgentAccountComponent,
         AgentBillPaymentComponent,
         AgentSlipPrintComponent,
-        AgentBalanceSheetComponent
+        AgentBalanceSheetComponent,
+        DuplicateSlipPrintComponent
     ],
 })
 export class AgentModule {

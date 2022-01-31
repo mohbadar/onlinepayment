@@ -1,0 +1,38 @@
+<div class="_form_wrapper">
+    <div class="kt-heading kt-heading--md">{{ "BILL_PAYMENT" | translate }}</div>
+  
+    <hr />
+    <!-- Getting bill information first -->
+    <div class="row">
+
+
+      <div class="col-xl-8">
+        <div class="form-group">
+          <label>{{ "BILL_NUMBER" | translate }}</label>
+          <input
+            type="text"
+            class="form-control"
+            name="fname"
+            [(ngModel)]="billModel.billNumber"
+          />
+        </div>
+      </div>
+
+
+      <div class="col-xl-4">
+        <div class="form-group">
+          <button
+            class="btn btn-primary btn-fill _abs_btn"
+            (click)="getBillInfo()"
+            type="button"
+            [disabled]="!billModel.billNumber"
+          >
+            {{ "DISPLAY" | translate }}
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <ngx-spinner></ngx-spinner>
+  

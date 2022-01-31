@@ -10,11 +10,11 @@ import { AgentService } from '../../service/agent.service';
 import { AgentSlipPrintComponent } from '../agent-slip-print/agent-slip-print.component';
 
 @Component({
-  selector: 'kt-agent-bill-payment',
-  templateUrl: './agent-bill-payment.component.html',
-  styleUrls: ['./agent-bill-payment.component.scss']
+  selector: 'kt-duplicate-slip-print',
+  templateUrl: './duplicate-slip-print.component.html',
+  styleUrls: ['./duplicate-slip-print.component.scss']
 })
-export class AgentBillPaymentComponent implements OnInit {
+export class DuplicateSlipPrintComponent implements OnInit {
 
   hasFormErrors: boolean = false;
   eBreshnaForm: FormGroup;
@@ -25,15 +25,6 @@ export class AgentBillPaymentComponent implements OnInit {
   billModel = {
       billNumber: null
   };
-  billInformation = {
-      billDate: '',
-      billDueDate: '',
-      cycle: '',
-      year: '',
-      billAmount: '',
-      totalBalance: ''
-  };
-
   isBillInfoFetched = false;
   paymentMode = 'CASH';
   paidAmount;
@@ -47,7 +38,6 @@ export class AgentBillPaymentComponent implements OnInit {
       public dialog: MatDialog,
       private layoutUtilService: LayoutUtilsService,
       private agentService: AgentService,
-      private keycloakService: KeycloakService,
       private spinner: NgxSpinnerService,
       private pagesService: PagesService
   ) { }
@@ -64,30 +54,14 @@ export class AgentBillPaymentComponent implements OnInit {
   getBillInfo() {
       this.billNo = this.billModel.billNumber;
 
-      //DABS698989
       this.spinner.show();
-      this.agentService.queryBill(this.billNo).subscribe((res: any) => {
+      this.agentService.queryDuplicateBillForAwizPrint(this.billNo).subscribe((res: any) => {
           this.spinner.hide();
           console.log('Res: ', res);
           if (res != null) {
-
-              console.log('PaymentCollectionDTO: ', res);
               this.isBillInfoFetched = true;
-              // As well as the bill information
-              const billInformationrsponse =
-              {
-                  billDate: res.billDate,
-                  billDueDate: res.billDueDate,
-                  cycle: res.cycle,
-                  year: res.year,
-                  billAmount: res.billAmount,
-                  totalBalance: res.balance
-              };
-
-              this.billInformation = billInformationrsponse;
-              this.tenderedAmount = Math.ceil(res.billAmount);
-              this.paidAmount = Math.ceil(res.billAmount);
-              this.cdrf.detectChanges();
+              this.printAwiz(res);
+              // this.cdrf.detectChanges();
           } else {
               this.spinner.hide();
               this.layoutUtilService.showActionNotification(" No Such Bill Exist / Not A Valid Bill for Payment / Already Paid Bill.");
@@ -105,40 +79,6 @@ export class AgentBillPaymentComponent implements OnInit {
           if (!res) {
               return;
           }
-      });
-  }
-
-
-  saveCollection() {
-      this.collection = new CollectionModel();
-      this.collection.billNo = this.billNo;
-      this.collection.paidAmount = this.paidAmount;
-      this.collection.tenderedAmount = this.tenderedAmount;
-      this.collection.paymentType = this.paymentMode;
-
-      this.spinner.show();
-      this.agentService.postCollection(this.collection).subscribe((res: any) => {
-          this.spinner.hide();
-          this.layoutUtilService.showActionNotification("Bill Payment Transaction Done");
-
-          console.log(res);
-          this.printAwiz(res);
-          this.eBreshnaForm.reset();
-          this.billInformation= {
-                  billDate: '',
-                  billDueDate: '',
-                  cycle: '',
-                  year: '',
-                  billAmount: '',
-                  totalBalance: ''
-        };
-        this.tenderedAmount = null;
-        this.paidAmount = null;
-      }
-      , (err) => {
-          console.log("Err", err);
-          this.spinner.hide();
-          this.layoutUtilService.showActionNotification(err.message);
       });
   }
 
