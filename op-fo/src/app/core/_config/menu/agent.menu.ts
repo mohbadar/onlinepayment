@@ -19,7 +19,7 @@ export const agentMenuModule = {
             {
               title: 'AGENT_BALANCE_SHEET',
               page: '/agent-balance-sheet',
-              translate: "MENU.AGENT_BALANCE_SHEET"
+              translate: "MENU.BALANCE_SHEET"
             },
        
     ]

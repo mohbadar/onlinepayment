@@ -85,7 +85,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
             name: 'AGENT_BALANCE_SHEET',
             icon: 'eAudit.svg',
             link: '/agent/agent-balance-sheet',
-            translate: 'AGENT_BALANCE_SHEET'
+            translate: 'BALANCE_SHEET'
         }, 
         
     ]
