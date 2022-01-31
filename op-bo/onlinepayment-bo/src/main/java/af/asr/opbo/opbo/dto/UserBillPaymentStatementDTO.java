@@ -9,10 +9,10 @@ import java.math.BigDecimal;
 public class UserBillPaymentStatementDTO {
     private String billNo;
     private String billDate;
-    private BigDecimal billAmount;
-    private Integer numberOfItems;
+    private String billAmount;
+    private String numberOfItems;
     private String receiptNo;
-    private boolean confirmed;
+    private String confirmed;
     private String confirmDate;
     private String confirmUserName;
 }

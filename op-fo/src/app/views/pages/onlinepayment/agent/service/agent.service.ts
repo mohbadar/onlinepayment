@@ -103,4 +103,8 @@ export class AgentService {
     return this.httpClient.post(`${_BASE_URL}/confirm-payment`, paymentId);
   }
 
+
+  getUserBillStatement() :Observable<any> {
+    return this.httpClient.get(`${_BASE_URL}/get-user-bill-statement`);
+  }
 }

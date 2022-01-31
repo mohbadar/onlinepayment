@@ -3,10 +3,7 @@ package af.asr.opbo.opbo.controller;
 
 import af.asr.opbo.infrastructure.audit.annotation.Auditable;
 import af.asr.opbo.infrastructure.base.UserService;
-import af.asr.opbo.opbo.dto.AgentAccountCreditDTO;
-import af.asr.opbo.opbo.dto.AgentUserRelationDTO;
-import af.asr.opbo.opbo.dto.BillCollectionDTO;
-import af.asr.opbo.opbo.dto.CenterUserRelationDTO;
+import af.asr.opbo.opbo.dto.*;
 import af.asr.opbo.opbo.model.*;
 import af.asr.opbo.opbo.repository.AgentUserRelationRepository;
 import af.asr.opbo.opbo.repository.CenterUserRelationRepository;
@@ -38,6 +35,13 @@ public class AgentController {
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Iterable<Agent>> findall() {
         return ResponseEntity.ok(service.findAll());
+    }
+
+    @Auditable
+    @GetMapping("/get-user-bill-statement")
+    public ResponseEntity<List<UserBillPaymentStatementDTO>> getUserBillStatement()
+    {
+        return ResponseEntity.ok(service.getUserBillStatement());
     }
 
     @Auditable
@@ -180,11 +184,6 @@ public class AgentController {
     }
 
 
-    @Auditable
-    @PostMapping("/confirm-payment")
-    public ResponseEntity<Map<String, Object>> getUserBillStatement()
-    {
-        return ResponseEntity.ok(service.getUserBillStatement());
-    }
+
 
 }

@@ -1,1 +1,62 @@
-<p>generate-statement works!</p>
+<kt-portlet class="_p_collections">
+    <kt-portlet-body>
+  
+      <!-- Paginator Start -->
+      <div
+        class="row"
+        *ngIf="dataSource != null"
+        style="margin-top: 50px; margin-bottom: 100px"
+      >
+        <div class="col-lg-12 mat-elevation-z12" style="border: 1px solid black">
+          <table mat-table [dataSource]="dataSource" matSort style="width: 100%">
+
+            <ng-container matColumnDef="billNo">
+              <th mat-header-cell *matHeaderCellDef>BILL_NO</th>
+              <td mat-cell *matCellDef="let element">{{ element.billNo }}</td>
+            </ng-container>
+  
+            <ng-container matColumnDef="billDate">
+              <th mat-header-cell *matHeaderCellDef>BILL_DATE</th>
+              <td mat-cell *matCellDef="let element">{{ element.billDate }}</td>
+            </ng-container>
+  
+ 
+            <ng-container matColumnDef="billAmount">
+              <th mat-header-cell *matHeaderCellDef>BILL_AMOUNT</th>
+              <td mat-cell *matCellDef="let element">{{ element.billAmount }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="numberOfItems">
+                <th mat-header-cell *matHeaderCellDef>NUMBER_OF_ITEMS</th>
+                <td mat-cell *matCellDef="let element">{{ element.numberOfItems }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="receiptNo">
+                <th mat-header-cell *matHeaderCellDef>RECEIPT_NUMBER</th>
+                <td mat-cell *matCellDef="let element">{{ element.receiptNo }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="confirmed">
+                <th mat-header-cell *matHeaderCellDef>CONFIRMED</th>
+                <td mat-cell *matCellDef="let element">{{ element.confirmed }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="confirmDate">
+                <th mat-header-cell *matHeaderCellDef>CONFIRM_DATE</th>
+                <td mat-cell *matCellDef="let element">{{ element.confirmDate }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="confirmUserName">
+                <th mat-header-cell *matHeaderCellDef>CONFIRM_USER</th>
+                <td mat-cell *matCellDef="let element">{{ element.confirmUserName }}</td>
+            </ng-container>
+  
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
+      </div>
+      <!-- The paginator part end-->
+    </kt-portlet-body>
+  </kt-portlet>
+  <ngx-spinner></ngx-spinner>

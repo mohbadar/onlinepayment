@@ -90,7 +90,7 @@ public class AgentService {
 
     public Agent findOne(String id)
     {
-        return repository.findById(id).get();
+        return repository.findById(id).orElse(null);
     }
 
 
@@ -294,7 +294,7 @@ public class AgentService {
         return billPaymentRepository.save(billPayment);
     }
 
-    public Map<String, Object> getUserBillStatement() {
+    public List<UserBillPaymentStatementDTO> getUserBillStatement() {
         Map<String, Object> response = new HashMap<>();
 
         String userName = userService.getPreferredUsername();

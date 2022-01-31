@@ -14,6 +14,6 @@ public interface BillPaymentRepository extends CrudRepository<BillPayment, Strin
     BillPayment findByReceiptNo(String receiptNo);
     List<BillPayment> findByBillIdOrderByCreateDateDesc(String billId);
 
-    @Query(nativeQuery =true, value = "SELECT bill_no as billNo, bill_date as billDate,  bill_amount as billAmout, number_of_items as numberOfItems,  receipt_no as receiptNo, confirmed, confirm_date as confirmDate, confirm_user_name as confirmUserName FROM bill LEFT JOIN bill_payment ON bill.id=bill_payment.bill_id WHERE bill_payment.confirm_user_name=:username")
+    @Query(nativeQuery =true, value = "SELECT CAST (JSON_BUILD_OBJECT( 'billNo', bill_no, 'billDate', bill_date, 'billAmount', bill_amount, 'numberOfItems', number_of_items,  'receiptNo',receipt_no,   'confirmed',confirmed, 'confirmDate',confirm_date,  'confirmUserName', confirm_user_name) AS VARCHAR) FROM ( \tSELECT bill_no, bill_date,  bill_amount, number_of_items,  receipt_no, confirmed, confirm_date, confirm_user_name FROM bill LEFT JOIN bill_payment ON bill.id=bill_payment.bill_id WHERE bill.created_by=:username ) as t")
     List<String> getUserBillStatement(String username);
 }
