@@ -1,0 +1,82 @@
+<kt-portlet class="_p_collections">
+    <kt-portlet-body>
+      <div class="kt-wizard-v4__form">
+        <div
+          class="kt-wizard-v4__content"
+          data-ktwizard-type="step-content"
+          data-ktwizard-state="current"
+        >
+          <div class="kt-heading kt-heading--md">
+            {{ "ORGANIZATION_BALANCE_SHEET" | translate }}
+          </div>
+  
+          <div class="row">
+            <div class="col-xl-4">
+              <div class="form-group">
+                <label>{{ "ACCOUNT_NUMBER" | translate }}</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="account_no"
+                  [(ngModel)]="model.accountNo"
+                  [placeholder]="'ACCOUNT_NUMBER' | translate"
+                  value="2324-2342-24"
+                />
+                <span class="form-text text-muted">{{
+                  "PLEASE_ENTER_THE_ACCOUNT_NUMBER" | translate
+                }}</span>
+  
+                <button
+                  (click)="searchBalanceSheet()"
+                  [disabled]="checkForm()"
+                  class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                  type="submit"
+                >
+                  {{ "SEARCH" | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <br /><br />
+  
+      <!-- Paginator Start -->
+      <div
+        class="row"
+        *ngIf="dataSource != null"
+        style="margin-top: 50px; margin-bottom: 100px"
+      >
+        <h3> {{ "BALANCE" | translate }}: {{balance}} </h3>
+        <div class="col-lg-12 mat-elevation-z12" style="border: 1px solid black">
+          <table mat-table [dataSource]="dataSource" matSort style="width: 100%">
+            <!-- credit Column -->
+            <ng-container matColumnDef="credit">
+              <th mat-header-cell *matHeaderCellDef>Credit</th>
+              <td mat-cell *matCellDef="let element">{{ element.credit }}</td>
+            </ng-container>
+  
+            <!-- debit Column -->
+            <ng-container matColumnDef="debit">
+              <th mat-header-cell *matHeaderCellDef>Debit</th>
+              <td mat-cell *matCellDef="let element">{{ element.debit }}</td>
+            </ng-container>
+  
+ 
+            <!-- balDate Column -->
+            <ng-container matColumnDef="balDate">
+              <th mat-header-cell *matHeaderCellDef>Balance Date</th>
+              <td mat-cell *matCellDef="let element">{{ element.balanceDate }}</td>
+            </ng-container>
+  
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
+      </div>
+      <!-- The paginator part end-->
+    </kt-portlet-body>
+  </kt-portlet>
+  <ngx-spinner></ngx-spinner>
+  

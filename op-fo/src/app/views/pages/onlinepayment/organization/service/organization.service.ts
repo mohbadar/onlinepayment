@@ -76,9 +76,11 @@ export class OrganizationService {
   }
 
   saveRectifiedJournalCredit(data: any) : Observable<any>{
-    // throw new Error('Method not implemented.');
     return this.httpClient.post(`${_BASE_URL}/organization-account-credit`, data);
-    
+  }
+
+  getBalanceSheet(accountNo) :Observable<any> {
+    return this.httpClient.post(`${_BASE_URL}/get-balance-sheet`, accountNo);
   }
 
 }

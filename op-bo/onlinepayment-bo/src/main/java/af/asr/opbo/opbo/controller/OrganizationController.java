@@ -144,4 +144,11 @@ public class OrganizationController {
         return ResponseEntity.ok(service.creditOrganizationAccount(dto));
     }
 
+    @Auditable
+    @PostMapping("/get-balance-sheet")
+    public ResponseEntity<Map<String, Object>> getBalanceSheet(@RequestBody String accountNo)
+    {
+        return ResponseEntity.ok(service.getBalanceSheet(accountNo));
+    }
+
 }

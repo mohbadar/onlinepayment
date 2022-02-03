@@ -25,6 +25,11 @@ export const financialManagerMenuModule = {
                     translate: "MENU.DEBIT_ORGANIZATION",
                 },
                 {
+                  title: "ORGANIZATION_BALANCE_SHEET",
+                  page: "/organization/balance-sheet",
+                  translate: "MENU.ORGANIZATION_BALANCE_SHEET",
+                },
+                {
                     title: 'ORGANIZATION_REVENUE_REPORT',
                     page: '/organization-admin/generate-date-based-statement',
                     translate: "MENU.ORGANIZATION_REVENUE_REPORT"

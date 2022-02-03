@@ -145,4 +145,16 @@ public class OrganizationService {
         organizationLedgerRepository.save(organizationLedger);
         return response;
     }
+
+
+    public Map<String, Object> getBalanceSheet(String accountNo) {
+        Map<String, Object> data = new HashMap<>();
+        Organization organization= repository.findByAccountNo(accountNo.trim());
+        if(organization==null)
+            throw new RuntimeException("OrganizationtNotFoundException");
+        data.put("organization", organization);
+        data.put("ledgers", organizationLedgerRepository.findByOrganizationId(organization.getId()));
+        data.put("balance", organizationLedgerRepository.getOrganizationBalanceByOrganizationId(organization.getId()));
+        return data;
+    }
 }

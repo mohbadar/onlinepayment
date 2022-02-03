@@ -47,6 +47,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { OrganizationComponent } from './organization.component';
 import { CreditOrganizationLedgerComponent } from './component/credit-organization-ledger/credit-organization-ledger.component';
 import { DebitOrganizationLedgerComponent } from './component/debit-organization-ledger/debit-organization-ledger.component';
+import { OrganizationBalanceSheetComponent } from './component/organization-balance-sheet/organization-balance-sheet.component';
 
 
 const routes: Routes = [
@@ -74,6 +75,10 @@ const routes: Routes = [
             {
                 path: 'debit',
                 component: DebitOrganizationLedgerComponent
+            },
+            {
+                path: 'balance-sheet',
+                component: OrganizationBalanceSheetComponent
             },
         ]
 
@@ -126,7 +131,8 @@ const routes: Routes = [
         UpdateOrganizationComponent,
         OrganizationUserRelationComponent,
         CreditOrganizationLedgerComponent,
-        DebitOrganizationLedgerComponent
+        DebitOrganizationLedgerComponent,
+        OrganizationBalanceSheetComponent
     ],
 })
 export class OrganizationModule {
