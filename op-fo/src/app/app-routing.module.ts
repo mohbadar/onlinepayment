@@ -63,12 +63,7 @@ const routes: Routes = [
                 data: { moduleName: 'organization-admin' },
                 loadChildren: () => import('./views/pages/onlinepayment/organization-admin/organization-admin.module').then(m => m.OrganizationAdminModule)
             },
-            {
-                path: 'pda',
-                canActivate: [TranslateGuard],
-                data: { moduleName: 'pda' },
-                loadChildren: () => import('./views/pages/pda/pda.module').then(m => m.PdaModule)
-            },
+        
             {
                 path: 'builder',
                 canActivate: [TranslateGuard, KeycloakAuthGuard],
