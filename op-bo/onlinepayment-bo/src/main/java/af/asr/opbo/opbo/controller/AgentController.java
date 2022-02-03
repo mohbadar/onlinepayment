@@ -135,6 +135,13 @@ public class AgentController {
         return ResponseEntity.ok(service.creditAgentAccount(dto));
     }
 
+    @Auditable
+    @PostMapping("/agent-account-debit")
+    public ResponseEntity<Map<String, Object>> debitAgentAccount(@RequestBody AgentAccountCreditDTO dto)
+    {
+        return ResponseEntity.ok(service.debitAgentAccount(dto));
+    }
+
 
     @Auditable
     @PostMapping("/query-bill")

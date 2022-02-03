@@ -132,7 +132,7 @@ public class AgentService {
 
         dto.setAgentId(agent.getId());
 
-        RectifiedJournalEntry rectifiedJournalEntry = rectifiedJournalEntryRepository.save(ObjectMapper.map(dto));
+        RectifiedJournalEntry rectifiedJournalEntry = rectifiedJournalEntryRepository.save(ObjectMapper.mapCredit(dto));
 
         AgentLedger agentLedger = new AgentLedger();
         agentLedger.setAgentId(agent.getId());
@@ -143,6 +143,31 @@ public class AgentService {
         agentLedgerRespository.save(agentLedger);
         return response;
     }
+
+
+    public Map<String, Object> debitAgentAccount(AgentAccountCreditDTO dto) {
+
+        Map<String, Object> response = new HashMap<>();
+
+        Agent agent = repository.findByAccountNo(dto.getAccountNumber());
+
+        if(agent == null)
+            throw  new RuntimeException("AgentNotFoundException");
+
+        dto.setAgentId(agent.getId());
+
+        RectifiedJournalEntry rectifiedJournalEntry = rectifiedJournalEntryRepository.save(ObjectMapper.mapDebit(dto));
+
+        AgentLedger agentLedger = new AgentLedger();
+        agentLedger.setAgentId(agent.getId());
+        agentLedger.setDebit(dto.getAmount());
+        agentLedger.setCredit(new BigDecimal(0));
+        agentLedger.setBalanceDate(HijriDateUtility.getCurrentJalaliDateAsString());
+        agentLedger.setRectifiedJournalEntryId(rectifiedJournalEntry.getId());
+        agentLedgerRespository.save(agentLedger);
+        return response;
+    }
+
 
     public Bill queryBill(String billNo) {
         return billRepository.findByBillNoAndAmountPayFlag(billNo.trim(),false);

@@ -74,9 +74,12 @@ export class AgentService {
 
 
   saveRectifiedJournalCredit(data: any) : Observable<any>{
-    // throw new Error('Method not implemented.');
     return this.httpClient.post(`${_BASE_URL}/agent-account-credit`, data);
-    
+  }
+
+  
+  saveRectifiedJournalDebit(data: any) : Observable<any>{
+    return this.httpClient.post(`${_BASE_URL}/agent-account-debit`, data);
   }
 
   queryBill(billNo) : Observable<any>{

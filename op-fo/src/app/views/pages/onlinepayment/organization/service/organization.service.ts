@@ -83,4 +83,8 @@ export class OrganizationService {
     return this.httpClient.post(`${_BASE_URL}/get-balance-sheet`, accountNo);
   }
 
+  saveRectifiedJournalDebit(data: any): Observable<any> {
+    return this.httpClient.post(`${_BASE_URL}/organization-account-debit`, data);
+  }
+
 }

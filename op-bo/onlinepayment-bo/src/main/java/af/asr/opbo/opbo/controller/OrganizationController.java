@@ -139,7 +139,7 @@ public class OrganizationController {
 
     @Auditable
     @PostMapping("/organization-account-credit")
-    public ResponseEntity<Map<String, Object>> creditAgentAccount(@RequestBody OrganizationAccountCreditDTO dto)
+    public ResponseEntity<Map<String, Object>> creditOrganizationAccount(@RequestBody OrganizationAccountCreditDTO dto)
     {
         return ResponseEntity.ok(service.creditOrganizationAccount(dto));
     }
@@ -149,6 +149,14 @@ public class OrganizationController {
     public ResponseEntity<Map<String, Object>> getBalanceSheet(@RequestBody String accountNo)
     {
         return ResponseEntity.ok(service.getBalanceSheet(accountNo));
+    }
+
+
+    @Auditable
+    @PostMapping("/organization-account-debit")
+    public ResponseEntity<Map<String, Object>> debitOrganizationAccount(@RequestBody OrganizationAccountCreditDTO dto)
+    {
+        return ResponseEntity.ok(service.debitOrganizationAccount(dto));
     }
 
 }

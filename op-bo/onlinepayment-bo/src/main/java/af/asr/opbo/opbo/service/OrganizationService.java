@@ -157,4 +157,30 @@ public class OrganizationService {
         data.put("balance", organizationLedgerRepository.getOrganizationBalanceByOrganizationId(organization.getId()));
         return data;
     }
+
+
+    public Map<String, Object> debitOrganizationAccount(OrganizationAccountCreditDTO dto)
+    {
+        Map<String, Object> response = new HashMap<>();
+
+        Organization organization = repository.findByAccountNo(dto.getAccountNumber());
+
+        if(organization == null)
+            throw  new RuntimeException("OrganizationNotFoundException");
+
+        dto.setOrganizationId(organization.getId());
+
+        RectifiedJournalEntry rectifiedJournalEntry = rectifiedJournalEntryRepository.save(ObjectMapper.mapDebit(dto));
+
+        OrganizationLedger organizationLedger = new OrganizationLedger();
+        organizationLedger.setOrganizationId(organization.getId());
+        organizationLedger.setDebit(dto.getAmount());
+        organizationLedger.setCredit(new BigDecimal(0));
+        organizationLedger.setBalanceDate(HijriDateUtility.getCurrentJalaliDateAsString());
+        organizationLedger.setRectifiedJournalEntryId(rectifiedJournalEntry.getId());
+        organizationLedger.setChannel(dto.getRjType());
+        organizationLedger.setTransactionId(AccountNumberUtility.generateSequence());
+        organizationLedgerRepository.save(organizationLedger);
+        return response;
+    }
 }
