@@ -4,11 +4,10 @@ package af.asr.opbo.opbo.controller;
 import af.asr.opbo.infrastructure.audit.annotation.Auditable;
 import af.asr.opbo.infrastructure.base.UserService;
 import af.asr.opbo.opbo.dto.*;
+import af.asr.opbo.opbo.dto.response.UserBillPaymentStatementResponseDTO;
 import af.asr.opbo.opbo.model.*;
 import af.asr.opbo.opbo.repository.AgentUserRelationRepository;
-import af.asr.opbo.opbo.repository.CenterUserRelationRepository;
 import af.asr.opbo.opbo.service.AgentService;
-import af.asr.opbo.opbo.service.CenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -39,7 +38,7 @@ public class AgentController {
 
     @Auditable
     @GetMapping("/get-user-bill-statement")
-    public ResponseEntity<List<UserBillPaymentStatementDTO>> getUserBillStatement()
+    public ResponseEntity<List<UserBillPaymentStatementResponseDTO>> getUserBillStatement()
     {
         return ResponseEntity.ok(service.getUserBillStatement());
     }

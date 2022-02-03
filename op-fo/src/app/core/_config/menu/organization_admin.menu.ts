@@ -4,8 +4,19 @@ export const organizationAdminMenuModule = {
     alignment: 'left',
     toggle: 'click',
     translate: 'MENU.ORGANIZATION_ADMIN',
-    page: '/agent',
+    page: '/organization-admin',
     submenu: [
+          {
+                title: 'DATE_BASED_STATEMENT',
+                page: '/generate-date-based-statement',
+                translate: "MENU.DATE_BASED_STATEMENT"
+            },
+
+          {
+              title: 'REVENUE_REPORT',
+              page: '/revenue-report',
+              translate: "MENU.REVENUE_REPORT"
+          },
            {
                 title: 'RECONCILIATION',
                 page: '/store-nid-process-docs',

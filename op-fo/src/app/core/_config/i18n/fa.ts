@@ -9,7 +9,7 @@ export const locale = {
       NEW: "جدید",
       ACTIONS: "فعالیت ها",
       DASHBOARD: "دشبورد",
-      HOME: "خانخ",
+      HOME: "خانه",
       ADMINISTRATION: "مدیریت",
       PROVINCE: "ولایت", 
       ORGANIZATION: "اداره", 

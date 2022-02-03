@@ -3,7 +3,7 @@ package af.asr.opbo.opbo.service;
 import af.asr.opbo.infrastructure.base.UserService;
 import af.asr.opbo.opbo.dto.AgentAccountCreditDTO;
 import af.asr.opbo.opbo.dto.BillCollectionDTO;
-import af.asr.opbo.opbo.dto.UserBillPaymentStatementDTO;
+import af.asr.opbo.opbo.dto.response.UserBillPaymentStatementResponseDTO;
 import af.asr.opbo.opbo.mapper.ObjectMapper;
 import af.asr.opbo.opbo.model.*;
 import af.asr.opbo.opbo.repository.*;
@@ -294,17 +294,15 @@ public class AgentService {
         return billPaymentRepository.save(billPayment);
     }
 
-    public List<UserBillPaymentStatementDTO> getUserBillStatement() {
-        Map<String, Object> response = new HashMap<>();
-
+    public List<UserBillPaymentStatementResponseDTO> getUserBillStatement() {
         String userName = userService.getPreferredUsername();
 
         List<String> statements = billPaymentRepository.getUserBillStatement(userName);
 
         Gson gson = new Gson();
-        Type type = new TypeToken<List<UserBillPaymentStatementDTO>>() {
+        Type type = new TypeToken<List<UserBillPaymentStatementResponseDTO>>() {
         }.getType();
-        List<UserBillPaymentStatementDTO> responseDTO = gson.fromJson(String.valueOf(statements), type);
+        List<UserBillPaymentStatementResponseDTO> responseDTO = gson.fromJson(String.valueOf(statements), type);
 
         return responseDTO;
     }

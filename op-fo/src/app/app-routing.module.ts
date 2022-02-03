@@ -58,6 +58,12 @@ const routes: Routes = [
                   import("./views/pages/onlinepayment/bill-type/bill-type.module").then((m) => m.BillTypeModule),
             },
             {
+                path: 'organization-admin',
+                canActivate: [TranslateGuard],
+                data: { moduleName: 'organization-admin' },
+                loadChildren: () => import('./views/pages/onlinepayment/organization-admin/organization-admin.module').then(m => m.OrganizationAdminModule)
+            },
+            {
                 path: 'pda',
                 canActivate: [TranslateGuard],
                 data: { moduleName: 'pda' },

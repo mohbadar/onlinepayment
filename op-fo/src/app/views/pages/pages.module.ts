@@ -7,8 +7,6 @@ import { HttpClientModule } from "@angular/common/http";
 import { PartialsModule } from "../partials/partials.module";
 // Pages
 import { CoreModule } from "../../core/core.module";
-import { TariffComponent } from './onlinepayment/tariff/tariff.component';
-import { TarifrChargesComponent } from './onlinepayment/tarifr-charges/tarifr-charges.component';
 
 @NgModule({
   declarations: [],

@@ -1,0 +1,102 @@
+<kt-portlet class="_p_collections">
+    <kt-portlet-body>
+        <div class="kt-heading kt-heading--md">
+            {{ "REVENUE_REPORT" | translate }}
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="mt-5">
+
+
+                    <div class="row">
+
+                       
+                        <div class="col-lg-6">
+                            <div class="form-group row required">
+                                <label class="col-lg-3 col-form-label">{{ 'ORGANIZATION'|translate }}</label>
+                                <div class="col-lg-9">
+                                    <ng-select [items]="organizations$ | async " bindLabel="name" bindValue="id"
+                                        [placeholder]="'ORGANIZATION'|translate" formControlName="organizationId"
+                                        >
+                                    </ng-select>
+                                    <print-error [control]="searchForm.get('organizationId')"></print-error>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group row required">
+                                <label class="col-lg-3">{{ 'CENTER'|translate }}</label>
+                                <div class="col-lg-9">
+                                    <ng-select [items]="centers$ | async " bindLabel="name" bindValue="id"
+                                        [placeholder]="'CENTER'|translate" formControlName="centerId">
+                                    </ng-select>
+                                    <print-error [control]="searchForm.get('centerId')"></print-error>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group row required">
+                                <label class="col-lg-3 col-form-label">{{ 'FROM_DATE'|translate }}</label>
+                                <div class="col-lg-9">
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="yyyy-mm-dd" name="startDate"
+                                            ngbDatepicker #startDate="ngbDatepicker" formControlName="startDate"
+                                            [firstDayOfWeek]="6">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" (click)="startDate.toggle()" type="button">
+                                                <i class="la la-calendar"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <print-error [control]="searchForm.get('startDate')"></print-error>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group row required">
+                                <label class="col-lg-3 col-form-label">{{ 'TO_DATE'|translate }}</label>
+                                <div class="col-lg-9">
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="yyyy-mm-dd" name="endDate"
+                                            ngbDatepicker #endDate="ngbDatepicker" formControlName="endDate"
+                                            [firstDayOfWeek]="6">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" (click)="endDate.toggle()" type="button">
+                                                <i class="la la-calendar"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <print-error [control]="searchForm.get('endDate')"></print-error>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group row required">
+                                <label class="col-lg-3">{{'DISPLAY_STATUS_TYPE'|translate}}</label>
+                                <div class="col-lg-9">
+                                    <ng-select [items]="statuses" bindLabel="name" bindValue="id"
+                                        [placeholder]="'STATUS'|translate" formControlName="status">
+                                    </ng-select>
+                                    <print-error [control]="searchForm.get('status')"></print-error>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <button [disabled]="searchForm.invalid" type="submit"
+                            class="btn btn-primary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u">
+                            {{ "EXPORT" | translate }}
+                        </button>
+
+                        ‍‍‍‍ &nbsp;&nbsp;
+                    </div>
+                </form>
+            </div>
+        </div>
+    </kt-portlet-body>
+</kt-portlet>
+<ngx-spinner></ngx-spinner>
