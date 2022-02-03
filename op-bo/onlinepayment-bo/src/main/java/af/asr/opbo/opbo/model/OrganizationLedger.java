@@ -1,5 +1,6 @@
 package af.asr.opbo.opbo.model;
 
+import af.asr.opbo.infrastructure.base.BaseEntity;
 import lombok.*;
 import org.hibernate.annotations.Where;
 
@@ -17,11 +18,13 @@ import java.math.BigDecimal;
 @ToString
 @Where(clause = "deleted is false")
 // class to track payments made to an organization
-public class OrganizationPayment {
+public class OrganizationLedger extends BaseEntity {
     private String organizationId;
     private String balanceDate;
     private BigDecimal credit;
     private BigDecimal debit;
     private String transactionId;
     private String channel;
+    private String billId;
+    private String billPaymentId;
 }

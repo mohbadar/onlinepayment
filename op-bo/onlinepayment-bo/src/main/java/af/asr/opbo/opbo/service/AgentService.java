@@ -53,6 +53,9 @@ public class AgentService {
     @Autowired
     private BillPaymentRepository billPaymentRepository;
 
+    @Autowired
+    private OrganizationLedgerRepository organizationLedgerRepository;
+
 
     public Agent findByPhone(String phone){
         return  repository.findByPhone(phone);
@@ -291,7 +294,23 @@ public class AgentService {
         billPayment.setConfirmUserId(userService.getId());
         billPayment.setConfirmUserName(userService.getPreferredUsername());
         billPayment.setConfirmDate(HijriDateUtility.getCurrentJalaliDateAsString());
-        return billPaymentRepository.save(billPayment);
+
+        BillPayment billPaymentSaved= billPaymentRepository.save(billPayment);
+
+        OrganizationLedger organizationLedger = new OrganizationLedger();
+        organizationLedger.setOrganizationId(billPayment.getOrganizationId());
+        organizationLedger.setBalanceDate(HijriDateUtility.getCurrentJalaliDateAsString());
+        organizationLedger.setDebit(new BigDecimal(0));
+        organizationLedger.setCredit(billPaymentSaved.getPaidAmount());
+        organizationLedger.setBillPaymentId(billPaymentSaved.getId());
+        organizationLedger.setBillId(billPaymentSaved.getBillId());
+        organizationLedger.setTransactionId(AccountNumberUtility.generateSequence());
+        organizationLedger.setChannel(billPayment.getChannelId());
+        organizationLedgerRepository.save(organizationLedger);
+
+
+
+        return billPaymentSaved;
     }
 
     public List<UserBillPaymentStatementResponseDTO> getUserBillStatement() {

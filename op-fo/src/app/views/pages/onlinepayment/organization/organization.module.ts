@@ -45,6 +45,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { OrganizationUserRelationComponent } from './component/organization-user-relation/organization-user-relation.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { OrganizationComponent } from './organization.component';
+import { CreditOrganizationLedgerComponent } from './component/credit-organization-ledger/credit-organization-ledger.component';
+import { DebitOrganizationLedgerComponent } from './component/debit-organization-ledger/debit-organization-ledger.component';
 
 
 const routes: Routes = [
@@ -64,6 +66,14 @@ const routes: Routes = [
             {
                 path: 'update',
                 component: UpdateOrganizationComponent
+            },
+            {
+                path: 'credit',
+                component: CreditOrganizationLedgerComponent
+            },
+            {
+                path: 'debit',
+                component: DebitOrganizationLedgerComponent
             },
         ]
 
@@ -114,7 +124,9 @@ const routes: Routes = [
         OrganizationComponent,
         ViewOrganizationComponent,
         UpdateOrganizationComponent,
-        OrganizationUserRelationComponent
+        OrganizationUserRelationComponent,
+        CreditOrganizationLedgerComponent,
+        DebitOrganizationLedgerComponent
     ],
 })
 export class OrganizationModule {

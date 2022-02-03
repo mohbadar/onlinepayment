@@ -9,26 +9,26 @@ export const financialManagerMenuModule = {
 
             {
               title: 'Organization',
-              page: '/organization',
+              page: '',
               translate: "MENU.ORGANIZATION",
               alignment: "center",
               toggle: "click",
               submenu: [
                 {
                     title: "CREDIT_ORGANIZATION",
-                    page: "/credit",
+                    page: "/organization/credit",
                     translate: "MENU.CREDIT_ORGANIZATION",
                 },
                 {
                     title: "DEBIT_ORGANIZATION",
-                    page: "/debit",
+                    page: "/organization/debit",
                     translate: "MENU.DEBIT_ORGANIZATION",
                 },
                 {
                     title: 'ORGANIZATION_REVENUE_REPORT',
-                    page: '/organization-revenue-report',
+                    page: '/organization-admin/generate-date-based-statement',
                     translate: "MENU.ORGANIZATION_REVENUE_REPORT"
-                },
+                }
               ]
             },
             {
@@ -52,6 +52,11 @@ export const financialManagerMenuModule = {
                         title: 'AGENT_REVENUE_REPORT',
                         page: '/agent-revenue-report',
                         translate: "MENU.AGENT_REVENUE_REPORT"
+                    },
+                    {
+                      title: 'AGENT_BALANCE_SHEET',
+                      page: '/agent-balance-sheet',
+                      translate: "MENU.AGENT_BALANCE_SHEET"
                     },
                                       
                   ],            
