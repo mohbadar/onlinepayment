@@ -60,6 +60,7 @@ public class OrganizationService {
         String accountNo = AccountNumberService.generateAccountNoByProvinceId(obj.getProvinceId());
         if(repository.findByAccountNo(accountNo) != null)
             throw new RuntimeException("Account Already Exist Exception");
+        obj.setAccountNo(accountNo);
         return repository.save(obj);
     }
 

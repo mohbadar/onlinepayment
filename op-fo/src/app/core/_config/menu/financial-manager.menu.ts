@@ -63,6 +63,12 @@ export const financialManagerMenuModule = {
                       page: '/agent-balance-sheet',
                       translate: "MENU.AGENT_BALANCE_SHEET"
                     },
+
+                    {
+                      title: 'AGENT_MAKE_PAYMENT',
+                      page: '/agent-make-payment',
+                      translate: "MENU.AGENT_MAKE_PAYMENT"
+                    },
                                       
                   ],            
             },

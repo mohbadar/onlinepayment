@@ -7,7 +7,6 @@ import org.hibernate.annotations.Where;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Entity
@@ -19,23 +18,31 @@ import java.math.BigDecimal;
 @Builder
 @ToString
 @Where(clause = "deleted is false")
-// class to track payments made to an agent
-public class AgentPayment extends BaseEntity {
-    @Column(nullable = false)
-    @NotNull
-    private String agentId;
-    @Column(nullable = false)
-    private String paymentDate;
-    @Column(nullable = false)
-    @NotNull
-    private BigDecimal paymentAmount;
-    @Column(nullable = false)
-    private String transactionId;
-    @Column(nullable = false)
-    @NotNull
-    private String channel;
+public class AgentFee extends BaseEntity {
 
     @Column(nullable = false)
-    private String rectifiedJournalEntryId;
+    private String agentId;
+    @Column(nullable = false)
+    private String agentAccountNo;
+    
+
+    @Column(nullable = false)
+    private String feeDate;
+    @Column(nullable = false)
+    private BigDecimal feeAmount;
+
+    private String clearanceDate;
+    @Column(nullable = false)
+    private boolean cleared=false;
+    @Column(nullable = false)
+    private String billPaymentId;
+    @Column(nullable = false)
+    private String billId;
+    @Column(nullable = false)
+    private String agentLedgerId;
+    @Column(nullable = false)
+    private String transactionId;
+
+    private String organizationId;
 
 }

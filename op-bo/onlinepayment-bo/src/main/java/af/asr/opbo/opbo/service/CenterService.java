@@ -123,6 +123,7 @@ public class CenterService {
 
         BigDecimal billAmount = calculateIssuedBill(dto);
         BigDecimal feeAmount = calculateFee(dto);
+        BigDecimal agentFeeAmount = calculateAgentFee(dto);
 
         Bill bill = new Bill();
         bill.setBillAmount(billAmount);
@@ -136,6 +137,7 @@ public class CenterService {
         bill.setBillTypeId(dto.getBillTypeId());
         bill.setCenterId(dto.getCenterId());
         bill.setFeeAmount(feeAmount);
+        bill.setAgentFeeAmount(agentFeeAmount);
         bill.setFeeModelId(feeModel.getId());
         bill.setCenterId(center.getId());
         bill.setOrganizationId(center.getOrganizationId());
@@ -201,6 +203,32 @@ public class CenterService {
             }
         }else {
             totalFee = feeModel.getAmount().multiply(new BigDecimal(numberOfItems));
+        }
+        return totalFee;
+    }
+
+
+    private BigDecimal calculateAgentFee(IssueBillDTO dto)
+    {
+        BillType billType = billTypeService.findById(dto.getBillTypeId());
+        if (billType == null)
+            throw new RuntimeException("BillTypeNotFoundException");
+
+        FeeModel feeModel= feeModelService.findById(billType.getFeeModelId());
+        if (feeModel == null)
+            throw new RuntimeException("FeeModelNotFoundException");
+
+        BigDecimal pricePerItem= billType.getPricePerItem();
+        Integer numberOfItems = dto.getNumberOfItems();
+
+        BigDecimal totalFee = new BigDecimal(0);
+        if (feeModel.getType()=="PERCENTAGE")
+        {
+            for (int i=0; i<numberOfItems; i++){
+                totalFee.add(calculatePercentage(feeModel.getAgentFeePercentage(),pricePerItem));
+            }
+        }else {
+            totalFee = feeModel.getAgentFeeAmount().multiply(new BigDecimal(numberOfItems));
         }
         return totalFee;
     }

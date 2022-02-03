@@ -16,4 +16,8 @@ export class Agent extends BaseEntity {
     organizationId:string;
     centerId:string;
     accountNo:string;
+    bankName:string;
+    bankAccountNo:string;
+    bankCardHolderName:string;
+    bankCardNo:string;
 }

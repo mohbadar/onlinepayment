@@ -70,6 +70,20 @@
                                     <print-error [control]="myForm.get('amount')"></print-error>
                                 </div>
 
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'AGENT_FEE_AMOUNT'|translate}}</label>
+                                    <input type="number" class="form-control" name="agentFeeAmount"
+                                        [placeholder]="'AGENT_FEE_AMOUNT'|translate" formControlName="agentFeeAmount">
+                                    <print-error [control]="myForm.get('agentFeeAmount')"></print-error>
+                                </div>
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'AGENT_FEE_PERCENTAGE'|translate}}</label>
+                                    <input type="number" class="form-control" name="agentFeePercentage"
+                                        [placeholder]="'AGENT_FEE_PERCENTAGE'|translate" formControlName="agentFeePercentage">
+                                    <print-error [control]="myForm.get('agentFeePercentage')"></print-error>
+                                </div>
+
 
                             </div>
                         </div>

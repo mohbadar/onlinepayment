@@ -26,12 +26,15 @@ public class Organization extends BaseEntity {
     @NotNull
     @Column(nullable=false, unique = true)
     private String code;
+
     @NotNull
     @Column(nullable=false)
     private String address;
+
     @NotNull
     @Column(nullable=false)
     private String phone;
+
     @NotNull
     @Email
     @Column(nullable=false)
@@ -44,4 +47,16 @@ public class Organization extends BaseEntity {
     @NotNull
     @Column(nullable=false, unique = true)
     private String accountNo;
+
+
+    @NotNull
+    @Column(nullable=false)
+    private String bankName;
+    @NotNull
+    @Column(nullable=false)
+    private String bankAccountNo;
+    @NotNull
+    @Column(nullable=false)
+    private String bankCardHolderName;
+    private String bankCardNo;
 }

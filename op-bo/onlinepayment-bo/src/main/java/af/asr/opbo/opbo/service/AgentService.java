@@ -56,6 +56,12 @@ public class AgentService {
     @Autowired
     private OrganizationLedgerRepository organizationLedgerRepository;
 
+    @Autowired
+    private AgentFeeRepository agentFeeRepository;
+
+    @Autowired
+    private AgentPaymentRepository agentPaymentRepository;
+
 
     public Agent findByPhone(String phone){
         return  repository.findByPhone(phone);
@@ -140,9 +146,37 @@ public class AgentService {
         agentLedger.setDebit(new BigDecimal(0));
         agentLedger.setBalanceDate(HijriDateUtility.getCurrentJalaliDateAsString());
         agentLedger.setRectifiedJournalEntryId(rectifiedJournalEntry.getId());
+        agentLedger.setTransactionId(AccountNumberUtility.generateSequence());
         agentLedgerRespository.save(agentLedger);
         return response;
     }
+
+
+    public Map<String, Object> makeAgentPayment(AgentAccountCreditDTO dto) {
+
+        Map<String, Object> response = new HashMap<>();
+
+        Agent agent = repository.findByAccountNo(dto.getAccountNumber());
+
+        if(agent == null)
+            throw  new RuntimeException("AgentNotFoundException");
+
+        dto.setAgentId(agent.getId());
+
+        RectifiedJournalEntry rectifiedJournalEntry = rectifiedJournalEntryRepository.save(ObjectMapper.mapCredit(dto));
+
+        AgentPayment agentPayment = new AgentPayment();
+        agentPayment.setAgentId(agent.getId());
+        agentPayment.setRectifiedJournalEntryId(rectifiedJournalEntry.getId());
+        agentPayment.setChannel(dto.getRjType());
+        agentPayment.setPaymentAmount(dto.getAmount());
+        agentPayment.setPaymentDate(HijriDateUtility.getCurrentJalaliDateAsString());
+        agentPayment.setTransactionId(AccountNumberUtility.generateSequence());
+
+        agentPaymentRepository.save(agentPayment);
+        return response;
+    }
+
 
 
     public Map<String, Object> debitAgentAccount(AgentAccountCreditDTO dto) {
@@ -164,6 +198,7 @@ public class AgentService {
         agentLedger.setCredit(new BigDecimal(0));
         agentLedger.setBalanceDate(HijriDateUtility.getCurrentJalaliDateAsString());
         agentLedger.setRectifiedJournalEntryId(rectifiedJournalEntry.getId());
+        agentLedger.setTransactionId(AccountNumberUtility.generateSequence());
         agentLedgerRespository.save(agentLedger);
         return response;
     }
@@ -222,6 +257,7 @@ public class AgentService {
 
         BillPayment savedBillPayment = billPaymentRepository.save(billPayment);
 
+
         AgentLedger agentLedger = new AgentLedger();
         agentLedger.setAgentId(agent.getId());
         agentLedger.setDebit(dto.getPaidAmount());
@@ -230,7 +266,22 @@ public class AgentService {
         agentLedger.setBillPaymentId(savedBillPayment.getId());
         agentLedger.setCycle(bill.getCycle());
         agentLedger.setCycleYear(bill.getCycleYear());
-        agentLedgerRespository.save(agentLedger);
+        agentLedger.setTransactionId(AccountNumberUtility.generateSequence());
+        AgentLedger savedAgentLedger = agentLedgerRespository.save(agentLedger);
+
+        AgentFee agentFee = new AgentFee();
+        agentFee.setAgentId(agent.getId());
+        agentFee.setCleared(false);
+        agentFee.setFeeAmount(bill.getAgentFeeAmount());
+        agentFee.setFeeDate(HijriDateUtility.getCurrentJalaliDateAsString());
+        agentFee.setBillId(bill.getId());
+        agentFee.setBillPaymentId(billPayment.getId());
+        agentFee.setAgentId(agent.getId());
+        agentFee.setAgentLedgerId(savedAgentLedger.getId());
+        agentFee.setTransactionId(savedAgentLedger.getTransactionId());
+        agentFee.setAgentAccountNo(agent.getAccountNo());
+        agentFee.setOrganizationId(bill.getOrganizationId());
+        agentFeeRepository.save(agentFee);
 
         data.put("agent", agent);
         data.put("bill", bill);
@@ -347,6 +398,32 @@ public class AgentService {
         List<UserBillPaymentStatementResponseDTO> responseDTO = gson.fromJson(String.valueOf(statements), type);
 
         return responseDTO;
+    }
+
+    public List<AgentFee> getAgentFees(String accountNo) {
+
+
+        Agent agent= repository.findByAccountNo(accountNo.trim());
+        if(agent==null)
+            throw new RuntimeException("AgentNotFoundException");
+        return agentFeeRepository.findByAgentIdAndCleared(agent.getId(), false);
+    }
+
+    public void approveFees(List<AgentFee> agentFees) {
+
+        agentFees.forEach(agentFee -> {
+            agentFee.setCleared(true);
+            agentFee.setClearanceDate(HijriDateUtility.getCurrentJalaliDateAsString());
+            agentFeeRepository.save(agentFee);
+
+            Bill bill = billRepository.findById(agentFee.getBillId()).orElse(null);
+            if(bill ==null )
+                throw new RuntimeException("BillNotFoundException");
+            bill.setClearedWithAgent(true);
+            bill.setAgentFeeId(agentFee.getId());
+            bill.setAgentClearanceDate(HijriDateUtility.getCurrentJalaliDateAsString());
+            billRepository.save(bill);
+        });
     }
 
 //    public Map<String, Object> getObjectAndRevisions(String id) {

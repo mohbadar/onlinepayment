@@ -65,7 +65,11 @@ export class CreateAgentComponent implements OnInit {
             tazkiraNo: [, [Validators.required]],
             friendAccountNo1: [, []],
             friendAccountNo2: [, []],
-            fathername: [, [Validators.required]]
+            fathername: [, [Validators.required]],
+            bankName: [, [Validators.required]],
+            bankAccountNo: [, [Validators.required]],
+            bankCardHolderName: [, [Validators.required]],
+            bankCardNo: [, []],
         });
 
 
@@ -111,6 +115,10 @@ export class CreateAgentComponent implements OnInit {
         this.record.frientAccountNo1 = this.myForm.get('friendAccountNo1').value;
         this.record.friendAccountNo2 = this.myForm.get('friendAccountNo2').value;
         this.record.tazkiraNo = this.myForm.get('tazkiraNo').value;
+        this.record.bankName = this.myForm.get('bankName').value;
+        this.record.bankAccountNo = this.myForm.get('bankAccountNo').value;
+        this.record.bankCardHolderName = this.myForm.get('bankCardHolderName').value;
+        this.record.bankCardNo = this.myForm.get('bankCardNo').value;
 
         console.log("Form Data", this.record)
         this.spinner.show();

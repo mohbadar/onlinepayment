@@ -45,7 +45,7 @@ public class Agent extends BaseEntity {
     private String grantFathername;
     @Column(nullable = false)
     @NotNull
-    private String tazikraNo;
+    private String tazkiraNo;
     @Column(nullable = true)
     private String tazkiraFilePath;
     @Column(nullable = true)
@@ -63,4 +63,16 @@ public class Agent extends BaseEntity {
     @Column(nullable = false)
     @NotNull
     private String centerId;
+
+    @NotNull
+    @Column(nullable=false)
+    private String bankName;
+    @NotNull
+    @Column(nullable=false)
+    private String bankAccountNo;
+    @NotNull
+    @Column(nullable=false)
+    private String bankCardHolderName;
+    private String bankCardNo;
+
 }

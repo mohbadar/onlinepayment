@@ -9,4 +9,5 @@ export class Center extends BaseEntity {
     address:string;
     provinceId:string;
     parentCenter:string;
+    organizationId:string;
 }

@@ -58,7 +58,8 @@ public class BillPayment extends BaseEntity {
     private BigDecimal tenderedAmount;
     private boolean posted;
 
-    private boolean confirmed;
+    @Column(nullable=false)
+    private boolean confirmed =false;
     private String confirmUserId;
     private String confirmUserName;
     private String confirmDate;

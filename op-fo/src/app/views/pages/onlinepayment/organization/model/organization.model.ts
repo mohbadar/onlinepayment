@@ -8,4 +8,8 @@ export class Organization extends BaseEntity {
     email:string;
     address:string;
     provinceId:string;
+    bankName:string;
+    bankAccountNo:string;
+    bankCardHolderName:string;
+    bankCardNo:string;
 }

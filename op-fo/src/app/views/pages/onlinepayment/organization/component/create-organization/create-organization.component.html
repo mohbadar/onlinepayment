@@ -65,6 +65,35 @@
                                     <print-error [control]="myForm.get('address')"></print-error>
                                 </div>
 
+                                
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'BANK_NAME'|translate}}</label>
+                                    <input type="text" class="form-control" name="bankName"
+                                        [placeholder]="'BANK_NAME'|translate" formControlName="bankName">
+                                    <print-error [control]="myForm.get('bankName')"></print-error>
+                                </div>
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'BANK_ACCOUNT_NO'|translate}}</label>
+                                    <input type="text" class="form-control" name="bankAccountNo"
+                                        [placeholder]="'BANK_ACCOUNT_NO'|translate" formControlName="bankAccountNo">
+                                    <print-error [control]="myForm.get('bankAccountNo')"></print-error>
+                                </div>
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'BANK_CARD_HOLDER_NAME'|translate}}</label>
+                                    <input type="text" class="form-control" name="bankCardHolderName"
+                                        [placeholder]="'BANK_CARD_HOLDER_NAME'|translate" formControlName="bankCardHolderName">
+                                    <print-error [control]="myForm.get('bankCardHolderName')"></print-error>
+                                </div>
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'BANK_CARD_NO'|translate}}</label>
+                                    <input type="text" class="form-control" name="bankCardNo"
+                                        [placeholder]="'BANK_CARD_NO'|translate" formControlName="bankCardNo">
+                                    <print-error [control]="myForm.get('bankCardNo')"></print-error>
+                                </div>
+
 
                             </div>
                         </div>

@@ -82,6 +82,10 @@ export class AgentService {
     return this.httpClient.post(`${_BASE_URL}/agent-account-debit`, data);
   }
 
+  makeAgentPayment(data: any) : Observable<any>{
+    return this.httpClient.post(`${_BASE_URL}/make-agent-payment`, data);
+  }
+
   queryBill(billNo) : Observable<any>{
     return this.httpClient.post(`${_BASE_URL}/query-bill`, billNo);
   }
@@ -109,5 +113,14 @@ export class AgentService {
 
   getUserBillStatement() :Observable<any> {
     return this.httpClient.get(`${_BASE_URL}/get-user-bill-statement`);
+  }
+
+  getAgentFees(accountNo): Observable<any>{
+    return this.httpClient.get(`${_BASE_URL}/agent-fees/${accountNo}`);
+  }
+
+
+  sendFeeApprovals(data:any): Observable<any>{
+    return this.httpClient.post(`${_BASE_URL}/fee-approvals`, data);
   }
 }

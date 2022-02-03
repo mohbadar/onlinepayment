@@ -71,4 +71,8 @@ public class Bill extends BaseEntity {
     private String billDueDate;
     @Column(nullable=false)
     private boolean amountPayFlag=false;
+
+    private boolean clearedWithAgent;
+    private String agentFeeId;
+    private String agentClearanceDate;
 }

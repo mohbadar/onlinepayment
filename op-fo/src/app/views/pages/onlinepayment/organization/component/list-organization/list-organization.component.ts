@@ -22,7 +22,7 @@ import { OrganizationUserRelationComponent } from '../organization-user-relation
 export class ListOrganizationComponent implements OnInit {
 
 
-  displayedColumns: string[] = [ 'name', 'code', "Status" ,'actions'];
+  displayedColumns: string[] = [ 'name', 'code', 'accountNo', "Status" ,'actions'];
 	dataSource: MatTableDataSource<any>;
   
 	@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

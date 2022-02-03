@@ -52,6 +52,7 @@ import { AgentSlipPrintComponent } from './component/agent-slip-print/agent-slip
 import { AgentBalanceSheetComponent } from './component/agent-balance-sheet/agent-balance-sheet.component';
 import { DuplicateSlipPrintComponent } from './component/duplicate-slip-print/duplicate-slip-print.component';
 import { AgentRevenueReportComponent } from './component/agent-revenue-report/agent-revenue-report.component';
+import { AgentMakePaymentComponent } from './component/agent-make-payment/agent-make-payment.component';
 
 
 const routes: Routes = [
@@ -95,6 +96,10 @@ const routes: Routes = [
             {
                 path: 'agent-revenue-report',
                 component: AgentRevenueReportComponent
+            },
+            {
+                path: 'agent-make-payment',
+                component: AgentMakePaymentComponent
             },
         ]
 
@@ -153,7 +158,8 @@ const routes: Routes = [
         AgentSlipPrintComponent,
         AgentBalanceSheetComponent,
         DuplicateSlipPrintComponent,
-        AgentRevenueReportComponent
+        AgentRevenueReportComponent,
+        AgentMakePaymentComponent
     ],
 })
 export class AgentModule {

@@ -63,6 +63,13 @@ public class AgentController {
         return ResponseEntity.ok(service.findByAccountNo(accountNo));
     }
 
+    @Auditable
+    @GetMapping(value = "/agent-fees/{accountNo}")
+    public @ResponseBody
+    ResponseEntity<List<AgentFee>> getAgentFees(
+            @PathVariable(name = "accountNo", required = true) String accountNo) {
+        return ResponseEntity.ok(service.getAgentFees(accountNo));
+    }
 //    @Auditable
 //    @GetMapping(value = "/revision/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 //    public @ResponseBody ResponseEntity<Map<String, Object>> getObjectAndRevisions(@PathVariable(name = "id", required = true) String id) {
@@ -144,6 +151,13 @@ public class AgentController {
 
 
     @Auditable
+    @PostMapping("/make-agent-payment")
+    public ResponseEntity<Map<String, Object>> makeAgentPayment(@RequestBody AgentAccountCreditDTO dto)
+    {
+        return ResponseEntity.ok(service.makeAgentPayment(dto));
+    }
+
+    @Auditable
     @PostMapping("/query-bill")
     public ResponseEntity<Bill> queryBill(@RequestBody String billNo)
     {
@@ -190,6 +204,13 @@ public class AgentController {
     }
 
 
+    @Auditable
+    @PostMapping("/fee-approvals")
+    public ResponseEntity<HttpStatus> approveFees(@RequestBody List<AgentFee> agentFees)
+    {
+        service.approveFees(agentFees);
+        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+    }
 
 
 }

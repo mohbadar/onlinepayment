@@ -12,11 +12,11 @@ import { Province } from '../../../province/model/province.model';
 import { ProvinceService } from '../../../province/service/province.service';
 
 @Component({
-  selector: 'kt-debit-agent-account',
-  templateUrl: './debit-agent-account.component.html',
-  styleUrls: ['./debit-agent-account.component.scss']
+  selector: 'kt-agent-make-payment',
+  templateUrl: './agent-make-payment.component.html',
+  styleUrls: ['./agent-make-payment.component.scss']
 })
-export class DebitAgentAccountComponent implements OnInit {
+export class AgentMakePaymentComponent implements OnInit {
 
   @ViewChild('wizard', { static: true }) el: ElementRef;
 
@@ -29,10 +29,7 @@ export class DebitAgentAccountComponent implements OnInit {
 	submitted = false;
 	items: any;
 	years: any[];
-	branches;
 	provinces: any[];
-	banks: any[];
-	cycleConfigs: any;
 
 	constructor(private formBuilder: FormBuilder,
 		private layoutUtilService: LayoutUtilsService,
@@ -40,8 +37,8 @@ export class DebitAgentAccountComponent implements OnInit {
 		public keycloakService: KeycloakService,
 		private spinner: NgxSpinnerService,
 		private agentService: AgentService,
-		private provinceService: ProvinceService,
-		private pagesService: PagesService
+    private provinceService: ProvinceService,
+    private pagesService: PagesService
 
 	) {
 		// if (!this.keycloakService.isUserInRole('agent_credit')) {
@@ -98,11 +95,11 @@ export class DebitAgentAccountComponent implements OnInit {
 		console.log("Form Data", data)
 
 		 this.spinner.show();
-        this.agentService.saveRectifiedJournalDebit(data).subscribe(
+        this.agentService.makeAgentPayment(data).subscribe(
             response => {
                 this.spinner.hide();
                 this.myForm.reset()
-                const msg = 'Account has been debited!';
+                const msg = 'Payment has been made!';
                 this.layoutUtilService.showActionNotification(msg);
             },
             err => {

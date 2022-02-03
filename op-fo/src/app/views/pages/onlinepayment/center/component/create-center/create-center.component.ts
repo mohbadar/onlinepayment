@@ -8,6 +8,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ProvinceService } from '../../../province/service/province.service';
 import { Center } from '../../model/center.model';
 import { CenterService } from '../../service/center.service';
+import { OrganizationService } from '../../../organization/service/organization.service';
 
 
 @Component({
@@ -28,6 +29,7 @@ export class CreateCenterComponent implements OnInit {
     record: Center;
     provinces$: Observable<any>;
     centers$: Observable<any>;
+    organizations$: any;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -35,7 +37,8 @@ export class CreateCenterComponent implements OnInit {
         private router: Router,
         private centerService: CenterService,
         private spinner: NgxSpinnerService,
-        private provinceService: ProvinceService
+        private provinceService: ProvinceService,
+        private organizationService: OrganizationService
 
     ) {
     }
@@ -44,6 +47,7 @@ export class CreateCenterComponent implements OnInit {
     ngOnInit() {
 
         this.provinces$ = this.provinceService.get();
+        this.organizations$ = this.organizationService.get();
         this.centers$ = this.centerService.get();
 
 
@@ -54,6 +58,7 @@ export class CreateCenterComponent implements OnInit {
             email: [, [Validators.required]],
             phone: [, [Validators.required]],
             provinceId: [, [Validators.required]],
+            organizationId: [, [Validators.required]],
             parentCenter: []
         });
 
@@ -93,6 +98,7 @@ export class CreateCenterComponent implements OnInit {
         this.record.email = this.myForm.get('email').value;
         this.record.address = this.myForm.get('address').value;
         this.record.provinceId = this.myForm.get('provinceId').value;
+        this.record.organizationId = this.myForm.get('organizationId').value;
         this.record.parentCenter = this.myForm.get('parentCenter').value;
 
 

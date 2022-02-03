@@ -51,6 +51,10 @@ export class CreateOrganizationComponent implements OnInit {
             email: [, [Validators.required]],
             phone: [, [Validators.required]],
             provinceId: [, [Validators.required]],
+            bankName: [, [Validators.required]],
+            bankAccountNo: [, [Validators.required]],
+            bankCardHolderName: [, [Validators.required]],
+            bankCardNo: [, []],
         });
 
 
@@ -89,6 +93,11 @@ export class CreateOrganizationComponent implements OnInit {
         this.record.email = this.myForm.get('email').value;
         this.record.address = this.myForm.get('address').value;
         this.record.provinceId = this.myForm.get('provinceId').value;
+        this.record.bankName = this.myForm.get('bankName').value;
+        this.record.bankAccountNo = this.myForm.get('bankAccountNo').value;
+        this.record.bankCardHolderName = this.myForm.get('bankCardHolderName').value;
+        this.record.bankCardNo = this.myForm.get('bankCardNo').value;
+
 
 
         console.log("Form Data", this.record)
