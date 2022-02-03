@@ -6,4 +6,6 @@ export class FeeModel extends BaseModel {
     type:string;
     percentage:number;
     amount:number;
+    agentFeeAmount: number;
+    agentFeePercentage: number;
 }

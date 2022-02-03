@@ -7,6 +7,7 @@ import org.hibernate.annotations.Where;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table()
@@ -20,8 +21,10 @@ import javax.persistence.Table;
 public class ProvinceUserRelation extends BaseEntity {
 
     @Column(nullable = false, name = "app_user_id")
+    @NotNull
     private String appUserId;
 
     @Column(nullable = false)
+    @NotNull
     private String provinceId;
 }
