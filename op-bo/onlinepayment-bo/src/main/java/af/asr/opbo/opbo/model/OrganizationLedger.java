@@ -27,4 +27,5 @@ public class OrganizationLedger extends BaseEntity {
     private String channel;
     private String billId;
     private String billPaymentId;
+    private String rectifiedJournalEntryId;
 }

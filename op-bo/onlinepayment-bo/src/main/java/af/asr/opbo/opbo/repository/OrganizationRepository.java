@@ -9,5 +9,6 @@ public interface OrganizationRepository extends CrudRepository<Organization, Str
 
     Organization findByName(String name);
     Organization findByCode(String provinceCode);
+    Organization findByAccountNo(String accountNo);
 
 }

@@ -21,6 +21,7 @@ public class RectifiedJournalEntry extends BaseEntity {
     private String rjno;
     private String rjdate;
     private String agentId;
+    private String organizationId;
     private BigDecimal creditAmount;
     private BigDecimal debitAmount;
     private String rjReason;

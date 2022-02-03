@@ -1,18 +1,26 @@
 package af.asr.opbo.opbo.service;
 
 import af.asr.opbo.infrastructure.base.UserService;
-import af.asr.opbo.opbo.model.Organization;
-import af.asr.opbo.opbo.model.OrganizationUserRelation;
+import af.asr.opbo.opbo.dto.OrganizationAccountCreditDTO;
+import af.asr.opbo.opbo.mapper.ObjectMapper;
+import af.asr.opbo.opbo.model.*;
 
+import af.asr.opbo.opbo.repository.OrganizationLedgerRepository;
 import af.asr.opbo.opbo.repository.OrganizationRepository;
 import af.asr.opbo.opbo.repository.OrganizationUserRelationRepository;
+import af.asr.opbo.opbo.repository.RectifiedJournalEntryRepository;
 import af.asr.opbo.usermanagement.service.UserManagementService;
+import af.asr.opbo.util.AccountNumberUtility;
+import af.asr.opbo.util.HijriDateUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -30,6 +38,11 @@ public class OrganizationService {
     @Autowired
     private OrganizationUserRelationRepository organizationUserRelationRepository;
 
+    @Autowired
+    private OrganizationLedgerRepository organizationLedgerRepository;
+    @Autowired
+    private RectifiedJournalEntryRepository rectifiedJournalEntryRepository;
+
 
 
     public Organization findByName(String name){
@@ -43,6 +56,10 @@ public class OrganizationService {
 
     public Organization save(Organization obj)
     {
+        //generate accountno
+        String accountNo = AccountNumberService.generateAccountNoByProvinceId(obj.getProvinceId());
+        if(repository.findByAccountNo(accountNo) != null)
+            throw new RuntimeException("Account Already Exist Exception");
         return repository.save(obj);
     }
 
@@ -98,4 +115,34 @@ public class OrganizationService {
 //        data.put("revisions", this.repository.getRevisions(id));
 //        return data;
 //    }
+    
+    public Organization findByAccountNo(String accountNo){
+        return repository.findByAccountNo(accountNo.trim());
+    }
+
+
+    public Map<String, Object> creditOrganizationAccount(OrganizationAccountCreditDTO dto)
+    {
+        Map<String, Object> response = new HashMap<>();
+
+        Organization organization = repository.findByAccountNo(dto.getAccountNumber());
+
+        if(organization == null)
+            throw  new RuntimeException("OrganizationNotFoundException");
+
+        dto.setOrganizationId(organization.getId());
+
+        RectifiedJournalEntry rectifiedJournalEntry = rectifiedJournalEntryRepository.save(ObjectMapper.mapCredit(dto));
+
+        OrganizationLedger organizationLedger = new OrganizationLedger();
+        organizationLedger.setOrganizationId(organization.getId());
+        organizationLedger.setCredit(dto.getAmount());
+        organizationLedger.setDebit(new BigDecimal(0));
+        organizationLedger.setBalanceDate(HijriDateUtility.getCurrentJalaliDateAsString());
+        organizationLedger.setRectifiedJournalEntryId(rectifiedJournalEntry.getId());
+        organizationLedger.setChannel(dto.getRjType());
+        organizationLedger.setTransactionId(AccountNumberUtility.generateSequence());
+        organizationLedgerRepository.save(organizationLedger);
+        return response;
+    }
 }

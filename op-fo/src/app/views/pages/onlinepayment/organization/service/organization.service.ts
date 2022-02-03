@@ -71,4 +71,14 @@ export class OrganizationService {
     return this.httpClient.get(`${_BASE_URL}/users`);
   }
 
+  public loadByAccountNo(accountNo: string): Observable<any> {
+    return this.httpClient.get(`${_BASE_URL}/account-no/${accountNo}`);
+  }
+
+  saveRectifiedJournalCredit(data: any) : Observable<any>{
+    // throw new Error('Method not implemented.');
+    return this.httpClient.post(`${_BASE_URL}/organization-account-credit`, data);
+    
+  }
+
 }

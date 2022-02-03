@@ -2,7 +2,10 @@ package af.asr.opbo.opbo.controller;
 
 import af.asr.opbo.infrastructure.audit.annotation.Auditable;
 import af.asr.opbo.infrastructure.base.UserService;
+import af.asr.opbo.opbo.dto.AgentAccountCreditDTO;
+import af.asr.opbo.opbo.dto.OrganizationAccountCreditDTO;
 import af.asr.opbo.opbo.dto.OrganizationUserRelationDTO;
+import af.asr.opbo.opbo.model.Agent;
 import af.asr.opbo.opbo.model.Organization;
 import af.asr.opbo.opbo.model.OrganizationUserRelation;
 import af.asr.opbo.opbo.repository.OrganizationUserRelationRepository;
@@ -123,6 +126,22 @@ public class OrganizationController {
     @GetMapping("/users")
     public ResponseEntity<List> getUsers() {
         return ResponseEntity.ok(userService.getUsers());
+    }
+
+    @Auditable
+    @GetMapping(value = "/account-no/{accountNo}")
+    public @ResponseBody
+    ResponseEntity<Organization> findByAccountNo(
+            @PathVariable(name = "accountNo", required = true) String accountNo) {
+        return ResponseEntity.ok(service.findByAccountNo(accountNo));
+    }
+
+
+    @Auditable
+    @PostMapping("/organization-account-credit")
+    public ResponseEntity<Map<String, Object>> creditAgentAccount(@RequestBody OrganizationAccountCreditDTO dto)
+    {
+        return ResponseEntity.ok(service.creditOrganizationAccount(dto));
     }
 
 }

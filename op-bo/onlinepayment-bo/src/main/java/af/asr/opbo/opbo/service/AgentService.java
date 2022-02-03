@@ -308,8 +308,6 @@ public class AgentService {
         organizationLedger.setChannel(billPayment.getChannelId());
         organizationLedgerRepository.save(organizationLedger);
 
-
-
         return billPaymentSaved;
     }
 
