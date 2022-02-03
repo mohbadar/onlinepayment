@@ -5,6 +5,7 @@ import { agentMenuModule } from "./menu/agent.menu";
 import { organizationAdminMenuModule } from "./menu/organization_admin.menu";
 import { organizationUserMenuModule } from "./menu/organization_user.menu";
 import { centerManagerMenuModule } from "./menu/center_manager.menu";
+import { financialManagerMenuModule } from "./menu/financial-manager.menu";
 
 
 export class MenuConfig {
@@ -59,6 +60,12 @@ export class MenuConfig {
     {
       this.defaults.header.items.splice(1, 0, agentMenuModule);
       this.defaults.aside.items.splice(1, 0, agentMenuModule);
+    }
+
+    if(this.keycloakService.isUserInRole('finance_module_view'))
+    {
+      this.defaults.header.items.splice(1, 0, financialManagerMenuModule);
+      this.defaults.aside.items.splice(1, 0, financialManagerMenuModule);
     }
 
     if(this.keycloakService.isUserInRole('organization_admin_module_view')){

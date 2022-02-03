@@ -4,42 +4,33 @@ export const organizationAdminMenuModule = {
     alignment: 'left',
     toggle: 'click',
     translate: 'MENU.ORGANIZATION_ADMIN',
-    page: '/organization-admin',
+    page: '',
     submenu: [
           {
                 title: 'DATE_BASED_STATEMENT',
-                page: '/generate-date-based-statement',
+                page: '/organization-admin/generate-date-based-statement',
                 translate: "MENU.DATE_BASED_STATEMENT"
             },
 
           {
               title: 'REVENUE_REPORT',
-              page: '/revenue-report',
+              page: '/organization-admin/revenue-report',
               translate: "MENU.REVENUE_REPORT"
           },
            {
                 title: 'RECONCILIATION',
-                page: '/store-nid-process-docs',
+                page: '/organization-admin/reconciliation',
                 translate: "MENU.RECONCILIATION"
             },
             {
-              title: 'STATEMENT',
-              page: '/store-nid-process-docs',
-              translate: "MENU.STATEMENT"
-            },
-            {
-              title: 'MONITORING',
-              page: '/find-nid-process-docs',
+              title: 'BALANCE_SHEET',
+              page: '/organization-admin/monitoring',
               translate: "MENU.BALANCE_SHEET"
             },
-            {
-                title: 'CENTER_USER_RELATION',
-                page: '/find-nid-process-docs',
-                translate: "MENU.CENTER_USER_RELATION"
-            },
+          
             {
                 title: 'CENTER',
-                page: '/find-nid-process-docs',
+                page: '/center',
                 translate: "MENU.CENTER"
             }
        
