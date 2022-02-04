@@ -12,6 +12,12 @@ export const agentMenuModule = {
                 translate: "MENU.AGENT_BILL_PAYMENT"
             },
             {
+              title: 'PAY_ONLINE_BILL',
+              page: '/agent-online-bill-payment',
+              translate: "MENU.PAY_ONLINE_BILL"
+            },
+       
+            {
               title: 'AGENT_SLIP_PRINT',
               page: '/slip-print',
               translate: "MENU.AGENT_SLIP_PRINT"
@@ -21,6 +27,9 @@ export const agentMenuModule = {
               page: '/agent-balance-sheet',
               translate: "MENU.BALANCE_SHEET"
             },
-       
+
+        
+
+            
     ]
 }

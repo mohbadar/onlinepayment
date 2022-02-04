@@ -123,6 +123,6 @@ export class IssueBillComponent implements OnInit {
 
 
     routeHome() {
-        this.router.navigate(['/agent']);
+        this.router.navigate(['/']);
     }
 }

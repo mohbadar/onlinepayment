@@ -4,10 +4,12 @@ package af.asr.opbo.opbo.controller;
 import af.asr.opbo.infrastructure.audit.annotation.Auditable;
 import af.asr.opbo.infrastructure.base.UserService;
 import af.asr.opbo.opbo.dto.*;
+import af.asr.opbo.opbo.dto.response.OnlineBillDetailsDTO;
 import af.asr.opbo.opbo.dto.response.UserBillPaymentStatementResponseDTO;
 import af.asr.opbo.opbo.model.*;
 import af.asr.opbo.opbo.repository.AgentUserRelationRepository;
 import af.asr.opbo.opbo.service.AgentService;
+import af.asr.opbo.opbo.service.OnlineBillCollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,7 +24,10 @@ import java.util.Map;
 @RequestMapping(value = "/api/agents", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AgentController {
     @Autowired
-    private AgentService service;
+    private AgentService agentService;
+
+    @Autowired
+    private OnlineBillCollectionService onlineBillCollectionService;
 
     @Autowired
     private AgentUserRelationRepository agentUserRelationRepository;
@@ -33,26 +38,26 @@ public class AgentController {
     @Auditable
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Iterable<Agent>> findall() {
-        return ResponseEntity.ok(service.findAll());
+        return ResponseEntity.ok(agentService.findAll());
     }
 
     @Auditable
     @GetMapping("/get-user-bill-statement")
     public ResponseEntity<List<UserBillPaymentStatementResponseDTO>> getUserBillStatement()
     {
-        return ResponseEntity.ok(service.getUserBillStatement());
+        return ResponseEntity.ok(agentService.getUserBillStatement());
     }
 
     @Auditable
     @GetMapping(value = "/{id}")
     public ResponseEntity<Agent> findOne(@PathVariable(name = "id", required = true) String id) {
-        return ResponseEntity.ok(service.findOne(id));
+        return ResponseEntity.ok(agentService.findOne(id));
     }
 
     @Auditable
     @GetMapping(value = "/phone/{phone}")
     public ResponseEntity<Agent> findByPhone(@PathVariable(name = "phone", required = true) String phone) {
-        return ResponseEntity.ok(service.findByPhone(phone));
+        return ResponseEntity.ok(agentService.findByPhone(phone));
     }
 
     @Auditable
@@ -60,7 +65,7 @@ public class AgentController {
     public @ResponseBody
     ResponseEntity<Agent> findByAccountNo(
             @PathVariable(name = "accountNo", required = true) String accountNo) {
-        return ResponseEntity.ok(service.findByAccountNo(accountNo));
+        return ResponseEntity.ok(agentService.findByAccountNo(accountNo));
     }
 
     @Auditable
@@ -68,7 +73,7 @@ public class AgentController {
     public @ResponseBody
     ResponseEntity<List<AgentFee>> getAgentFees(
             @PathVariable(name = "accountNo", required = true) String accountNo) {
-        return ResponseEntity.ok(service.getAgentFees(accountNo));
+        return ResponseEntity.ok(agentService.getAgentFees(accountNo));
     }
 //    @Auditable
 //    @GetMapping(value = "/revision/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -80,13 +85,13 @@ public class AgentController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<Agent> update(@PathVariable(name = "id", required = true) String id,
                                          @RequestBody(required = true) Agent obj) {
-        return ResponseEntity.ok(service.save(obj));
+        return ResponseEntity.ok(agentService.save(obj));
     }
 
     @Auditable
     @PostMapping()
     public ResponseEntity<Agent> save(@RequestBody(required = true) Agent obj) {
-        return ResponseEntity.ok(service.save(obj));
+        return ResponseEntity.ok(agentService.save(obj));
     }
 
     // @DeleteMapping(value = "/{id}")
@@ -124,7 +129,7 @@ public class AgentController {
     @GetMapping(value = "/user-agents", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Agent>> getUserAgents(@RequestParam Map<String, String> params)
     {
-        return ResponseEntity.ok(service.getUserAgents(params.get("userName")));
+        return ResponseEntity.ok(agentService.getUserAgents(params.get("userName")));
     }
 
 
@@ -139,14 +144,14 @@ public class AgentController {
     @PostMapping("/agent-account-credit")
     public ResponseEntity<Map<String, Object>> creditAgentAccount(@RequestBody AgentAccountCreditDTO dto)
     {
-        return ResponseEntity.ok(service.creditAgentAccount(dto));
+        return ResponseEntity.ok(agentService.creditAgentAccount(dto));
     }
 
     @Auditable
     @PostMapping("/agent-account-debit")
     public ResponseEntity<Map<String, Object>> debitAgentAccount(@RequestBody AgentAccountCreditDTO dto)
     {
-        return ResponseEntity.ok(service.debitAgentAccount(dto));
+        return ResponseEntity.ok(agentService.debitAgentAccount(dto));
     }
 
 
@@ -154,14 +159,14 @@ public class AgentController {
     @PostMapping("/make-agent-payment")
     public ResponseEntity<Map<String, Object>> makeAgentPayment(@RequestBody AgentAccountCreditDTO dto)
     {
-        return ResponseEntity.ok(service.makeAgentPayment(dto));
+        return ResponseEntity.ok(agentService.makeAgentPayment(dto));
     }
 
     @Auditable
     @PostMapping("/query-bill")
     public ResponseEntity<Bill> queryBill(@RequestBody String billNo)
     {
-        return ResponseEntity.ok(service.queryBill(billNo));
+        return ResponseEntity.ok(agentService.queryBill(billNo));
     }
 
 
@@ -169,7 +174,7 @@ public class AgentController {
     @PostMapping("/collect")
     public ResponseEntity<Map<String, Object>> collectPayment(@RequestBody BillCollectionDTO dto)
     {
-        return ResponseEntity.ok(service.collectBillPayment(dto));
+        return ResponseEntity.ok(agentService.collectBillPayment(dto));
     }
 
 
@@ -177,7 +182,7 @@ public class AgentController {
     @PostMapping("/print-duplicate-slip")
     public ResponseEntity<Map<String, Object>> printDuplicateSlip(@RequestBody String billNo)
     {
-        return ResponseEntity.ok(service.printDuplicateSlip(billNo));
+        return ResponseEntity.ok(agentService.printDuplicateSlip(billNo));
     }
 
 
@@ -185,14 +190,14 @@ public class AgentController {
     @PostMapping("/get-balance-sheet")
     public ResponseEntity<Map<String, Object>> getBalanceSheet(@RequestBody String accountNo)
     {
-        return ResponseEntity.ok(service.getBalanceSheet(accountNo));
+        return ResponseEntity.ok(agentService.getBalanceSheet(accountNo));
     }
 
     @Auditable
     @PostMapping("/query-bill-payment")
     public ResponseEntity<Map<String, Object>> queryBillPayment(@RequestBody String receiptNo)
     {
-        return ResponseEntity.ok(service.queryBillPayment(receiptNo));
+        return ResponseEntity.ok(agentService.queryBillPayment(receiptNo));
     }
 
 
@@ -200,7 +205,7 @@ public class AgentController {
     @PostMapping("/confirm-payment")
     public ResponseEntity<BillPayment> confirmPayment(@RequestBody String paymentId)
     {
-        return ResponseEntity.ok(service.confirmPayment(paymentId));
+        return ResponseEntity.ok(agentService.confirmPayment(paymentId));
     }
 
 
@@ -208,9 +213,26 @@ public class AgentController {
     @PostMapping("/fee-approvals")
     public ResponseEntity<HttpStatus> approveFees(@RequestBody List<AgentFee> agentFees)
     {
-        service.approveFees(agentFees);
+        agentService.approveFees(agentFees);
         return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
 
+
+    @Auditable
+    @PostMapping("/query-online-bill-info")
+    public ResponseEntity<OnlineBillDetailsDTO> queryOnlineBillInfo(@RequestBody QueryOnlineBillInfoDTO dto)
+    {
+
+        return ResponseEntity.ok(onlineBillCollectionService.queryOnlineBillInfo(dto));
+    }
+
+
+    @Auditable
+    @PostMapping("/confirm-online-bill-payment")
+    public ResponseEntity<OnlineBillDetailsDTO> confirmOnlineBillPayment(@RequestBody OnlineBillDetailsDTO dto)
+    {
+
+        return ResponseEntity.ok(onlineBillCollectionService.confirmOnlineBillPayment(dto));
+    }
 
 }

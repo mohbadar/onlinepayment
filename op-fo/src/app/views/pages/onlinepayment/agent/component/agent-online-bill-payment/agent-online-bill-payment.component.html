@@ -1,0 +1,146 @@
+<kt-notice [icon]="'flaticon-warning kt-font-primary'">
+	We know that you are authorized to access this part of the system. 
+	Considering that, this is a critical module. Please be careful!
+</kt-notice>
+
+
+
+
+<kt-portlet *ngIf="isBillInfoFetched">
+    <kt-portlet-body>
+      <div class="kt-heading kt-heading--md">
+        {{ "BILL_DETAILS" | translate }}
+      </div>
+      <div class="col-lg-12 row">
+        <hr />
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td class="font-weight-bold">
+                  {{ "BILL_NO" | translate }}
+                </td>
+                <td>{{ bill.billNo }}</td>
+              </tr>
+              <tr>
+                <td class="font-weight-bold">{{ "BILL_AMOUNT" | translate }}</td>
+                <td>{{ bill.billAmount}}</td>
+              </tr>
+
+              <tr>
+                <td class="font-weight-bold">{{ "BILL_DATE" | translate }}</td>
+                <td>{{ bill.billDate}}</td>
+              </tr>
+
+              <tr>
+                <td class="font-weight-bold">{{ "BILL_DATE" | translate }}</td>
+                <td>{{ bill.cycle}}</td>
+              </tr>
+
+              <tr>
+                <td class="font-weight-bold">{{ "BILL_DATE" | translate }}</td>
+                <td>{{ bill.cycleYear}}</td>
+              </tr>
+
+            </tbody>
+          </table>
+
+          <br /><br />
+        <div class="col-lg-12">
+          <div class="col-lg-3 offset-9">
+            <button (click)="
+                confirmPayment(bill)
+              " class="
+                btn btn-primary btn-md btn-tall btn-wide
+                kt-font-bold kt-font-transform-u
+              ">
+              {{ "CONFIRM_PAYMENT" | translate }}
+            </button>
+          </div>
+        </div>
+      
+        </div>
+      </div>
+
+    </kt-portlet-body>
+  </kt-portlet>
+
+
+
+<kt-portlet>
+    <kt-portlet-body>
+
+        <!--begin: Wizard -->
+        <div #wizard class="kt-grid kt-wizard-v2 kt-wizard-v2--white" id="kt_wizard_v2"
+            data-ktwizard-state="step-first">
+            <div class="kt-grid__item kt-grid__item--fluid kt-wizard-v2__wrapper">
+                <!--begin: Form Wizard Form-->
+                <form [formGroup]="myForm" (ngSubmit)="submit()" class="kt-form" id="kt_form">
+                    <!--begin: Form Wizard Step 1-->
+                    <div class="kt-wizard-v2__content" data-ktwizard-type="step-content" data-ktwizard-state="current">
+                        <div class="kt-heading kt-heading--md">{{'ENTER_UNIQUE_NAME'|translate}} </div>
+                        <div class="kt-form__section kt-form__section--first">
+                            <div class="kt-wizard-v2__form">
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'ORGANIZATION'|translate}}</label>
+                                    <ng-select [items]="organizations$ | async " bindLabel="name" bindValue="id"
+                                    [placeholder]="'ORGANIZATION'|translate" formControlName="organizationId">
+                                    </ng-select>
+                                    <print-error [control]="myForm.get('organizationId')"></print-error>
+                                </div>
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'BILL_TYPE'|translate}}</label>
+                                    <ng-select [items]="billTypes$ | async " bindLabel="name" bindValue="id"
+                                    [placeholder]="'BILL_TYPE'|translate" formControlName="billTypeId">
+                                    </ng-select>
+                                    <print-error [control]="myForm.get('billTypeId')"></print-error>
+                                </div>
+
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'IDENTIFIER'|translate}}</label>
+                                    <input type="text" class="form-control" name="billIdentifier"
+                                        [placeholder]="'IDENTIFIER'|translate" formControlName="billIdentifier">
+                                    <print-error [control]="myForm.get('billIdentifier')"></print-error>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--end: Form Wizard Step 1-->
+
+
+
+
+                    <!--begin: Form Actions -->
+                    <div class="kt-form__actions text-center">
+                        <button (click)="routeHome()" type="button"
+                            class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u">
+                            {{'BACK'|translate}}
+                        </button>&nbsp;&nbsp;
+                        <button [disabled]="myForm.invalid"
+                            class="btn btn-primary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                            data-ktwizard-type="action-submit">
+                            {{'SUBMIT'|translate}}
+                        </button>
+                    </div>
+                    <!--end: Form Actions -->
+                </form>
+                <!--end: Form Wizard Form-->
+            </div>
+        </div>
+        <!--end: Wizard -->
+
+    </kt-portlet-body>
+</kt-portlet>
+
+
+<ngx-spinner></ngx-spinner>
+
+
+

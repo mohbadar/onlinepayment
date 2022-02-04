@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { OnlineBillPayment } from '../model/agent-online-bill-payment.model';
 
 const _BASE_URL = "/api/agents";
 @Injectable({
@@ -122,5 +123,14 @@ export class AgentService {
 
   sendFeeApprovals(data:any): Observable<any>{
     return this.httpClient.post(`${_BASE_URL}/fee-approvals`, data);
+  }
+
+  queryOnlineBillInfo(data:OnlineBillPayment): Observable<any>{
+    return this.httpClient.post(`${_BASE_URL}/query-online-bill-info`, data);
+  }
+
+
+  confirmOnlinePayment(bill): Observable<any> {
+    return this.httpClient.post(`${_BASE_URL}/confirm-online-bill-payment`, bill);
   }
 }
