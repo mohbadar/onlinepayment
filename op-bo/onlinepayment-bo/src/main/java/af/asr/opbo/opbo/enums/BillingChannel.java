@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public enum BillChannel {
+public enum BillingChannel {
     ONLINE("ONLINE"),
     OFFLINE("OFFLINE");
 

@@ -1,8 +1,7 @@
 package af.asr.opbo.opbo.model;
 
 import af.asr.opbo.infrastructure.base.BaseEntity;
-import af.asr.opbo.opbo.enums.AuthorizationType;
-import af.asr.opbo.opbo.enums.BillChannel;
+import af.asr.opbo.opbo.enums.BillingChannel;
 import lombok.*;
 import org.hibernate.annotations.Where;
 
@@ -43,7 +42,7 @@ public class BillType extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     @NotNull
     @Column(nullable = false)
-    private BillChannel billingChannel;
+    private BillingChannel billingChannel;
 
     private String thirdPartyIntegrationId;
 

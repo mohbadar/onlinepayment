@@ -11,6 +11,7 @@ import { CenterService } from '../../../center/service/center.service';
 import { BillType } from '../../model/bill-type.model';
 import { BillTypeService } from '../../service/bill-type.service';
 import { FeeModelService } from '../../../fee-model/service/fee-model.service';
+import { ThirdPartyIntegrationService } from '../../../third-party-integration/service/third-party-integration.service';
 
 @Component({
   selector: 'kt-create-billtype',
@@ -33,6 +34,7 @@ export class CreateBilltypeComponent implements OnInit {
   centers$: Observable<any>;
   organizations$: Observable<any>;
   feemodels$: Observable<any>;
+    integrations$: Observable<any>;
 
   constructor(
       private formBuilder: FormBuilder,
@@ -43,7 +45,8 @@ export class CreateBilltypeComponent implements OnInit {
       private provinceService: ProvinceService,
       private organizationService: OrganizationService,
       private centerService: CenterService,
-      private feeModelService: FeeModelService
+      private feeModelService: FeeModelService,
+      private thirdPartyIntegrationService: ThirdPartyIntegrationService
   ) {
   }
 
@@ -54,6 +57,7 @@ export class CreateBilltypeComponent implements OnInit {
       this.organizations$ = this.organizationService.get();
       this.centers$ = this.centerService.get();
       this.feemodels$ = this.feeModelService.get();
+      this.integrations$ = this.thirdPartyIntegrationService.get();
 
 
 
@@ -63,7 +67,9 @@ export class CreateBilltypeComponent implements OnInit {
           organizationId: [, [Validators.required]],
           centerId: [,[Validators.required]],
           feeModelId: [, [Validators.required]],
-          pricePerItem: [, [Validators.required]]
+          pricePerItem: [, [Validators.required]],
+          billingChannel: [, [Validators.required]],
+          thirdPartyIntegrationId: [, []],
           });
 
 
@@ -102,6 +108,8 @@ export class CreateBilltypeComponent implements OnInit {
       this.record.organizationId = this.myForm.get('organizationId').value;
       this.record.centerId = this.myForm.get('centerId').value;
       this.record.pricePerItem = this.myForm.get('pricePerItem').value;
+      this.record.thirdPartyIntegrationId = this.myForm.get('thirdPartyIntegrationId').value;
+      this.record.billingChannel = this.myForm.get('billingChannel').value;
 
 
       console.log("Form Data", this.record)
