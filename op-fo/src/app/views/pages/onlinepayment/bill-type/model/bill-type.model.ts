@@ -8,4 +8,6 @@ export class BillType extends BaseModel {
     feeModelId:string;
     provinceId:string;
     pricePerItem:number;
+    billingChannel:string;
+    thirdPartyIntegrationId:string;
 }

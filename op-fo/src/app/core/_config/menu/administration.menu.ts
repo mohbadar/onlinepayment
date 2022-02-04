@@ -57,6 +57,12 @@ export const administrationMenuModule = {
                 translate: "MENU.FEE_MODEL"
             },
 
+            {
+              title: 'THIRD_PARTY_INTEGRATION',
+              page: '/third-party-integration',
+              translate: "MENU.THIRD_PARTY_INTEGRATION"
+          },
+
             
             // {
             //     title: 'TARIFF',

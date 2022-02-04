@@ -1,0 +1,288 @@
+<kt-notice [icon]="'flaticon-warning kt-font-primary'">
+	We know that you are authorized to access this part of the system. 
+	Considering that, this is a critical module. Please be careful!
+</kt-notice> 
+
+
+<kt-portlet>
+    <kt-portlet-body>
+
+        <!--begin: Wizard -->
+        <div #wizard class="kt-grid kt-wizard-v2 kt-wizard-v2--white" id="kt_wizard_v2"
+            data-ktwizard-state="step-first">
+            <div class="kt-grid__item kt-grid__item--fluid kt-wizard-v2__wrapper">
+                <!--begin: Form Wizard Form-->
+                <form [formGroup]="myForm" (ngSubmit)="submit()" class="kt-form" id="kt_form">
+                    <!--begin: Form Wizard Step 1-->
+                    <div class="kt-wizard-v2__content" data-ktwizard-type="step-content" data-ktwizard-state="current">
+                        <div class="kt-heading kt-heading--md">{{'ENTER_UNIQUE_NAME'|translate}} </div>
+                        <div class="kt-form__section kt-form__section--first">
+                            <div class="kt-wizard-v2__form">
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'PROVINCE'|translate}}</label>
+                                    <ng-select [items]="provinces$ | async " bindLabel="name" bindValue="id"
+                                    [placeholder]="'PROVINCE'|translate" formControlName="provinceId">
+                                    </ng-select>
+                                    <print-error [control]="myForm.get('name')"></print-error>
+                                </div>
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'ORGANIZATION'|translate}}</label>
+                                    <ng-select [items]="organizations$ | async " bindLabel="name" bindValue="id"
+                                    [placeholder]="'ORGANIZATION'|translate" formControlName="organizationId">
+                                    </ng-select>
+                                    <print-error [control]="myForm.get('organizationId')"></print-error>
+                                </div>
+
+                    
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'NAME'|translate}}</label>
+                                    <input type="text" class="form-control" name="name"
+                                        [placeholder]="'NAME'|translate" formControlName="name">
+                                    <print-error [control]="myForm.get('name')"></print-error>
+                                </div>
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'CODE'|translate}}</label>
+                                    <input type="text" class="form-control" name="code"
+                                        [placeholder]="'CODE'|translate" formControlName="code">
+                                    <print-error [control]="myForm.get('code')"></print-error>
+                                </div>
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'HOST'|translate}}</label>
+                                    <input type="text" class="form-control" name="host"
+                                        [placeholder]="'HOST'|translate" formControlName="host">
+                                    <print-error [control]="myForm.get('host')"></print-error>
+                                </div>
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'PORT'|translate}}</label>
+                                    <input type="number" class="form-control" name="port"
+                                        [placeholder]="'PORT'|translate" formControlName="port">
+                                    <print-error [control]="myForm.get('port')"></print-error>
+                                </div>
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'URI'|translate}}</label>
+                                    <input type="text" class="form-control" name="uri"
+                                        [placeholder]="'URI'|translate" formControlName="uri">
+                                    <print-error [control]="myForm.get('uri')"></print-error>
+                                </div>
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'USERNAME'|translate}}</label>
+                                    <input type="text" class="form-control" name="username"
+                                        [placeholder]="'USERNAME'|translate" formControlName="username">
+                                    <print-error [control]="myForm.get('username')"></print-error>
+                                </div>
+
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'PASSWORD'|translate}}</label>
+                                    <input type="text" class="form-control" name="password"
+                                        [placeholder]="'PASSWORD'|translate" formControlName="password">
+                                    <print-error [control]="myForm.get('password')"></print-error>
+                                </div>
+
+
+                                <div class="kt-form__section kt-form__section--first">
+                                    <div class="form-group kt-form__group row">
+                                      <label class="col-lg-3 col-form-label"> {{'AUTHORIZATION_TYPE'|translate}}</label>
+                                      <div class="col-lg-9">
+                                        <ng-select
+                                          [placeholder]="'AUTHORIZATION_TYPE' | translate"
+                                          formControlName="authorizationType"
+                                        >
+                                          <ng-option value="NO_AUTH"
+                                            >NO_AUTH</ng-option
+                                          >
+                                          <ng-option value="API_KEY"
+                                            >API_KEY</ng-option
+                                          >
+                                          <ng-option value="BEAR_TOKEN"
+                                            >BEAR_TOKEN</ng-option
+                                          >
+                                          <ng-option value="BASIC_AUTH"
+                                            >BASIC_AUTH</ng-option
+                                          >                                    
+                                        <ng-option value="OAUTH1"
+                                        >OAUTH1</ng-option>
+
+                                        <ng-option value="OAUTH2"
+                                        >OAUTH2</ng-option>
+
+                                        <ng-option value="DIGEST_AUTH"
+                                        >DIGEST_AUTH</ng-option>
+                                        </ng-select>
+                                        <print-error [control]="myForm.get('authorizationType')"></print-error>
+                                      </div>
+                                    </div>
+                                  </div>
+
+
+                                  
+                                <div class="kt-form__section kt-form__section--first">
+                                    <div class="form-group kt-form__group row">
+                                      <label class="col-lg-3 col-form-label"> {{'CREDENTIAL_POSITION'|translate}}</label>
+                                      <div class="col-lg-9">
+                                        <ng-select
+                                          [placeholder]="'CREDENTIAL_POSITION' | translate"
+                                          formControlName="credentialPosition"
+                                        >
+                                          <ng-option value="HEADER"
+                                            >HEADER</ng-option
+                                          >
+                                          <ng-option value="QUERY_PARAMS"
+                                            >QUERY_PARAMS</ng-option
+                                          >
+                                        
+                                        </ng-select>
+                                        <print-error [control]="myForm.get('credentialPosition')"></print-error>
+                                      </div>
+                                    </div>
+                                  </div>
+
+
+
+                                  <div class="kt-form__section kt-form__section--first">
+                                    <div class="form-group kt-form__group row">
+                                      <label class="col-lg-3 col-form-label"> {{'CREDENTIAL_POSITION'|translate}}</label>
+                                      <div class="col-lg-9">
+                                        <ng-select
+                                          [placeholder]="'CREDENTIAL_POSITION' | translate"
+                                          formControlName="credentialPosition"
+                                        >
+                                          <ng-option value="HEADER"
+                                            >HEADER</ng-option
+                                          >
+                                          <ng-option value="QUERY_PARAMS"
+                                            >QUERY_PARAMS</ng-option
+                                          >
+                                        
+                                        </ng-select>
+                                        <print-error [control]="myForm.get('credentialPosition')"></print-error>
+                                      </div>
+                                    </div>
+                                  </div>
+
+
+                                  <div class="kt-form__section kt-form__section--first">
+                                    <div class="form-group kt-form__group row">
+                                      <label class="col-lg-3 col-form-label"> {{'DATA_EXCHANGE_PROTOCOL'|translate}}</label>
+                                      <div class="col-lg-9">
+                                        <ng-select
+                                          [placeholder]="'DATA_EXCHANGE_PROTOCOL' | translate"
+                                          formControlName="dataExchangeProtocol"
+                                        >
+                                          <ng-option value="JSON"
+                                            >JSON</ng-option
+                                          >
+                                          <ng-option value="XML"
+                                            >XML</ng-option
+                                          >
+                                        
+                                        </ng-select>
+                                        <print-error [control]="myForm.get('dataExchangeProtocol')"></print-error>
+                                      </div>
+                                    </div>
+                                  </div>
+
+
+
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'API_KEY'|translate}}</label>
+                                    <input type="text" class="form-control" name="apiKey"
+                                        [placeholder]="'API_KEY'|translate" formControlName="apiKey">
+                                    <print-error [control]="myForm.get('apiKey')"></print-error>
+                                </div>
+
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'API_VALUE'|translate}}</label>
+                                    <input type="text" class="form-control" name="apiValue"
+                                        [placeholder]="'API_VALUE'|translate" formControlName="apiValue">
+                                    <print-error [control]="myForm.get('apiValue')"></print-error>
+                                </div>
+
+
+
+                                <div class="kt-form__section kt-form__section--first">
+                                    <div class="form-group kt-form__group row">
+                                      <label class="col-lg-3 col-form-label"> {{'OAUTH2_GRANT_TYPE'|translate}}</label>
+                                      <div class="col-lg-9">
+                                        <ng-select
+                                          [placeholder]="'OAUTH2_GRANT_TYPE' | translate"
+                                          formControlName="oAuth2GrantType"
+                                        >
+                                          <ng-option value="AUTHORIZATION_CODE"
+                                            >AUTHORIZATION_CODE</ng-option
+                                          >
+                                          <ng-option value="AUTHORIZATION_CODE_WITH_PKCE"
+                                            >AUTHORIZATION_CODE_WITH_PKCE</ng-option
+                                          >
+
+                                          <ng-option value="IMPLICIT"
+                                          >IMPLICIT</ng-option
+                                        >
+                                        <ng-option value="PASSWORD_CREDENTIALS"
+                                          >PASSWORD_CREDENTIALS</ng-option
+                                        >
+                                        <ng-option value="CLIENT_CREDENTIALS"
+                                        >CLIENT_CREDENTIALS</ng-option
+                                      >
+                                        
+                                        </ng-select>
+                                        <print-error [control]="myForm.get('oAuth2GrantType')"></print-error>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'CLIENT_ID'|translate}}</label>
+                                    <input type="text" class="form-control" name="clientId"
+                                        [placeholder]="'CLIENT_ID'|translate" formControlName="clientId">
+                                    <print-error [control]="myForm.get('clientId')"></print-error>
+                                </div>
+
+
+                                <div class="form-group required">
+                                    <label class="col-form-label">{{'CLIENT_SECRET'|translate}}</label>
+                                    <input type="text" class="form-control" name="clientSecret"
+                                        [placeholder]="'CLIENT_SECRET'|translate" formControlName="clientSecret">
+                                    <print-error [control]="myForm.get('clientSecret')"></print-error>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--end: Form Wizard Step 1-->
+
+
+
+
+                    <!--begin: Form Actions -->
+                    <div class="kt-form__actions text-center">
+                        <button (click)="routeHome()" type="button"
+                            class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u">
+                            {{'BACK'|translate}}
+                        </button>&nbsp;&nbsp;
+                        <button [disabled]="myForm.invalid"
+                            class="btn btn-primary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                            data-ktwizard-type="action-submit">
+                            {{'SUBMIT'|translate}}
+                        </button>
+                    </div>
+                    <!--end: Form Actions -->
+                </form>
+                <!--end: Form Wizard Form-->
+            </div>
+        </div>
+        <!--end: Wizard -->
+
+    </kt-portlet-body>
+</kt-portlet>
+<ngx-spinner></ngx-spinner>

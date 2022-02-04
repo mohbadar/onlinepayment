@@ -65,6 +65,13 @@ const routes: Routes = [
             },
         
             {
+                path: 'third-party-integration',
+                canActivate: [TranslateGuard],
+                data: { moduleName: 'third-party-integration' },
+                loadChildren: () => import('./views/pages/onlinepayment/third-party-integration/third-party-integration.module').then(m => m.ThirdPartyIntegrationModule)
+            },
+
+            {
                 path: 'builder',
                 canActivate: [TranslateGuard, KeycloakAuthGuard],
                 data: { moduleName: 'builder' },
