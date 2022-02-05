@@ -4,6 +4,7 @@ import af.asr.opbo.infrastructure.base.UserService;
 import af.asr.opbo.opbo.dto.AgentAccountCreditDTO;
 import af.asr.opbo.opbo.dto.BillCollectionDTO;
 import af.asr.opbo.opbo.dto.response.UserBillPaymentStatementResponseDTO;
+import af.asr.opbo.opbo.enums.BillingChannel;
 import af.asr.opbo.opbo.mapper.ObjectMapper;
 import af.asr.opbo.opbo.model.*;
 import af.asr.opbo.opbo.repository.*;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@Transactional
 public class AgentService {
 
     @Autowired
@@ -208,6 +211,7 @@ public class AgentService {
         return billRepository.findByBillNoAndAmountPayFlag(billNo.trim(),false);
     }
 
+    @Transactional
     public Map<String, Object> collectBillPayment(BillCollectionDTO dto) {
 
         Map<String, Object> data = new HashMap<>();
@@ -251,6 +255,7 @@ public class AgentService {
         billPayment.setTenderedAmount(dto.getTenderedAmount());
         billPayment.setPaymentType(dto.getPaymentType());
         billPayment.setPosted(true);
+        billPayment.setBillingChannel(dto.getBillingChannel() == null ? BillingChannel.OFFLINE: dto.getBillingChannel());
 
         bill.setAmountPayFlag(true);
         billRepository.save(bill);

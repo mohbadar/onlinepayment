@@ -137,7 +137,7 @@ public class CenterController {
     @Auditable
     @PostMapping("/issue-bill")
     public ResponseEntity<Map<String, Object>> issueBill(@RequestBody(required = true) IssueBillDTO dto) {
-        return ResponseEntity.ok(service.issueBill(dto));
+        return ResponseEntity.ok(service.issueBill(dto, null));
     }
 
 }

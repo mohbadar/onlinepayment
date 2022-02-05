@@ -1,5 +1,6 @@
 package af.asr.opbo.opbo.dto;
 
+import af.asr.opbo.opbo.enums.BillingChannel;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -12,4 +13,5 @@ public class BillCollectionDTO {
     private BigDecimal paidAmount;
     private BigDecimal tenderedAmount;
     private String agentId;
+    private BillingChannel billingChannel;
 }

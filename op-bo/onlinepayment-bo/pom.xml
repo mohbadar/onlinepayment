@@ -39,6 +39,12 @@
 			<version>3.0.0-RC1</version>
 		</dependency>
 
+		<!-- Spring OAuth 2.0 Dependency Added Manually -->
+		<dependency>
+			<groupId>org.springframework.security.oauth.boot</groupId>
+			<artifactId>spring-security-oauth2-autoconfigure</artifactId>
+		</dependency>
+
 
 		<!-- Camel Starter -->
 		<!-- https://mvnrepository.com/artifact/org.apache.camel/camel-spring-boot-starter -->

@@ -14,5 +14,8 @@ public class OnlineBillDetailsDTO {
     private String cycle;
     private String cycleYear;
     private boolean paid;
+    private String organizationId;
+    private String billTypeId;
+    private Integer numberOfItems;
 
 }

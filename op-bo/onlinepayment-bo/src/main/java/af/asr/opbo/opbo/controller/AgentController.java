@@ -9,7 +9,11 @@ import af.asr.opbo.opbo.dto.response.UserBillPaymentStatementResponseDTO;
 import af.asr.opbo.opbo.model.*;
 import af.asr.opbo.opbo.repository.AgentUserRelationRepository;
 import af.asr.opbo.opbo.service.AgentService;
-import af.asr.opbo.opbo.service.OnlineBillCollectionService;
+import af.asr.opbo.opbo.onlinecollection.OnlineBillCollectionService;
+import af.gov.anar.core.infrastructure.exception.common.IOException;
+import af.gov.anar.lib.json.exception.JsonMappingException;
+import af.gov.anar.lib.json.exception.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -220,8 +224,7 @@ public class AgentController {
 
     @Auditable
     @PostMapping("/query-online-bill-info")
-    public ResponseEntity<OnlineBillDetailsDTO> queryOnlineBillInfo(@RequestBody QueryOnlineBillInfoDTO dto)
-    {
+    public ResponseEntity<OnlineBillDetailsDTO> queryOnlineBillInfo(@RequestBody QueryOnlineBillInfoDTO dto) throws JsonProcessingException, JsonParseException, IOException, JsonMappingException, af.gov.anar.lib.json.exception.JsonProcessingException {
 
         return ResponseEntity.ok(onlineBillCollectionService.queryOnlineBillInfo(dto));
     }
@@ -229,7 +232,7 @@ public class AgentController {
 
     @Auditable
     @PostMapping("/confirm-online-bill-payment")
-    public ResponseEntity<OnlineBillDetailsDTO> confirmOnlineBillPayment(@RequestBody OnlineBillDetailsDTO dto)
+    public ResponseEntity<Map<String, Object>> confirmOnlineBillPayment(@RequestBody OnlineBillDetailsDTO dto)
     {
 
         return ResponseEntity.ok(onlineBillCollectionService.confirmOnlineBillPayment(dto));

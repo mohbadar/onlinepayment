@@ -1,12 +1,11 @@
 package af.asr.opbo.opbo.model;
 
 import af.asr.opbo.infrastructure.base.BaseEntity;
+import af.asr.opbo.opbo.enums.BillingChannel;
 import lombok.*;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
@@ -57,6 +56,8 @@ public class BillPayment extends BaseEntity {
     private String paymentType;
     private BigDecimal tenderedAmount;
     private boolean posted;
+    @Enumerated(EnumType.STRING)
+    private BillingChannel billingChannel = BillingChannel.OFFLINE;
 
     @Column(nullable=false)
     private boolean confirmed =false;

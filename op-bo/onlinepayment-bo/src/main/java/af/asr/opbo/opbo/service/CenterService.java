@@ -2,6 +2,8 @@ package af.asr.opbo.opbo.service;
 
 import af.asr.opbo.infrastructure.base.UserService;
 import af.asr.opbo.opbo.dto.IssueBillDTO;
+import af.asr.opbo.opbo.dto.response.OnlineBillDetailsDTO;
+import af.asr.opbo.opbo.enums.BillingChannel;
 import af.asr.opbo.opbo.model.*;
 import af.asr.opbo.opbo.repository.*;
 import af.asr.opbo.usermanagement.service.UserManagementService;
@@ -105,7 +107,7 @@ public class CenterService {
         return centers;
     }
 
-    public Map<String, Object> issueBill(IssueBillDTO dto) {
+    public Map<String, Object> issueBill(IssueBillDTO dto, OnlineBillDetailsDTO onlineBillDetailsDTO) {
         Map<String, Object> response= new HashMap<>();
 
 
@@ -121,19 +123,33 @@ public class CenterService {
         if (center ==null)
             throw new RuntimeException("CenterNotFoundException");
 
-        BigDecimal billAmount = calculateIssuedBill(dto);
         BigDecimal feeAmount = calculateFee(dto);
         BigDecimal agentFeeAmount = calculateAgentFee(dto);
+        String billNo = AccountNumberUtility.generateSequence();
+
 
         Bill bill = new Bill();
-        bill.setBillAmount(billAmount);
-        bill.setBillDate(HijriDateUtility.getCurrentJalaliDateAsString());
 
-        String billNo = AccountNumberUtility.generateSequence();
-        while(billRepository.findByBillNo(billNo) !=null)
-            billNo = AccountNumberUtility.generateSequence();
+        if(onlineBillDetailsDTO != null){
 
-        bill.setBillNo(billNo);
+            bill.setBillAmount(onlineBillDetailsDTO.getBillAmount());
+            bill.setBillDate(onlineBillDetailsDTO.getBillDate());
+            bill.setBillingChannel(BillingChannel.ONLINE);
+            bill.setBillNo(onlineBillDetailsDTO.getBillNo());
+            bill.setTotalAmount(onlineBillDetailsDTO.getBillAmount());
+            bill.setAmountPayFlag(true);
+
+        }else{
+            BigDecimal billAmount = calculateIssuedBill(dto);
+            bill.setBillAmount(billAmount);
+            bill.setBillDate(HijriDateUtility.getCurrentJalaliDateAsString());
+
+            while(billRepository.findByBillNo(billNo) !=null)
+                billNo = AccountNumberUtility.generateSequence();
+            bill.setBillNo(billNo);
+            bill.setTotalAmount(billAmount);
+        }
+
         bill.setBillTypeId(dto.getBillTypeId());
         bill.setCenterId(dto.getCenterId());
         bill.setFeeAmount(feeAmount);
@@ -144,7 +160,6 @@ public class CenterService {
         bill.setPrincePerItem(billType.getPricePerItem());
         bill.setNumberOfItems(dto.getNumberOfItems());
         bill.setOrganizationUniqueBillIdentifier(dto.getOrganizationUniqueBillIdentifier());
-        bill.setTotalAmount(billAmount);
         bill.setStationaryAmount(new BigDecimal(0));
         bill.setOtherChargesAmount(new BigDecimal(0));
 
@@ -154,6 +169,7 @@ public class CenterService {
         response.put("billNo", savedBill.getBillNo());
         response.put("billAmount", savedBill.getBillAmount());
         response.put("billDate", savedBill.getBillDate());
+        response.put("bill", savedBill);
         return response;
     }
 

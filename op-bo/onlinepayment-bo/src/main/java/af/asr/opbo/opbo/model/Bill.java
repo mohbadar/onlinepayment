@@ -1,12 +1,11 @@
 package af.asr.opbo.opbo.model;
 
 import af.asr.opbo.infrastructure.base.BaseEntity;
+import af.asr.opbo.opbo.enums.BillingChannel;
 import lombok.*;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
@@ -20,6 +19,11 @@ import java.math.BigDecimal;
 @ToString
 @Where(clause = "deleted is false")
 public class Bill extends BaseEntity {
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private BillingChannel billingChannel = BillingChannel.OFFLINE;
+
     @NotNull
     @Column(unique = true)
     private String billNo;
