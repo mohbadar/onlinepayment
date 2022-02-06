@@ -88,6 +88,14 @@ public class OnlineBillCollectionService {
 
         }else if(integration.getAuthorizationType().getValue().equalsIgnoreCase(AuthorizationType.BASIC_AUTH.getValue())) {
 
+            String response = apiClientService.getBillInfoWithBasicAuth(integration, onlineBillInfoDTO.getBillIdentifier());
+            JsonObject convertedObject = new Gson().fromJson(response, JsonObject.class);
+            convertedObject.addProperty("billTypeId", onlineBillInfoDTO.getBillTypeId());
+            convertedObject.addProperty("organizationId", onlineBillInfoDTO.getOrganizationId());
+            int numberOfItems = convertedObject.get("numberOfItems").getAsInt() == 0 ? 1 : convertedObject.get("numberOfItems").getAsInt();
+            convertedObject.addProperty("numberOfItems", numberOfItems);
+            System.out.println(convertedObject.toString());
+            return convertedObject.toString();
         }else if(integration.getAuthorizationType().getValue().equalsIgnoreCase(AuthorizationType.BEAR_TOKEN.getValue())) {
         }else if(integration.getAuthorizationType().getValue().equalsIgnoreCase(AuthorizationType.OAUTH2.getValue())) {
         }

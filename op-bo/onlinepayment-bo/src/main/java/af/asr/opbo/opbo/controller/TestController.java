@@ -54,4 +54,29 @@ public class TestController {
 
 
 
+    //Basic Auth
+
+    @GetMapping("/basic/bill-inquiry/{billNo}")
+    public ResponseEntity<OnlineBillDetailsDTO> queryOnlineBillInfo(@PathVariable(required = true, name = "billNo") String billNo,
+                                                                    @RequestHeader(name="username") String username,
+                                                                    @RequestHeader(name="password") String password
+    ) {
+
+        System.out.println("Username: "+ username);
+        System.out.println("Password: "+ password);
+
+        OnlineBillDetailsDTO dto = new OnlineBillDetailsDTO();
+        dto.setBillNo(billNo);
+        dto.setBillHolderName("Jamshid Ahmadzai");
+        dto.setBillAmount(new BigDecimal(1500));
+        dto.setBillDate(HijriDateUtility.getCurrentJalaliDateAsString());
+        dto.setCycle("05");
+        dto.setCycleYear("1400");
+        dto.setNumberOfItems(5);
+
+        return ResponseEntity.ok(dto);
+    }
+
+
+
 }
