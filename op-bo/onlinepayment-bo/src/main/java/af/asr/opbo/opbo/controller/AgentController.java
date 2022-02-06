@@ -14,6 +14,7 @@ import af.gov.anar.core.infrastructure.exception.common.IOException;
 import af.gov.anar.lib.json.exception.JsonMappingException;
 import af.gov.anar.lib.json.exception.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -224,9 +225,10 @@ public class AgentController {
 
     @Auditable
     @PostMapping("/query-online-bill-info")
-    public ResponseEntity<OnlineBillDetailsDTO> queryOnlineBillInfo(@RequestBody QueryOnlineBillInfoDTO dto) throws JsonProcessingException, JsonParseException, IOException, JsonMappingException, af.gov.anar.lib.json.exception.JsonProcessingException {
+    public ResponseEntity<String> queryOnlineBillInfo(@RequestBody QueryOnlineBillInfoDTO dto) throws JsonProcessingException, JsonParseException, IOException, JsonMappingException, af.gov.anar.lib.json.exception.JsonProcessingException {
 
-        return ResponseEntity.ok(onlineBillCollectionService.queryOnlineBillInfo(dto));
+        String response = onlineBillCollectionService.queryOnlineBillInfo(dto);
+        return ResponseEntity.ok(response);
     }
 
 

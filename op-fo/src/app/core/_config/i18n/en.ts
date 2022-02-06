@@ -40,8 +40,8 @@ export const locale = {
       CONFIRM_BILL_PAYMENT: "Confirm Bill Payment", 
       ISSUE_BILL: "Issue New Bill",
       ORGANIZATION_USER: "Organization_User", 
-      CENTER_MANAGER: "Center_Manager",
-      ORGANIZATION_ADMIN: "Organization_Admin", 
+      CENTER_MANAGER: "Center Manager",
+      ORGANIZATION_ADMIN: "Organization Admin", 
     },
     
     // },

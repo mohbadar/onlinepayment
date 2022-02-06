@@ -48,6 +48,8 @@ searchBalanceSheet() {
         this.dataSource.data = res['ledgers'];
         this.balance  = res.balance;
         this.cdrf.detectChanges();
+    }, (err)=> {
+        this.spinner.hide();
     });
 }
 }

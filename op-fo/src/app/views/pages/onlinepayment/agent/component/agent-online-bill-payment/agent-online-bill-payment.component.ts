@@ -10,6 +10,7 @@ import { BillTypeService } from 'app/views/pages/onlinepayment/bill-type/service
 import { OnlineBillPayment } from '../../model/agent-online-bill-payment.model';
 import { OrganizationService } from '../../../organization/service/organization.service';
 import { AgentService } from '../../service/agent.service';
+import { AgentSlipPrintComponent } from '../agent-slip-print/agent-slip-print.component';
 
 
 @Component({
@@ -142,10 +143,22 @@ export class AgentOnlineBillPaymentComponent implements OnInit {
 
       this.agentService.confirmOnlinePayment(bill).subscribe((response) => {
         this.layoutUtilService.showActionNotification(_deleteMessage, MessageType.Delete);
+        this.printAwiz(response);
       });
 			
 		});
   }
+
+  
+  printAwiz(item) {
+    const dialogRef = this.dialog.open(AgentSlipPrintComponent, { data: { item: item } });
+    dialogRef.afterClosed().subscribe(res => {
+        if (!res) {
+            return;
+        }
+    });
+}
+
 
   routeHome() {
     this.router.navigate(['/']);

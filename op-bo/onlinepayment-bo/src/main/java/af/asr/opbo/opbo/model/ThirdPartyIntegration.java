@@ -46,7 +46,24 @@ public class ThirdPartyIntegration extends BaseEntity {
     private int port;
     @NotNull
     @Column(nullable = false)
-    private String uri;
+    private String authUri;
+    @NotNull
+    @Column(nullable = false)
+    private String authUriMethod;
+
+    @NotNull
+    @Column(nullable = false)
+    private String billInfoInquiryUri;
+    @NotNull
+    @Column(nullable = false)
+    private String billInfoInquiryUriMethod;
+
+    @NotNull
+    @Column(nullable = false)
+    private String billAdviceMessageUri;
+    @NotNull
+    @Column(nullable = false)
+    private String billAdviceMessageUriMethod;
 
     @NotNull
     @Column(nullable = false)

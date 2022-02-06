@@ -38,11 +38,21 @@
       </ng-container>
 
 
-      <ng-container matColumnDef="uri">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'URI'|translate}}</th>
-        <td mat-cell *matCellDef="let row">{{ row.uri }}</td>
+      <ng-container matColumnDef="authUri">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'AUTH_URI'|translate}}</th>
+        <td mat-cell *matCellDef="let row">{{ row.authUri }}</td>
       </ng-container>
   
+
+      <ng-container matColumnDef="billInfoInquiryUri">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'BILL_INQUIRY_URI'|translate}}</th>
+        <td mat-cell *matCellDef="let row">{{ row.billInfoInquiryUri }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="billAdviceMessageUri">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'POST_BILL_URI'|translate}}</th>
+        <td mat-cell *matCellDef="let row">{{ row.billAdviceMessageUri }}</td>
+      </ng-container>
   
       <ng-container matColumnDef="Status">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'STATUS'|translate}}</th>

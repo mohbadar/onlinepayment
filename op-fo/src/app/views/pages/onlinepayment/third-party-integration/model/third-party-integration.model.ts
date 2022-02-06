@@ -7,7 +7,12 @@ export class ThirdPartyIntegration extends BaseModel {
     provinceId:string;
     host:string;
     port:number;
-    uri:string;
+    authUri:string;
+    authUriMethod:string;
+    billInfoInquiryUri:string;
+    billInfoInquiryUriMethod:string;
+    billAdviceMessageUri:string;
+    billAdviceMessageUriMethod:string;
     username:string;
     password:string;
     authorizationType:string;

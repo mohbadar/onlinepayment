@@ -18,7 +18,7 @@ export class LayoutConfig {
         // == Page Splash Screen loading
         'loader': {
             'enabled': true,
-            'type': 'spinner-logo',
+            'type': 'spinner-message',
             'logo': './assets/media/flags/afghanistan1.png',
             'message': 'Please wait...',
         },
@@ -64,7 +64,7 @@ export class LayoutConfig {
             'menu': {
                 'self': {
                     'display': true,
-                    'root-arrow': false,
+                    'root-arrow': true,
                 },
                 'desktop': {
                     'arrow': true,

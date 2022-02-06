@@ -1,4 +1,4 @@
-package af.asr.opbo.opbo.onlinecollection;
+package af.asr.opbo.opbo.onlinecollection.keycloack;
 
 import lombok.Data;
 

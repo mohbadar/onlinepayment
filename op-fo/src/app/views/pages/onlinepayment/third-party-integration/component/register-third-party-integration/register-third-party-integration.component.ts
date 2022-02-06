@@ -64,7 +64,12 @@ export class RegisterThirdPartyIntegrationComponent implements OnInit {
           provinceId:[, [Validators.required]],
           host:[, [Validators.required]],
           port:[80, [Validators.required]],
-          uri:[, [Validators.required]],
+          authUri:[, [Validators.required]],
+          authUriMethod:[, [Validators.required]],
+          billInfoInquiryUri:[, [Validators.required]],
+          billInfoInquiryUriMethod:[, [Validators.required]],
+          billAdviceMessageUri:[, [Validators.required]],
+          billAdviceMessageUriMethod:[, [Validators.required]],
           username:[, [Validators.required]],
           password:[, [Validators.required]],
           authorizationType:[, [Validators.required]],
@@ -105,25 +110,26 @@ export class RegisterThirdPartyIntegrationComponent implements OnInit {
   submit() {
 
 
+    this.record = this.myForm.value;
 
-      this.record = new ThirdPartyIntegration;
-      this.record.name = this.myForm.get('name').value;
-      this.record.code = this.myForm.get('code').value;
-      this.record.provinceId = this.myForm.get('provinceId').value;
-      this.record.organizationId = this.myForm.get('organizationId').value;
-      this.record.host = this.myForm.get('host').value;
-      this.record.port = this.myForm.get('port').value;
-      this.record.uri = this.myForm.get('uri').value;
-      this.record.username = this.myForm.get('username').value;
-      this.record.password = this.myForm.get('password').value;
-      this.record.authorizationType = this.myForm.get('authorizationType').value;
-      this.record.credentialPosition = this.myForm.get('credentialPosition').value;
-      this.record.dataExchangeProtocol = this.myForm.get('dataExchangeProtocol').value;
-      this.record.apiKey = this.myForm.get('apiKey').value;
-      this.record.apiValue = this.myForm.get('apiValue').value;
-      this.record.oAuth2GrantType = this.myForm.get('oAuth2GrantType').value;
-      this.record.clientId = this.myForm.get('clientId').value;
-      this.record.clientSecret = this.myForm.get('clientSecret').value;
+    //   this.record = new ThirdPartyIntegration;
+    //   this.record.name = this.myForm.get('name').value;
+    //   this.record.code = this.myForm.get('code').value;
+    //   this.record.provinceId = this.myForm.get('provinceId').value;
+    //   this.record.organizationId = this.myForm.get('organizationId').value;
+    //   this.record.host = this.myForm.get('host').value;
+    //   this.record.port = this.myForm.get('port').value;
+    //   this.record.uri = this.myForm.get('uri').value;
+    //   this.record.username = this.myForm.get('username').value;
+    //   this.record.password = this.myForm.get('password').value;
+    //   this.record.authorizationType = this.myForm.get('authorizationType').value;
+    //   this.record.credentialPosition = this.myForm.get('credentialPosition').value;
+    //   this.record.dataExchangeProtocol = this.myForm.get('dataExchangeProtocol').value;
+    //   this.record.apiKey = this.myForm.get('apiKey').value;
+    //   this.record.apiValue = this.myForm.get('apiValue').value;
+    //   this.record.oAuth2GrantType = this.myForm.get('oAuth2GrantType').value;
+    //   this.record.clientId = this.myForm.get('clientId').value;
+    //   this.record.clientSecret = this.myForm.get('clientSecret').value;
 
       console.log("Form Data", this.record)
       this.spinner.show();

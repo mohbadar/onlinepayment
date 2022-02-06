@@ -5,14 +5,14 @@ import af.asr.opbo.opbo.dto.BillCollectionDTO;
 import af.asr.opbo.opbo.dto.IssueBillDTO;
 import af.asr.opbo.opbo.dto.QueryOnlineBillInfoDTO;
 import af.asr.opbo.opbo.dto.response.OnlineBillDetailsDTO;
+import af.asr.opbo.opbo.enums.AuthorizationType;
 import af.asr.opbo.opbo.enums.BillingChannel;
-import af.asr.opbo.opbo.model.Agent;
-import af.asr.opbo.opbo.model.AgentUserRelation;
-import af.asr.opbo.opbo.model.Bill;
-import af.asr.opbo.opbo.model.BillPayment;
+import af.asr.opbo.opbo.model.*;
+import af.asr.opbo.opbo.onlinecollection.keycloack.KCAuth;
 import af.asr.opbo.opbo.repository.AgentUserRelationRepository;
 import af.asr.opbo.opbo.repository.BillRepository;
 import af.asr.opbo.opbo.repository.BillTypeRepository;
+import af.asr.opbo.opbo.repository.ThirdPartyIntegrationRepository;
 import af.asr.opbo.opbo.service.AgentService;
 import af.asr.opbo.opbo.service.CenterService;
 import af.asr.opbo.util.AccountNumberUtility;
@@ -21,10 +21,10 @@ import af.gov.anar.core.infrastructure.exception.common.IOException;
 import af.gov.anar.lib.json.exception.JsonMappingException;
 import af.gov.anar.lib.json.exception.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -53,13 +53,44 @@ public class OnlineBillCollectionService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ThirdPartyIntegrationRepository thirdPartyIntegrationRepository;
+
+    @Autowired
+    private ApiClientService apiClientService;
+
 
 
 
 //    http://localhost:8080/auth/realms/onlinepayment/
-    public OnlineBillDetailsDTO queryOnlineBillInfo(QueryOnlineBillInfoDTO onlineBillInfoDTO) throws JsonProcessingException, JsonProcessingException, JsonProcessingException, JsonParseException, IOException, JsonMappingException, af.gov.anar.lib.json.exception.JsonProcessingException {
+    public String queryOnlineBillInfo(QueryOnlineBillInfoDTO onlineBillInfoDTO) throws JsonProcessingException, JsonProcessingException, JsonProcessingException, JsonParseException, IOException, JsonMappingException, af.gov.anar.lib.json.exception.JsonProcessingException {
 
 //        String token = kcAuth.getAccessToken();
+
+
+        BillType billType = billTypeRepository.findById(onlineBillInfoDTO.getBillTypeId()).orElse(null);
+        if(billType ==null || billType.getBillingChannel().getValue().equalsIgnoreCase(BillingChannel.OFFLINE.getValue()))
+            throw new RuntimeException("BillTypeNotFoundException");
+        ThirdPartyIntegration integration = thirdPartyIntegrationRepository.findById(billType.getThirdPartyIntegrationId()).orElse(null);
+        if(integration == null)
+            throw new RuntimeException("ThirdPartyIntegrationNotFoundException");
+
+        if(integration.getAuthorizationType().getValue().equalsIgnoreCase(AuthorizationType.NO_AUTH.getValue())){
+
+            String response = apiClientService.getBillInfoWithNoAuth(integration, onlineBillInfoDTO.getBillIdentifier());
+            JsonObject convertedObject = new Gson().fromJson(response, JsonObject.class);
+            convertedObject.addProperty("billTypeId", onlineBillInfoDTO.getBillTypeId());
+            convertedObject.addProperty("organizationId", onlineBillInfoDTO.getOrganizationId());
+            int numberOfItems = convertedObject.get("numberOfItems").getAsInt() == 0 ? 1 : convertedObject.get("numberOfItems").getAsInt();
+            convertedObject.addProperty("numberOfItems", numberOfItems);
+            System.out.println(convertedObject.toString());
+            return convertedObject.toString();
+
+        }else if(integration.getAuthorizationType().getValue().equalsIgnoreCase(AuthorizationType.BASIC_AUTH.getValue())) {
+
+        }else if(integration.getAuthorizationType().getValue().equalsIgnoreCase(AuthorizationType.BEAR_TOKEN.getValue())) {
+        }else if(integration.getAuthorizationType().getValue().equalsIgnoreCase(AuthorizationType.OAUTH2.getValue())) {
+        }
 
         OnlineBillDetailsDTO dto = new OnlineBillDetailsDTO();
         dto.setBillNo(AccountNumberUtility.generateSequence());
@@ -73,7 +104,7 @@ public class OnlineBillCollectionService {
         dto.setOrganizationId(onlineBillInfoDTO.getOrganizationId());
         dto.setBillTypeId(onlineBillInfoDTO.getBillTypeId());
 
-        return dto;
+        return null;
     }
 
     public Map<String, Object> confirmOnlineBillPayment(OnlineBillDetailsDTO dto) {
@@ -123,13 +154,5 @@ public class OnlineBillCollectionService {
 
         return collectionMap;
     }
-
-
-
-
-
-
-
-
 
 }

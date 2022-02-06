@@ -21,7 +21,7 @@ import { ViewThirdPartyIntegrationComponent } from '../view-third-party-integrat
 export class ListThirdPartyIntegrationComponent implements OnInit {
 
     
-  displayedColumns: string[] = [ 'name', "code", "host", "port", "uri", "Status" ,'actions'];
+  displayedColumns: string[] = [ 'name', "code", "host", "port", "authUri", "billInfoInquiryUri","billAdviceMessageUri", "Status" ,'actions'];
 	dataSource: MatTableDataSource<any>;
   
 	@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

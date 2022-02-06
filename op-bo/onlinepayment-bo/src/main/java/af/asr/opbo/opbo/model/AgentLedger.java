@@ -22,7 +22,7 @@ public class AgentLedger extends BaseEntity {
 
 
     @Enumerated(value = EnumType.STRING)
-    @Column(nullable = false)
+    @Column()
     private BillingChannel billingChannel = BillingChannel.OFFLINE;
 
     @NotNull
