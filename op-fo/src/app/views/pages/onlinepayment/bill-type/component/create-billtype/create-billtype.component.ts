@@ -65,7 +65,7 @@ export class CreateBilltypeComponent implements OnInit {
           name: [, [Validators.required]],
           provinceId: [, [Validators.required]],
           organizationId: [, [Validators.required]],
-          centerId: [,[Validators.required]],
+          centerId: [,[]],
           feeModelId: [, [Validators.required]],
           pricePerItem: [, [Validators.required]],
           billingChannel: [, [Validators.required]],

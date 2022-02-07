@@ -4,6 +4,7 @@ import af.asr.opbo.infrastructure.base.UserService;
 import af.asr.opbo.opbo.dto.IssueBillDTO;
 import af.asr.opbo.opbo.dto.response.OnlineBillDetailsDTO;
 import af.asr.opbo.opbo.enums.BillingChannel;
+import af.asr.opbo.opbo.enums.FeeInclusion;
 import af.asr.opbo.opbo.model.*;
 import af.asr.opbo.opbo.repository.*;
 import af.asr.opbo.usermanagement.service.UserManagementService;
@@ -136,7 +137,15 @@ public class CenterService {
             bill.setBillDate(onlineBillDetailsDTO.getBillDate());
             bill.setBillingChannel(BillingChannel.ONLINE);
             bill.setBillNo(onlineBillDetailsDTO.getBillNo());
-            bill.setTotalAmount(onlineBillDetailsDTO.getBillAmount());
+
+            BigDecimal totalAmount=onlineBillDetailsDTO.getBillAmount();
+
+            if(feeModel.getFeeInclusion().getValue().equalsIgnoreCase(FeeInclusion.NOT_INCLUDED.getValue())){
+                totalAmount.add(feeAmount);
+            }
+
+            bill.setTotalAmount(totalAmount);
+
             bill.setAmountPayFlag(true);
 
         }else{
@@ -147,8 +156,15 @@ public class CenterService {
             while(billRepository.findByBillNo(billNo) !=null)
                 billNo = AccountNumberUtility.generateSequence();
             bill.setBillNo(billNo);
-            bill.setTotalAmount(billAmount);
+            BigDecimal totalAmount=billAmount;
+
+            if(feeModel.getFeeInclusion().getValue().equalsIgnoreCase(FeeInclusion.NOT_INCLUDED.getValue())){
+                totalAmount.add(feeAmount);
+            }
+
+            bill.setTotalAmount(totalAmount);
         }
+
 
         bill.setBillTypeId(dto.getBillTypeId());
         bill.setCenterId(dto.getCenterId());
@@ -188,7 +204,7 @@ public class CenterService {
         BigDecimal pricePerItem= billType.getPricePerItem();
         Integer numberOfItems = dto.getNumberOfItems();
 
-        // calculate Bill
+            // calculate Bill
         billTotalAmount= pricePerItem.multiply(new BigDecimal(numberOfItems));
         return billTotalAmount;
     }
@@ -212,6 +228,7 @@ public class CenterService {
         Integer numberOfItems = dto.getNumberOfItems();
 
         BigDecimal totalFee = new BigDecimal(0);
+
         if (feeModel.getType()=="PERCENTAGE")
         {
             for (int i=0; i<numberOfItems; i++){

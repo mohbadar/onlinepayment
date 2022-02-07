@@ -29,18 +29,18 @@
 
 
                 <mat-form-field>
-                    <input style="font-size:30px" matInput #input [placeholder]="'BILLNO'|translate" [value]="item.billNo" readonly>
+                    <input style="font-size:30px" matInput #input [placeholder]="'BILL_NO'|translate" [value]="item.billNo" readonly>
                 </mat-form-field>
 
 
                 <mat-form-field>
-                    <input matInput #input [placeholder]="'BILLAMOUNT'|translate" [value]="item.billAmount"
+                    <input matInput #input [placeholder]="'BILL_AMOUNT'|translate" [value]="item.billAmount"
                         readonly>
                 </mat-form-field>
 
                 
                 <mat-form-field>
-                    <input matInput #input [placeholder]="'BILLDATE'|translate" [value]="item.billDate"
+                    <input matInput #input [placeholder]="'BILL_DATE'|translate" [value]="item.billDate"
                         readonly>
                 </mat-form-field>
                 
@@ -55,9 +55,6 @@
                                 matTooltip="Cancel changes">
                                 {{'CLOSE'|translate}}
                             </button>&nbsp;
-
-                            
-
                         </div>
                     </div>
                 </div>

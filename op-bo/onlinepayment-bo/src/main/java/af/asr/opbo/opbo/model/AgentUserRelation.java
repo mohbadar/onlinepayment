@@ -21,9 +21,9 @@ import javax.validation.constraints.NotNull;
 @Where(clause = "deleted is false")
 public class AgentUserRelation extends BaseEntity {
     @NotNull
-    @Column
+    @Column(nullable = false)
     private String agentId;
     @NotNull
-    @Column
+    @Column(nullable = false)
     private String appUserId;
 }

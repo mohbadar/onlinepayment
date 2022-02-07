@@ -29,8 +29,8 @@ public class BillType extends BaseEntity {
     @NotNull
     @Column(nullable=false)
     private String organizationId;
-    @NotNull
-    @Column(nullable=false)
+//    @NotNull
+//    @Column(nullable=false)
     private String centerId;
     @NotNull
     @Column(nullable=false)
