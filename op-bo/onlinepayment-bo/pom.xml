@@ -40,10 +40,10 @@
 		</dependency>
 
 		<!-- Spring OAuth 2.0 Dependency Added Manually -->
-		<dependency>
-			<groupId>org.springframework.security.oauth.boot</groupId>
-			<artifactId>spring-security-oauth2-autoconfigure</artifactId>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.security.oauth.boot</groupId>-->
+<!--			<artifactId>spring-security-oauth2-autoconfigure</artifactId>-->
+<!--		</dependency>-->
 
 
 		<!-- Camel Starter -->

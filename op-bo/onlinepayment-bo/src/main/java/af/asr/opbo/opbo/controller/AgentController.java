@@ -226,7 +226,6 @@ public class AgentController {
     @Auditable
     @PostMapping("/query-online-bill-info")
     public ResponseEntity<String> queryOnlineBillInfo(@RequestBody QueryOnlineBillInfoDTO dto) throws JsonProcessingException, JsonParseException, IOException, JsonMappingException, af.gov.anar.lib.json.exception.JsonProcessingException {
-
         String response = onlineBillCollectionService.queryOnlineBillInfo(dto);
         return ResponseEntity.ok(response);
     }

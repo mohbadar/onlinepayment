@@ -7,6 +7,7 @@ import af.asr.opbo.opbo.dto.QueryOnlineBillInfoDTO;
 import af.asr.opbo.opbo.dto.response.OnlineBillDetailsDTO;
 import af.asr.opbo.opbo.enums.AuthorizationType;
 import af.asr.opbo.opbo.enums.BillingChannel;
+import af.asr.opbo.opbo.mapper.ObjectMapper;
 import af.asr.opbo.opbo.model.*;
 import af.asr.opbo.opbo.onlinecollection.keycloack.KCAuth;
 import af.asr.opbo.opbo.repository.AgentUserRelationRepository;
@@ -75,30 +76,39 @@ public class OnlineBillCollectionService {
         if(integration == null)
             throw new RuntimeException("ThirdPartyIntegrationNotFoundException");
 
-        if(integration.getAuthorizationType().getValue().equalsIgnoreCase(AuthorizationType.NO_AUTH.getValue())){
-
-            String response = apiClientService.getBillInfoWithNoAuth(integration, onlineBillInfoDTO.getBillIdentifier());
-            JsonObject convertedObject = new Gson().fromJson(response, JsonObject.class);
-            convertedObject.addProperty("billTypeId", onlineBillInfoDTO.getBillTypeId());
-            convertedObject.addProperty("organizationId", onlineBillInfoDTO.getOrganizationId());
-            int numberOfItems = convertedObject.get("numberOfItems").getAsInt() == 0 ? 1 : convertedObject.get("numberOfItems").getAsInt();
-            convertedObject.addProperty("numberOfItems", numberOfItems);
-            System.out.println(convertedObject.toString());
-            return convertedObject.toString();
-
-        }else if(integration.getAuthorizationType().getValue().equalsIgnoreCase(AuthorizationType.BASIC_AUTH.getValue())) {
-
-            String response = apiClientService.getBillInfoWithBasicAuth(integration, onlineBillInfoDTO.getBillIdentifier());
-            JsonObject convertedObject = new Gson().fromJson(response, JsonObject.class);
-            convertedObject.addProperty("billTypeId", onlineBillInfoDTO.getBillTypeId());
-            convertedObject.addProperty("organizationId", onlineBillInfoDTO.getOrganizationId());
-            int numberOfItems = convertedObject.get("numberOfItems").getAsInt() == 0 ? 1 : convertedObject.get("numberOfItems").getAsInt();
-            convertedObject.addProperty("numberOfItems", numberOfItems);
-            System.out.println(convertedObject.toString());
-            return convertedObject.toString();
-        }else if(integration.getAuthorizationType().getValue().equalsIgnoreCase(AuthorizationType.BEAR_TOKEN.getValue())) {
-        }else if(integration.getAuthorizationType().getValue().equalsIgnoreCase(AuthorizationType.OAUTH2.getValue())) {
-        }
+//        if(integration.getAuthorizationType().getValue().equalsIgnoreCase(AuthorizationType.NO_AUTH.getValue())){
+//
+//            String response = apiClientService.getBillInfoWithNoAuth(integration, onlineBillInfoDTO.getBillIdentifier());
+//            JsonObject convertedObject = new Gson().fromJson(response, JsonObject.class);
+//            convertedObject.addProperty("billTypeId", onlineBillInfoDTO.getBillTypeId());
+//            convertedObject.addProperty("organizationId", onlineBillInfoDTO.getOrganizationId());
+//            int numberOfItems = convertedObject.get("numberOfItems").getAsInt() == 0 ? 1 : convertedObject.get("numberOfItems").getAsInt();
+//            convertedObject.addProperty("numberOfItems", numberOfItems);
+//            System.out.println(convertedObject.toString());
+//            return convertedObject.toString();
+//
+//        }else if(integration.getAuthorizationType().getValue().equalsIgnoreCase(AuthorizationType.BASIC_AUTH.getValue())) {
+//
+//            String response = apiClientService.getBillInfoWithBasicAuth(integration, onlineBillInfoDTO.getBillIdentifier());
+//            JsonObject convertedObject = new Gson().fromJson(response, JsonObject.class);
+//            convertedObject.addProperty("billTypeId", onlineBillInfoDTO.getBillTypeId());
+//            convertedObject.addProperty("organizationId", onlineBillInfoDTO.getOrganizationId());
+//            int numberOfItems = convertedObject.get("numberOfItems").getAsInt() == 0 ? 1 : convertedObject.get("numberOfItems").getAsInt();
+//            convertedObject.addProperty("numberOfItems", numberOfItems);
+//            System.out.println(convertedObject.toString());
+//            return convertedObject.toString();
+//        }else if(integration.getAuthorizationType().getValue().equalsIgnoreCase(AuthorizationType.BEAR_TOKEN.getValue())) {
+//            String response = apiClientService.getBillInfoWithBearerToken(integration, onlineBillInfoDTO.getBillIdentifier());
+//            JsonObject convertedObject = new Gson().fromJson(response, JsonObject.class);
+//            convertedObject.addProperty("billTypeId", onlineBillInfoDTO.getBillTypeId());
+//            convertedObject.addProperty("organizationId", onlineBillInfoDTO.getOrganizationId());
+//            int numberOfItems = convertedObject.get("numberOfItems").getAsInt() == 0 ? 1 : convertedObject.get("numberOfItems").getAsInt();
+//            convertedObject.addProperty("numberOfItems", numberOfItems);
+//            System.out.println(convertedObject.toString());
+//            return convertedObject.toString();
+//
+//        }else if(integration.getAuthorizationType().getValue().equalsIgnoreCase(AuthorizationType.OAUTH2.getValue())) {
+//        }
 
         OnlineBillDetailsDTO dto = new OnlineBillDetailsDTO();
         dto.setBillNo(AccountNumberUtility.generateSequence());
@@ -112,7 +122,7 @@ public class OnlineBillCollectionService {
         dto.setOrganizationId(onlineBillInfoDTO.getOrganizationId());
         dto.setBillTypeId(onlineBillInfoDTO.getBillTypeId());
 
-        return null;
+        return new Gson().toJson(dto);
     }
 
     public Map<String, Object> confirmOnlineBillPayment(OnlineBillDetailsDTO dto) {

@@ -59,11 +59,13 @@ public class TestController {
     @GetMapping("/basic/bill-inquiry/{billNo}")
     public ResponseEntity<OnlineBillDetailsDTO> queryOnlineBillInfo(@PathVariable(required = true, name = "billNo") String billNo,
                                                                     @RequestHeader(name="username") String username,
-                                                                    @RequestHeader(name="password") String password
+                                                                    @RequestHeader(name="password") String password,
+                                                                    @RequestHeader(name="Authorization") String authorization
     ) {
 
         System.out.println("Username: "+ username);
         System.out.println("Password: "+ password);
+        System.out.println("Authorization: "+ authorization);
 
         OnlineBillDetailsDTO dto = new OnlineBillDetailsDTO();
         dto.setBillNo(billNo);
