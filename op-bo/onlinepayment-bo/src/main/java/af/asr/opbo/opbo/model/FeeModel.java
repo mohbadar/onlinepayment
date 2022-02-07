@@ -1,6 +1,7 @@
 package af.asr.opbo.opbo.model;
 
 import af.asr.opbo.infrastructure.base.BaseEntity;
+import af.asr.opbo.opbo.enums.FeeInclusion;
 import lombok.*;
 import org.hibernate.annotations.Where;
 
@@ -25,22 +26,25 @@ public class FeeModel extends BaseEntity {
     @Column(unique = true)
     private String name;
     @NotNull
-    @Column()
+    @Column(nullable = false)
     private  boolean isItemBased;
     @NotNull
-    @Column()
+    @Column(nullable = false)
     private String type; //percentage or exact amount
     @NotNull
-    @Column()
+    @Column(nullable = false)
     private BigDecimal percentage;
     @NotNull
-    @Column()
+    @Column(nullable = false)
     private BigDecimal amount;
     @NotNull
-    @Column()
+    @Column(nullable = false)
     private BigDecimal agentFeePercentage;
     @NotNull
-    @Column()
+    @Column(nullable = false)
     private BigDecimal agentFeeAmount;
+
+    @Column(nullable = false)
+    private FeeInclusion feeInclusion = FeeInclusion.INCLUDED;
 
 }

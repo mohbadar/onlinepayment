@@ -8,4 +8,5 @@ export class FeeModel extends BaseModel {
     amount:number;
     agentFeeAmount: number;
     agentFeePercentage: number;
+    feeInclusion:string;
 }

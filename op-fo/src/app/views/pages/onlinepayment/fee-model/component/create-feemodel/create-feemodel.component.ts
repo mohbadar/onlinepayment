@@ -52,7 +52,8 @@ export class CreateFeemodelComponent implements OnInit {
             percentage: [, [Validators.required]],
             amount: [, [Validators.required]],
             agentFeePercentage:[, [Validators.required]],
-            agentFeeAmount: [, [Validators.required]]
+            agentFeeAmount: [, [Validators.required]],
+            feeInclusion: [, [Validators.required]]
 
         });
 
@@ -93,6 +94,8 @@ export class CreateFeemodelComponent implements OnInit {
         this.record.amount = this.myForm.get('amount').value;
         this.record.agentFeeAmount = this.myForm.get('agentFeeAmount').value;
         this.record.agentFeePercentage = this.myForm.get('agentFeePercentage').value;
+        this.record.feeInclusion = this.myForm.get('feeInclusion').value;
+
 
         // this.record.provinceCode = this.myForm.get('provinceCode').value;
 
