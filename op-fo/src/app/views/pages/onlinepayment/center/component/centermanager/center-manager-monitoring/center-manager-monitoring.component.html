@@ -1,7 +1,7 @@
 <kt-portlet class="_p_collections">
     <kt-portlet-body>
         <div class="kt-heading kt-heading--md">
-            {{ "GENEATE_DATE_BASED_REPORT" | translate }}
+            {{ "GENEATE_REPORT" | translate }}
         </div>
         <div class="row">
             <div class="col-lg-12">
@@ -73,7 +73,7 @@
 
                         <div class="col-lg-6">
                             <div class="form-group row required">
-                                <label class="col-lg-3">{{'DISPLAY_STATUS_TYPE'|translate}}</label>
+                                <label class="col-lg-3">{{'STATUS'|translate}}</label>
                                 <div class="col-lg-9">
                                     <ng-select [items]="statuses" bindLabel="name" bindValue="id"
                                         [placeholder]="'STATUS'|translate" formControlName="status">

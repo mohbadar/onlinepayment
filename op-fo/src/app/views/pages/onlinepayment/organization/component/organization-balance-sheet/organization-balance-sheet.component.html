@@ -53,20 +53,20 @@
           <table mat-table [dataSource]="dataSource" matSort style="width: 100%">
             <!-- credit Column -->
             <ng-container matColumnDef="credit">
-              <th mat-header-cell *matHeaderCellDef>Credit</th>
+              <th mat-header-cell *matHeaderCellDef>{{ "CREDIT" | translate }}</th>
               <td mat-cell *matCellDef="let element">{{ element.credit }}</td>
             </ng-container>
   
             <!-- debit Column -->
             <ng-container matColumnDef="debit">
-              <th mat-header-cell *matHeaderCellDef>Debit</th>
+              <th mat-header-cell *matHeaderCellDef>{{ "DEBIT" | translate }}</th>
               <td mat-cell *matCellDef="let element">{{ element.debit }}</td>
             </ng-container>
   
  
             <!-- balDate Column -->
             <ng-container matColumnDef="balDate">
-              <th mat-header-cell *matHeaderCellDef>Balance Date</th>
+              <th mat-header-cell *matHeaderCellDef>{{ "BALANCE_DATE" | translate }}</th>
               <td mat-cell *matCellDef="let element">{{ element.balanceDate }}</td>
             </ng-container>
   

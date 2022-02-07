@@ -9,22 +9,22 @@ export const organizationAdminMenuModule = {
           {
                 title: 'DATE_BASED_STATEMENT',
                 page: '/organization-admin/generate-date-based-statement',
-                translate: "MENU.DATE_BASED_STATEMENT"
+                translate: "GENERATE_STATEMENT"
             },
 
           {
               title: 'REVENUE_REPORT',
               page: '/organization-admin/revenue-report',
-              translate: "MENU.REVENUE_REPORT"
+              translate: "REVENUE_REPORT"
           },
-           {
-                title: 'RECONCILIATION',
-                page: '/organization-admin/reconciliation',
-                translate: "MENU.RECONCILIATION"
-            },
+        //    {
+        //         title: 'RECONCILIATION',
+        //         page: '/organization-admin/reconciliation',
+        //         translate: "MENU.RECONCILIATION"
+        //     },
             {
               title: 'BALANCE_SHEET',
-              page: '/organization-admin/monitoring',
+              page: '/organization/balance-sheet',
               translate: "MENU.BALANCE_SHEET"
             },
           
