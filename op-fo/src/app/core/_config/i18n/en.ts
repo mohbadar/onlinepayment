@@ -1,4 +1,3 @@
-// USA
 export const locale = {
   lang: "en",
   data: {
@@ -20,7 +19,7 @@ export const locale = {
       STORE_PROCESSED_DOCS: "Register Document",
       SEARCH_PROCESSED_DOCS: "Search Document",
       VERIFY_PROCESSED_DOCS: "Verify Document",
-      ADMINISTRATION: "Administration",
+      ADMINISTRATION: "Settings",
       PROVINCE: "Province", 
       ORGANIZATION: "Organization", 
       CENTER: "Center", 

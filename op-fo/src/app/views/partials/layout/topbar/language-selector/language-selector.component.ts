@@ -32,12 +32,12 @@ export class LanguageSelectorComponent implements OnInit {
     {
       lang: "fa",
       name: "Dari",
-      flag: "./assets/media/flags/afghanistan.png",
+      flag: "./assets/media/flags/asr.png",
     },
     {
       lang: "ps",
       name: "Pashto",
-      flag: "./assets/media/flags/afghanistan.png",
+      flag: "./assets/media/flags/asr.png",
     },
   ];
 

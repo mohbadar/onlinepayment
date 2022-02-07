@@ -4,23 +4,23 @@ export const centerManagerMenuModule = {
     alignment: 'left',
     toggle: 'click',
     translate: 'MENU.CENTER_MANAGER',
-    page: '/agent',
+    page: '/center',
     submenu: [
            {
                 title: 'MONITORING',
-                page: '/store-nid-process-docs',
-                translate: "MENU.MONITORING"
+                page: '/center-manager-monitoring',
+                translate: "MENU.REPORTING"
             },
-            {
-                title: 'RECONCILIATION',
-                page: '/store-nid-process-docs',
-                translate: "MENU.RECONCILIATION"
-            },
-            {
-              title: 'STATEMENT',
-              page: '/store-nid-process-docs',
-              translate: "MENU.STATEMENT"
-            },
+            // {
+            //     title: 'RECONCILIATION',
+            //     page: '/store-nid-process-docs',
+            //     translate: "MENU.RECONCILIATION"
+            // },
+            // {
+            //   title: 'STATEMENT',
+            //   page: '/center-manager-statement',
+            //   translate: "MENU.STATEMENT"
+            // },
        
     ]
 }

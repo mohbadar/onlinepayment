@@ -49,6 +49,10 @@ import { IssueBillComponent } from './component/centeruser/issue-bill/issue-bill
 import { ConfirmBillPaymentComponent } from './component/centeruser/confirm-bill-payment/confirm-bill-payment.component';
 import { GenerateStatementComponent } from './component/centeruser/generate-statement/generate-statement.component';
 import { BillDetailRepesentationComponent } from './component/centeruser/bill-detail-repesentation/bill-detail-repesentation.component';
+import { CenterManagerMonitoringComponent } from './component/centermanager/center-manager-monitoring/center-manager-monitoring.component';
+import { CenterManagerStatementComponent } from './component/centermanager/center-manager-statement/center-manager-statement.component';
+import { NgbCalendar, NgbCalendarPersian, NgbDatepickerI18n, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerI18nPersian } from 'app/core/service/datepicker-jalali.service';
 
 
 const routes: Routes = [
@@ -81,12 +85,24 @@ const routes: Routes = [
                 path: 'user-statement',
                 component: GenerateStatementComponent
             },
+            {
+                path: 'center-manager-statement',
+                component: CenterManagerStatementComponent
+            },
+            {
+                path: 'center-manager-monitoring',
+                component: CenterManagerMonitoringComponent
+            },
         ]
 
     }
 ];
 
 @NgModule({
+    providers: [
+        { provide: NgbCalendar, useClass: NgbCalendarPersian },
+        { provide: NgbDatepickerI18n, useClass: NgbDatepickerI18nPersian }
+    ],
     imports: [
         CommonModule,
         HttpClientModule,
@@ -116,7 +132,8 @@ const routes: Routes = [
         MatTooltipModule,
         MatDialogModule,
         NgxSpinnerModule,
-        NgSelectModule
+        NgSelectModule,
+        NgbModule
     ],
 
     entryComponents: [
@@ -134,7 +151,9 @@ const routes: Routes = [
         IssueBillComponent,
         ConfirmBillPaymentComponent,
         GenerateStatementComponent,
-        BillDetailRepesentationComponent
+        BillDetailRepesentationComponent,
+        CenterManagerMonitoringComponent,
+        CenterManagerStatementComponent
     ],
 })
 export class CenterModule {
