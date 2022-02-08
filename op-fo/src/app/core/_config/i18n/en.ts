@@ -53,6 +53,7 @@ export const locale = {
       PAY_ONLINE_BILL: "Pay Online Bill",
       THIRD_PARTY_INTEGRATION: "Third Party Integration",
       AGENT_REVENUE: "Agent Revenue",
+      REPORTING: "Reporting",
     },
     CAREFULL_MESSAGE: "	We know that you are authorized to access this part of the system. Considering that, this is a critical module. Please be careful!",
     ISSUE_BILL: "Issue Bill",
@@ -201,7 +202,8 @@ export const locale = {
     API_KEY: "API Key",
     API_VALUE: "API Value",
     CLIENT_ID: "Client ID",
-    CLIENT_SECRET: "Client Secret",    
+    CLIENT_SECRET: "Client Secret",   
+    NEW: "New", 
 
     // This is the dynamic module translation which should be loaded on each module loaded
     M: {},
