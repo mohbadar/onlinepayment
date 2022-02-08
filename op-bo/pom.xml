@@ -37,5 +37,6 @@
 		<module>anar-lib-logger</module>
 		<module>anar-lib-date</module>
 		<module>onlinepayment-bo</module>
+		<module>cloud-rest-api-client</module>
     </modules>
 </project>
