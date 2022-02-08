@@ -22,29 +22,9 @@ export const administrationMenuModule = {
               translate: "MENU.CENTER"
             },
             {
-              title: 'AGENT',
+              title: 'AGENT_MANAGEMETNNT',
               page: '/agent',
-              translate: "MENU.AGENT",
-              alignment: "center",
-              toggle: "click",
-              submenu: [
-                  {
-                      title: "AGENT_MANAGEMETN",
-                      page: "",
-                      translate: "MENU.AGENT_MANAGEMENT",
-                    },
-                    {
-                      title: "CREDIT_AGENT",
-                      page: "/credit",
-                      translate: "MENU.CREDIT_AGENT",
-                    },
-                    {
-                      title: "DEBIT_AGENT",
-                      page: "/debit",
-                      translate: "MENU.DEBIT_AGENT",
-                    },
-                   
-                  ],            
+              translate: "MENU.AGENT",     
             },
             {
               title: 'BILLTYPE',

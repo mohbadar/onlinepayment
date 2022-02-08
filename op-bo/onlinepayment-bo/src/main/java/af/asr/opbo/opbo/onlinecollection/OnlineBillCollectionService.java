@@ -69,12 +69,12 @@ public class OnlineBillCollectionService {
 //        String token = kcAuth.getAccessToken();
 
 
-        BillType billType = billTypeRepository.findById(onlineBillInfoDTO.getBillTypeId()).orElse(null);
-        if(billType ==null || billType.getBillingChannel().getValue().equalsIgnoreCase(BillingChannel.OFFLINE.getValue()))
-            throw new RuntimeException("BillTypeNotFoundException");
-        ThirdPartyIntegration integration = thirdPartyIntegrationRepository.findById(billType.getThirdPartyIntegrationId()).orElse(null);
-        if(integration == null)
-            throw new RuntimeException("ThirdPartyIntegrationNotFoundException");
+//        BillType billType = billTypeRepository.findById(onlineBillInfoDTO.getBillTypeId()).orElse(null);
+//        if(billType ==null || billType.getBillingChannel().getValue().equalsIgnoreCase(BillingChannel.OFFLINE.getValue()))
+//            throw new RuntimeException("BillTypeNotFoundException");
+//        ThirdPartyIntegration integration = thirdPartyIntegrationRepository.findById(billType.getThirdPartyIntegrationId()).orElse(null);
+//        if(integration == null)
+//            throw new RuntimeException("ThirdPartyIntegrationNotFoundException");
 
 //        if(integration.getAuthorizationType().getValue().equalsIgnoreCase(AuthorizationType.NO_AUTH.getValue())){
 //

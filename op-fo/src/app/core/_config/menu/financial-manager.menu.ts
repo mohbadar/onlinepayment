@@ -56,7 +56,7 @@ export const financialManagerMenuModule = {
                     {
                         title: 'AGENT_REVENUE_REPORT',
                         page: '/agent-revenue-report',
-                        translate: "MENU.AGENT_REVENUE_REPORT"
+                        translate: "MENU.AGENT_REVENUE"
                     },
                     {
                       title: 'AGENT_BALANCE_SHEET',

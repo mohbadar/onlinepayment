@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material';
+import { TranslateService } from '@ngx-translate/core';
 import { LayoutUtilsService, MessageType } from 'app/core/_base/crud';
 import { AgentService } from 'app/views/pages/onlinepayment/agent/service/agent.service';
 import { PagesService } from 'app/views/pages/pages.service';
@@ -36,7 +37,8 @@ export class ConfirmBillPaymentComponent implements OnInit {
       private layoutUtilService: LayoutUtilsService,
       private agentService: AgentService,
       private spinner: NgxSpinnerService,
-      private pagesService: PagesService
+      private pagesService: PagesService,
+      private translate: TranslateService
   ) { }
 
   ngOnInit() {
@@ -68,10 +70,10 @@ export class ConfirmBillPaymentComponent implements OnInit {
 
 
   confirmPayment(paymentId){
-    const _title: string = 'CONFIRM_PAYMENT';
-		const _description: string = 'Are you sure to  confirm?';
-		const _waitDesciption: string = 'confirming...';
-		const _deleteMessage = `The payment has been confirmed`;
+    const _title: string = this.translate.instant('CONFIRMATION');
+		const _description: string = this.translate.instant('ARE_YOU_SURE');
+		const _waitDesciption: string = this.translate.instant('PROCESSING');
+		const _deleteMessage = this.translate.instant('THE_OPERATION_SUCCESSFULLY_DONE');
 
 		const dialogRef = this.layoutUtilService.deleteElement(_title, _description, _waitDesciption);
 		dialogRef.afterClosed().subscribe(res => {

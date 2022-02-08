@@ -1,7 +1,9 @@
-<kt-notice [icon]="'flaticon-warning kt-font-primary'">
+<!--
+    <kt-notice [icon]="'flaticon-warning kt-font-primary'">
 	We know that you are authorized to access this part of the system. 
 	Considering that, this is a critical module. Please be careful!
 </kt-notice> 
+-->
 
 
 <kt-portlet>
@@ -15,7 +17,7 @@
                 <form [formGroup]="myForm" (ngSubmit)="submit()" class="kt-form" id="kt_form">
                     <!--begin: Form Wizard Step 1-->
                     <div class="kt-wizard-v2__content" data-ktwizard-type="step-content" data-ktwizard-state="current">
-                        <div class="kt-heading kt-heading--md">{{'ENTER_UNIQUE_NAME'|translate}} </div>
+                        <div class="kt-heading kt-heading--md">{{'ADD_ORGANIZATION'|translate}} </div>
                         <div class="kt-form__section kt-form__section--first">
                             <div class="kt-wizard-v2__form">
 
@@ -31,7 +33,6 @@
                                     <label class="col-form-label">{{'NAME'|translate}}</label>
                                     <input type="text" class="form-control" name="name"
                                         [placeholder]="'NAME'|translate" formControlName="name">
-                                    <!-- <span class="form-text text-muted">{{'PLEASE_ENTER_PROVINCE_NAME'|translate}}</span> -->
                                     <print-error [control]="myForm.get('name')"></print-error>
                                 </div>
 
@@ -39,7 +40,6 @@
                                     <label class="col-form-label">{{'CODE'|translate}}</label>
                                     <input type="number" class="form-control" name="code"
                                         [placeholder]="'CODE'|translate" formControlName="code">
-                                    <span class="form-text text-muted">{{'PLEASE_ENTER_CODE'|translate}}</span>
                                     <print-error [control]="myForm.get('code')"></print-error>
                                 </div>
 

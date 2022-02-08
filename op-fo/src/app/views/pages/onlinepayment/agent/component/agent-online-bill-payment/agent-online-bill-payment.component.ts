@@ -11,6 +11,7 @@ import { OnlineBillPayment } from '../../model/agent-online-bill-payment.model';
 import { OrganizationService } from '../../../organization/service/organization.service';
 import { AgentService } from '../../service/agent.service';
 import { AgentSlipPrintComponent } from '../agent-slip-print/agent-slip-print.component';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -44,7 +45,8 @@ export class AgentOnlineBillPaymentComponent implements OnInit {
       private billTypeService: BillTypeService,
       public dialog: MatDialog,
       private organizationService: OrganizationService,
-      private agentService: AgentService
+      private agentService: AgentService,
+      private translate: TranslateService
   ) {
   }
 
@@ -129,10 +131,10 @@ export class AgentOnlineBillPaymentComponent implements OnInit {
 
   confirmPayment(bill){
 
-    const _title: string = 'CONFIRM_PAYMENT';
-		const _description: string = 'Are you sure to confirm?';
-		const _waitDesciption: string = 'confirming...';
-		const _deleteMessage = `The payment has been confirmed`;
+    const _title: string = this.translate.instant('CONFIRMATION');
+		const _description: string = this.translate.instant('ARE_YOU_SURE');
+		const _waitDesciption: string = this.translate.instant('PROCESSING');
+		const _deleteMessage = this.translate.instant('THE_OPERATION_SUCCESSFULLY_DONE');
 
 		const dialogRef = this.layoutUtilService.deleteElement(_title, _description, _waitDesciption);
 		dialogRef.afterClosed().subscribe(res => {
