@@ -73,7 +73,7 @@ export class MenuConfig {
       this.defaults.aside.items.splice(1, 0, organizationAdminMenuModule);
     }
 
-    if(this.keycloakService.isUserInRole('organization_user_module_view')){
+    if(this.keycloakService.isUserInRole('center_user_module_view')){
       this.defaults.header.items.splice(1, 0, organizationUserMenuModule);
       this.defaults.aside.items.splice(1, 0, organizationUserMenuModule);
     }

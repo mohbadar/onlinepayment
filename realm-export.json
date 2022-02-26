@@ -306,6 +306,15 @@
         "attributes": {}
       },
       {
+        "id": "5526b955-1eb3-4b61-9154-4e648c01268b",
+        "name": "center_user_module_view",
+        "description": "Role to view center_user_module_view menu",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "onlinepayment",
+        "attributes": {}
+      },
+      {
         "id": "340b2425-b900-4cf2-ab08-09f76e702df3",
         "name": "agent_revenue_report",
         "description": "Role to access agent revenue report component",
@@ -529,7 +538,142 @@
       }
     ]
   },
-  "groups": [],
+  "groups": [
+    {
+      "id": "d09e9c43-4541-409c-9da2-12bd47fd8ec5",
+      "name": "AdminGroup",
+      "path": "/AdminGroup",
+      "attributes": {},
+      "realmRoles": [
+        "list_province",
+        "issue_bill",
+        "view_organization",
+        "list_feemodel",
+        "view_center",
+        "update_center",
+        "organization_admin_revenue_report",
+        "center_manager_monitoring",
+        "organization_admin_module_view",
+        "administration_module_view",
+        "organization_user_relation",
+        "register_third_party_integration",
+        "create_province",
+        "organization_balance_sheet",
+        "province_module_view",
+        "create_feemodel",
+        "agent_online_bill_payment",
+        "update_agent",
+        "agent_user_relation",
+        "center_manager_module_view",
+        "create_agent",
+        "agent_bill_payment",
+        "agent_balance_sheet",
+        "center_user_relation",
+        "view_billtype",
+        "create_center",
+        "generate_statement",
+        "agent_module_view",
+        "bill_detail_representation",
+        "create_organization",
+        "center_user_module_view",
+        "agent_revenue_report",
+        "create_billtype",
+        "agent_print_slip",
+        "debit_organization_ledger",
+        "offline_access",
+        "view_feemodel",
+        "list_billtype",
+        "view_province",
+        "list_agent",
+        "generate_date_based_statement",
+        "organization_user_module_view",
+        "update_province",
+        "confirm_bill_payment",
+        "credit_agent_account",
+        "uma_authorization",
+        "credit_organization_ledger",
+        "list_organization",
+        "debit_agent_account",
+        "agent_make_payment",
+        "province_user_relation",
+        "duplicate_slip_print",
+        "view_agent",
+        "view_full_provinces_list",
+        "finance_module_view",
+        "list_third_party_integration"
+      ],
+      "clientRoles": {},
+      "subGroups": []
+    },
+    {
+      "id": "12b869e2-36e6-400e-9e64-4dd6d23eca25",
+      "name": "AgentGroup",
+      "path": "/AgentGroup",
+      "attributes": {},
+      "realmRoles": [
+        "agent_online_bill_payment",
+        "agent_module_view",
+        "duplicate_slip_print",
+        "view_full_provinces_list",
+        "agent_bill_payment",
+        "agent_balance_sheet",
+        "agent_print_slip"
+      ],
+      "clientRoles": {},
+      "subGroups": []
+    },
+    {
+      "id": "a483bf79-08ab-4da4-88c2-11e67541d48c",
+      "name": "CenterUserGroup",
+      "path": "/CenterUserGroup",
+      "attributes": {},
+      "realmRoles": [
+        "confirm_bill_payment",
+        "generate_statement",
+        "issue_bill",
+        "bill_detail_representation",
+        "view_full_provinces_list",
+        "center_user_module_view"
+      ],
+      "clientRoles": {},
+      "subGroups": []
+    },
+    {
+      "id": "c961fb1d-ca2f-4d2e-8852-e93d090e66fa",
+      "name": "FinanceOfficerGroup",
+      "path": "/FinanceOfficerGroup",
+      "attributes": {},
+      "realmRoles": [
+        "view_full_provinces_list",
+        "organization_admin_revenue_report",
+        "credit_organization_ledger",
+        "credit_agent_account",
+        "agent_revenue_report",
+        "organization_balance_sheet",
+        "debit_agent_account",
+        "finance_module_view",
+        "agent_make_payment",
+        "debit_organization_ledger",
+        "agent_balance_sheet"
+      ],
+      "clientRoles": {},
+      "subGroups": []
+    },
+    {
+      "id": "513ce40f-1708-456e-a76c-fbfa0fa14020",
+      "name": "OManagerGroup",
+      "path": "/OManagerGroup",
+      "attributes": {},
+      "realmRoles": [
+        "generate_date_based_statement",
+        "organization_admin_revenue_report",
+        "organization_admin_module_view",
+        "organization_balance_sheet"
+      ],
+      "clientRoles": {},
+      "subGroups": []
+    }
+  ],
   "defaultRoles": [
     "uma_authorization",
     "offline_access"

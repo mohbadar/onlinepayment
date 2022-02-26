@@ -187,7 +187,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
             this.modules = this.agentuser_modules;
         }
         
-        if(this.keycloakService.isUserInRole("organization_user_module_view")){
+        if(this.keycloakService.isUserInRole("center_user_module_view")){
             this.modules = this.centeruser_modules;
         }
 
