@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 import { ViewProvinceComponent } from '../view-province/view-province.component';
 import { DataExchangeService } from '../../../../../../core/service/data.exchange.service';
 import { ProvinceUserRelationComponent } from '../province-user-relation/province-user-relation.component';
+import { KeycloakService } from 'keycloak-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'kt-list-province',
@@ -32,8 +34,15 @@ export class ListProvinceComponent implements OnInit {
 		private layoutUtilsService: LayoutUtilsService,
 		public dialog: MatDialog,
     private router: Router,
-    private dataExchangeService: DataExchangeService
-  ) { }
+    private dataExchangeService: DataExchangeService,
+    private keycloakService: KeycloakService,
+    private translate: TranslateService
+  ) { 
+    if (!this.keycloakService.isUserInRole('list_province')) {
+      this.router.navigate(['/'])
+      this.layoutUtilsService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+     }
+  }
 
   ngOnInit() {
       this.reloadData();

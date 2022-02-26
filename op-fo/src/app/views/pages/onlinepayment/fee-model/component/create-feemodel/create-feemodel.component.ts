@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { FeeModel } from '../../model/feemodel.model';
 import { FeeModelService } from '../../service/fee-model.service';
+import { KeycloakService } from 'keycloak-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'kt-create-feemodel',
@@ -33,11 +35,16 @@ export class CreateFeemodelComponent implements OnInit {
         private layoutUtilService: LayoutUtilsService,
         private router: Router,
         private feeModelService: FeeModelService,
-        private spinner: NgxSpinnerService
+        private spinner: NgxSpinnerService,
+        private keycloakService: KeycloakService,
+        private translate: TranslateService
 
     ) {
 
-
+      if (!this.keycloakService.isUserInRole('create_feemodel')) {
+        this.router.navigate(['/'])
+        this.layoutUtilService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+      }
 
     }
 

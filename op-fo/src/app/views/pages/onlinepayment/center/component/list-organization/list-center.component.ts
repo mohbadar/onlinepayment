@@ -13,6 +13,8 @@ import { DataExchangeService } from '../../../../../../core/service/data.exchang
 import { CenterService } from '../../service/center.service';
 import { CenterUserRelationComponent } from '../center-user-relation/center-user-relation.component';
 import { ViewCenterComponent } from '../view-center/view-center.component';
+import { KeycloakService } from 'keycloak-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'kt-list-center',
@@ -32,8 +34,15 @@ export class ListCenterComponent implements OnInit {
 		private layoutUtilsService: LayoutUtilsService,
 		public dialog: MatDialog,
     private router: Router,
-    private dataExchangeService: DataExchangeService
-  ) { }
+    private dataExchangeService: DataExchangeService,
+    private keycloakService: KeycloakService,
+    private translate: TranslateService
+  ) {
+    if (!this.keycloakService.isUserInRole('create_center')) {
+      this.router.navigate(['/'])
+      this.layoutUtilsService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+    }
+   }
 
   ngOnInit() {
       this.reloadData();

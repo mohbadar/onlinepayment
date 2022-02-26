@@ -12,6 +12,8 @@ import { BillType } from '../../model/bill-type.model';
 import { BillTypeService } from '../../service/bill-type.service';
 import { FeeModelService } from '../../../fee-model/service/fee-model.service';
 import { ThirdPartyIntegrationService } from '../../../third-party-integration/service/third-party-integration.service';
+import { KeycloakService } from 'keycloak-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'kt-create-billtype',
@@ -46,8 +48,15 @@ export class CreateBilltypeComponent implements OnInit {
       private organizationService: OrganizationService,
       private centerService: CenterService,
       private feeModelService: FeeModelService,
-      private thirdPartyIntegrationService: ThirdPartyIntegrationService
+      private thirdPartyIntegrationService: ThirdPartyIntegrationService,
+      private keycloakService: KeycloakService,
+      private translate: TranslateService
   ) {
+      
+    if (!this.keycloakService.isUserInRole('create_billtype')) {
+        this.router.navigate(['/'])
+        this.layoutUtilService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+    }
   }
 
 

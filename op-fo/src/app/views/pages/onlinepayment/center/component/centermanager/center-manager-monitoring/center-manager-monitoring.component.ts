@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { ExcelService } from 'app/core/service/excel.service';
 import { LayoutUtilsService } from 'app/core/_base/crud';
 import { OrganizationAdminService } from 'app/views/pages/onlinepayment/organization-admin/service/organization-admin.service';
@@ -41,11 +42,13 @@ export class CenterManagerMonitoringComponent implements OnInit {
     private layoutUtilService: LayoutUtilsService,
     private organizationService: OrganizationService,
     private centerService: CenterService,
-    private organizationAdminService: OrganizationAdminService
+    private organizationAdminService: OrganizationAdminService,
+    private translate : TranslateService
   ) {
-    // if (!this.keycloakService.isUserInRole('reporting_arrear_report')) {
-    //   this.router.navigate(['/'])
-    // }
+    if (!this.keycloakService.isUserInRole('center_manager_monitoring')) {
+      this.router.navigate(['/'])
+      this.layoutUtilService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+    }
   }
 
   ngOnInit(): void {

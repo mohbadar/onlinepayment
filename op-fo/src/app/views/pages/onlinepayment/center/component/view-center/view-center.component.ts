@@ -6,6 +6,9 @@ import { LayoutUtilsService, MessageType } from '../../../../../../core/_base/cr
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Center } from '../../model/center.model';
 import { CenterService } from '../../service/center.service';
+import { KeycloakService } from 'keycloak-angular';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'kt-view-center',
@@ -23,11 +26,19 @@ export class ViewCenterComponent implements OnInit {
 
     constructor(
         private service: CenterService,
-        private layoutUtilService: LayoutUtilsService,
+        private layoutUtilsService: LayoutUtilsService,
         public dialogRef: MatDialogRef<ViewCenterComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any,
+        private keycloakService: KeycloakService,
+        private router: Router,
+        private translate: TranslateService
     ) {
 
+
+        if (!this.keycloakService.isUserInRole('view_center')) {
+            this.router.navigate(['/'])
+            this.layoutUtilsService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+        }
         this.item = this.data.item;
         console.log("Item", this.item);
 

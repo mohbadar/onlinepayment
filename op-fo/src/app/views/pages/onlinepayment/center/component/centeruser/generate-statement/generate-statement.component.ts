@@ -4,6 +4,8 @@ import { KeycloakService } from 'keycloak-angular';
 import { MatTableDataSource } from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AgentService } from 'app/views/pages/onlinepayment/agent/service/agent.service';
+import { LayoutUtilsService } from 'app/core/_base/crud';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'kt-generate-statement',
@@ -25,11 +27,14 @@ constructor(
     private cdrf: ChangeDetectorRef,
     private router: Router,
     private keycloakService: KeycloakService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private layoutUtilService: LayoutUtilsService,
+    private translate: TranslateService
 ) {
-    // if (!this.keycloakService.isUserInRole('payments_balancesheet')) {
-    //     this.router.navigate(['/'])
-    // }
+  if (!this.keycloakService.isUserInRole('generate_statement')) {
+    this.router.navigate(['/'])
+    this.layoutUtilService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+  }
 }
 
 ngOnInit() {

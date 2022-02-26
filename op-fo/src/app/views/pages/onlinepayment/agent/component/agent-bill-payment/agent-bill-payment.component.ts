@@ -1,6 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { LayoutUtilsService } from 'app/core/_base/crud';
 import { PagesService } from 'app/views/pages/pages.service';
 import { KeycloakService } from 'keycloak-angular';
@@ -49,8 +51,15 @@ export class AgentBillPaymentComponent implements OnInit {
       private agentService: AgentService,
       private keycloakService: KeycloakService,
       private spinner: NgxSpinnerService,
-      private pagesService: PagesService
-  ) { }
+      private pagesService: PagesService,
+      private translate: TranslateService,
+      private router: Router
+  ) {
+    if (!this.keycloakService.isUserInRole('agent_bill_payment')) {
+        this.router.navigate(['/'])
+        this.layoutUtilService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+    }
+   }
 
   ngOnInit() {
 

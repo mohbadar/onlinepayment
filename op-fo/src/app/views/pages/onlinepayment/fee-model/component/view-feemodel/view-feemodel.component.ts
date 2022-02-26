@@ -6,6 +6,9 @@ import { LayoutUtilsService, MessageType } from '../../../../../../core/_base/cr
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FeeModelService } from '../../service/fee-model.service';
 import { FeeModel } from '../../model/feemodel.model';
+import { KeycloakService } from 'keycloak-angular';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'kt-view-feemodel',
@@ -27,7 +30,15 @@ export class ViewFeemodelComponent implements OnInit {
         private layoutUtilService: LayoutUtilsService,
         public dialogRef: MatDialogRef<ViewFeemodelComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any,
+        private keycloakService: KeycloakService,
+        private router: Router,
+        private translate: TranslateService
     ) {
+
+        if (!this.keycloakService.isUserInRole('view_feemodel')) {
+            this.router.navigate(['/'])
+            this.layoutUtilService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+        }
 
         this.item = this.data.item;
         console.log("Item", this.item);

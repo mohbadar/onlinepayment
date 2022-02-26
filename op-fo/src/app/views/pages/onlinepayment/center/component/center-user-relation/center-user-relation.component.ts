@@ -1,8 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { LayoutUtilsService, MessageType } from 'app/core/_base/crud';
 import { PagesService } from 'app/views/pages/pages.service';
+import { KeycloakService } from 'keycloak-angular';
 import { CenterUserRelation } from '../../model/center-user-relation.mode';
 import { CenterService } from '../../service/center.service';
 
@@ -23,7 +26,16 @@ export class CenterUserRelationComponent implements OnInit {
         private formBuilder: FormBuilder,
         private layoutUtilService: LayoutUtilsService,
         private pagesService: PagesService,
-    ) { }
+        private keycloakService: KeycloakService,
+        private router: Router,
+        private translate: TranslateService
+
+    ) { 
+        if (!this.keycloakService.isUserInRole('center_user_relation')) {
+            this.router.navigate(['/'])
+            this.layoutUtilService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+          }
+    }
 
     ngOnInit() {
 

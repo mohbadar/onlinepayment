@@ -200,6 +200,7 @@ export const locale = {
 	  CLIENT_ID: "Client ID",
 	  CLIENT_SECRET: "Client Secret",    
 	  NEW: "نوی",
+	  UN_AUTHORIZED_ACCESS: "تاسو د دی بخش صلاحیت نه لری",
   
 	  // This is the dynamic module translation which should be loaded on each module loaded
 	  M: {},

@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 import { DataExchangeService } from '../../../../../../core/service/data.exchange.service';
 import { ViewFeemodelComponent } from '../view-feemodel/view-feemodel.component';
 import { FeeModelService } from '../../service/fee-model.service';
+import { KeycloakService } from 'keycloak-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'kt-list-feemodel',
@@ -31,8 +33,15 @@ export class ListFeemodelComponent implements OnInit {
 		private layoutUtilsService: LayoutUtilsService,
 		public dialog: MatDialog,
     private router: Router,
-    private dataExchangeService: DataExchangeService
-  ) { }
+    private dataExchangeService: DataExchangeService,
+    private keycloakService: KeycloakService,
+    private translate: TranslateService
+  ) { 
+    if (!this.keycloakService.isUserInRole('list_feemodel')) {
+      this.router.navigate(['/'])
+      this.layoutUtilsService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+    }
+  }
 
   ngOnInit() {
       this.reloadData();

@@ -6,6 +6,8 @@ import { LayoutUtilsService, MessageType } from 'app/core/_base/crud';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Agent } from '../../model/agent.model';
 import { AgentService } from '../../service/agent.service';
+import { KeycloakService } from 'keycloak-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'kt-update-agent',
@@ -33,8 +35,15 @@ export class UpdateAgentComponent implements OnInit {
         private dataExchangeService: DataExchangeService,
         private router: Router,
         private layoutUtilService: LayoutUtilsService,
-        private spinner: NgxSpinnerService
-    ) { }
+        private spinner: NgxSpinnerService,
+        private keycloakService: KeycloakService,
+        private translate: TranslateService
+    ) {
+        if (!this.keycloakService.isUserInRole('update_agent')) {
+            this.router.navigate(['/'])
+            this.layoutUtilService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+        }
+     }
 
     ngOnInit() {
 

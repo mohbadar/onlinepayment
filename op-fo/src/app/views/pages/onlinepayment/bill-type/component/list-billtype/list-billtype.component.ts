@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 import { DataExchangeService } from '../../../../../../core/service/data.exchange.service';
 import { BillTypeService } from '../../service/bill-type.service';
 import { ViewBilltypeComponent } from '../view-billtype/view-billtype.component';
+import { KeycloakService } from 'keycloak-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'kt-list-billtype',
@@ -32,8 +34,16 @@ export class ListBilltypeComponent implements OnInit {
 		private layoutUtilsService: LayoutUtilsService,
 		public dialog: MatDialog,
     private router: Router,
-    private dataExchangeService: DataExchangeService
-  ) { }
+    private dataExchangeService: DataExchangeService,
+    private layoutUtilService: LayoutUtilsService,
+    private keycloakService: KeycloakService,
+    private translate: TranslateService
+  ) {
+    if (!this.keycloakService.isUserInRole('list_billtype')) {
+      this.router.navigate(['/'])
+      this.layoutUtilService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+    }
+   }
 
   ngOnInit() {
       this.reloadData();

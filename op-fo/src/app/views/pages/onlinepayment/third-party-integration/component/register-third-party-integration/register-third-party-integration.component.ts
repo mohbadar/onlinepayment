@@ -11,6 +11,8 @@ import { CenterService } from '../../../center/service/center.service';
 import { FeeModelService } from '../../../fee-model/service/fee-model.service';
 import { ThirdPartyIntegration } from '../../model/third-party-integration.model';
 import { ThirdPartyIntegrationService } from '../../service/third-party-integration.service';
+import { KeycloakService } from 'keycloak-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'kt-register-third-party-integration',
@@ -43,8 +45,14 @@ export class RegisterThirdPartyIntegrationComponent implements OnInit {
       private provinceService: ProvinceService,
       private organizationService: OrganizationService,
       private centerService: CenterService,
-      private feeModelService: FeeModelService
+      private feeModelService: FeeModelService,
+      private keycloakService: KeycloakService,
+      private translate: TranslateService
   ) {
+      if (!this.keycloakService.isUserInRole('register_third_party_integration')) {
+        this.router.navigate(['/'])
+        this.layoutUtilService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+      }
   }
 
 

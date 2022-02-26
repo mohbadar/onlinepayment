@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LayoutUtilsService } from 'app/core/_base/crud';
+import { KeycloakService } from 'keycloak-angular';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'kt-bill-detail-repesentation',
@@ -24,7 +27,15 @@ export class BillDetailRepesentationComponent implements OnInit {
         private layoutUtilService: LayoutUtilsService,
         public dialogRef: MatDialogRef<BillDetailRepesentationComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any,
+        private keycloakService: KeycloakService,
+        private router: Router,
+        private translate: TranslateService
     ) {
+
+      if (!this.keycloakService.isUserInRole('bill_detail_representation')) {
+        this.router.navigate(['/'])
+        this.layoutUtilService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+      }
 
         this.item = this.data.item;
         console.log("Item", this.item);

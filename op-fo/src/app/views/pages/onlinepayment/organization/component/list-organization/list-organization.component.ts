@@ -14,6 +14,8 @@ import { OrganizationService } from '../../service/organization.service';
 import { ViewOrganizationComponent } from '../view-organization/view-organization.component';
 import { OrganizationUserRelation } from '../../model/organization-user-relation.mode';
 import { OrganizationUserRelationComponent } from '../organization-user-relation/organization-user-relation.component';
+import { KeycloakService } from 'keycloak-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'kt-list-organization',
@@ -33,8 +35,15 @@ export class ListOrganizationComponent implements OnInit {
 		private layoutUtilsService: LayoutUtilsService,
 		public dialog: MatDialog,
     private router: Router,
-    private dataExchangeService: DataExchangeService
-  ) { }
+    private dataExchangeService: DataExchangeService,
+    private keycloakService: KeycloakService,
+    private translate: TranslateService
+  ) {
+    if (!this.keycloakService.isUserInRole('list_organization')) {
+      this.router.navigate(['/'])
+      this.layoutUtilsService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+  }
+   }
 
   ngOnInit() {
       this.reloadData();

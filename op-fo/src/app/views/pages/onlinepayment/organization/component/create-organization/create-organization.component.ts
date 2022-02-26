@@ -8,6 +8,8 @@ import { Organization } from '../../model/organization.model';
 import { OrganizationService} from '../../service/organization.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ProvinceService } from '../../../province/service/province.service';
+import { KeycloakService } from 'keycloak-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -34,9 +36,15 @@ export class CreateOrganizationComponent implements OnInit {
         private router: Router,
         private organizationService: OrganizationService,
         private spinner: NgxSpinnerService,
-        private provinceService: ProvinceService
+        private provinceService: ProvinceService,
+        private keycloakService: KeycloakService,
+        private translate: TranslateService
 
     ) {
+        if (!this.keycloakService.isUserInRole('create_organization')) {
+            this.router.navigate(['/'])
+            this.layoutUtilService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+        }
     }
 
 
@@ -56,9 +64,6 @@ export class CreateOrganizationComponent implements OnInit {
             bankCardHolderName: [, [Validators.required]],
             bankCardNo: [, []],
         });
-
-
-
 
     }
 

@@ -6,6 +6,9 @@ import { LayoutUtilsService, MessageType } from '../../../../../../core/_base/cr
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Organization } from '../../model/organization.model';
 import { OrganizationService } from '../../service/organization.service';
+import { KeycloakService } from 'keycloak-angular';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'kt-view-organization',
@@ -26,8 +29,15 @@ export class ViewOrganizationComponent implements OnInit {
         private layoutUtilService: LayoutUtilsService,
         public dialogRef: MatDialogRef<ViewOrganizationComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any,
+        private keycloakService: KeycloakService,
+        private router: Router,
+        private translate: TranslateService
     ) {
 
+        if (!this.keycloakService.isUserInRole('view_organization')) {
+            this.router.navigate(['/'])
+            this.layoutUtilService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+        }
         this.item = this.data.item;
         console.log("Item", this.item);
 

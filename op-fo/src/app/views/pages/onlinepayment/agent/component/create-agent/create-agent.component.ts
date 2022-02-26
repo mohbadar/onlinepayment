@@ -10,6 +10,8 @@ import { AgentService } from '../../service/agent.service';
 import { Agent } from '../../model/agent.model';
 import { OrganizationService } from '../../../organization/service/organization.service';
 import { CenterService } from '../../../center/service/center.service';
+import { KeycloakService } from 'keycloak-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -40,8 +42,14 @@ export class CreateAgentComponent implements OnInit {
         private spinner: NgxSpinnerService,
         private provinceService: ProvinceService,
         private organizationService: OrganizationService,
-        private centerService: CenterService
+        private centerService: CenterService,
+        private keycloakService: KeycloakService,
+        private translate: TranslateService
     ) {
+        if (!this.keycloakService.isUserInRole('create_agent')) {
+            this.router.navigate(['/'])
+            this.layoutUtilService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+        }
     }
 
 

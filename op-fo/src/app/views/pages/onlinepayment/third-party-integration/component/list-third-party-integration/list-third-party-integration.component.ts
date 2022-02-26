@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 import { DataExchangeService } from '../../../../../../core/service/data.exchange.service';
 import { ThirdPartyIntegrationService } from '../../service/third-party-integration.service';
 import { ViewThirdPartyIntegrationComponent } from '../view-third-party-integration/view-third-party-integration.component';
+import { KeycloakService } from 'keycloak-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'kt-list-third-party-integration',
@@ -32,8 +34,15 @@ export class ListThirdPartyIntegrationComponent implements OnInit {
 		private layoutUtilsService: LayoutUtilsService,
 		public dialog: MatDialog,
     private router: Router,
-    private dataExchangeService: DataExchangeService
-  ) { }
+    private dataExchangeService: DataExchangeService,
+    private keycloakService: KeycloakService,
+    private translate: TranslateService
+  ) { 
+    if (!this.keycloakService.isUserInRole('list_third_party_integration')) {
+      this.router.navigate(['/'])
+      this.layoutUtilsService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+    }
+  }
 
   ngOnInit() {
       this.reloadData();

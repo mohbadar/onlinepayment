@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { Province } from '../../model/province.model';
 import { ProvinceService } from '../../service/province.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { KeycloakService } from 'keycloak-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -31,12 +33,15 @@ export class CreateProvinceComponent implements OnInit {
         private layoutUtilService: LayoutUtilsService,
         private router: Router,
         private provinceService: ProvinceService,
-        private spinner: NgxSpinnerService
+        private spinner: NgxSpinnerService,
+        private keycloakService: KeycloakService,
+        private translate: TranslateService
 
     ) {
-
-
-
+        if (!this.keycloakService.isUserInRole('create_province')) {
+            this.router.navigate(['/'])
+            this.layoutUtilService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+        }
     }
 
 

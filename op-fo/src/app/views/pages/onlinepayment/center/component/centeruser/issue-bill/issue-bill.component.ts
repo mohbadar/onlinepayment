@@ -10,6 +10,8 @@ import { CenterService } from '../../../service/center.service';
 import { BillType } from 'app/views/pages/onlinepayment/bill-type/model/bill-type.model';
 import { BillTypeService } from 'app/views/pages/onlinepayment/bill-type/service/bill-type.service';
 import { BillDetailRepesentationComponent } from '../bill-detail-repesentation/bill-detail-repesentation.component';
+import { KeycloakService } from 'keycloak-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -42,7 +44,13 @@ export class IssueBillComponent implements OnInit {
         private centerService: CenterService,
         private billTypeService: BillTypeService,
         public dialog: MatDialog,
+        private keycloakService: KeycloakService,
+        private translate: TranslateService
     ) {
+        if (!this.keycloakService.isUserInRole('issue_bill')) {
+            this.router.navigate(['/'])
+            this.layoutUtilService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+        }
     }
 
 

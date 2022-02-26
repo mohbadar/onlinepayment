@@ -8,6 +8,7 @@ import { AgentService } from '../../service/agent.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { LayoutUtilsService, MessageType } from 'app/core/_base/crud';
 import { ExcelService } from 'app/core/service/excel.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'kt-agent-revenue-report',
@@ -39,10 +40,12 @@ constructor(
     private spinner: NgxSpinnerService,
     private layoutUtilService:LayoutUtilsService,
     private excelService: ExcelService,
+    private translate: TranslateService
 ) {
-    // if (!this.keycloakService.isUserInRole('payments_balancesheet')) {
-    //     this.router.navigate(['/'])
-    // }
+  if (!this.keycloakService.isUserInRole('agent_revenue_report')) {
+    this.router.navigate(['/'])
+    this.layoutUtilService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+  }
 }
 
 ngOnInit() { }

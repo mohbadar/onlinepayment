@@ -9,6 +9,8 @@ import { ProvinceService } from '../../../province/service/province.service';
 import { Center } from '../../model/center.model';
 import { CenterService } from '../../service/center.service';
 import { OrganizationService } from '../../../organization/service/organization.service';
+import { TranslateService } from '@ngx-translate/core';
+import { KeycloakService } from 'keycloak-angular';
 
 
 @Component({
@@ -38,9 +40,15 @@ export class CreateCenterComponent implements OnInit {
         private centerService: CenterService,
         private spinner: NgxSpinnerService,
         private provinceService: ProvinceService,
-        private organizationService: OrganizationService
+        private organizationService: OrganizationService,
+        private keycloakService: KeycloakService,
+        private translate: TranslateService
 
     ) {
+        if (!this.keycloakService.isUserInRole('create_center')) {
+            this.router.navigate(['/'])
+            this.layoutUtilService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+        }
     }
 
 

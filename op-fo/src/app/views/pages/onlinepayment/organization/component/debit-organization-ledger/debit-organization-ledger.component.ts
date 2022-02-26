@@ -10,6 +10,7 @@ import { LayoutUtilsService } from 'app/core/_base/crud';
 import { Province } from '../../../province/model/province.model';
 import { ProvinceService } from '../../../province/service/province.service';
 import { OrganizationService } from '../../service/organization.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -42,13 +43,15 @@ export class DebitOrganizationLedgerComponent implements OnInit {
 		public keycloakService: KeycloakService,
 		private spinner: NgxSpinnerService,
 		private organizationService: OrganizationService,
-    private provinceService: ProvinceService,
-    private pagesService: PagesService
+		private provinceService: ProvinceService,
+		private pagesService: PagesService,
+		private translate : TranslateService
 
 	) {
-		// if (!this.keycloakService.isUserInRole('agent_credit')) {
-		// 	this.router.navigate(['/']);
-		// }
+        if (!this.keycloakService.isUserInRole('debit_organization_ledger')) {
+            this.router.navigate(['/'])
+            this.layoutUtilService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+        }
 	}
 
 

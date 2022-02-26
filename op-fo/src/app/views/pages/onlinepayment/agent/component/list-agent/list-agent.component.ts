@@ -14,6 +14,8 @@ import { AgentService } from '../../service/agent.service';
 import { ViewAgentComponent } from '../view-agent/view-agent.component';
 import { AgentUserRelation } from '../../model/agent-user-relation.mode';
 import { AgentUserRelationComponent } from '../agent-user-relation/agent-user-relation.component';
+import { KeycloakService } from 'keycloak-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'kt-list-agent',
@@ -33,8 +35,16 @@ export class ListAgentComponent implements OnInit {
 		private layoutUtilsService: LayoutUtilsService,
 		public dialog: MatDialog,
     private router: Router,
-    private dataExchangeService: DataExchangeService
-  ) { }
+    private dataExchangeService: DataExchangeService,
+    private layoutUtilService: LayoutUtilsService,
+    private keycloakService: KeycloakService,
+    private translate: TranslateService
+  ) { 
+    if (!this.keycloakService.isUserInRole('list_agent')) {
+      this.router.navigate(['/'])
+      this.layoutUtilService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+     }
+  }
 
   ngOnInit() {
       this.reloadData();

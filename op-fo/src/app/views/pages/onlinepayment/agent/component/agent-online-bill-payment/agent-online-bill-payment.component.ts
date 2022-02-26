@@ -12,6 +12,7 @@ import { OrganizationService } from '../../../organization/service/organization.
 import { AgentService } from '../../service/agent.service';
 import { AgentSlipPrintComponent } from '../agent-slip-print/agent-slip-print.component';
 import { TranslateService } from '@ngx-translate/core';
+import { KeycloakService } from 'keycloak-angular';
 
 
 @Component({
@@ -46,8 +47,13 @@ export class AgentOnlineBillPaymentComponent implements OnInit {
       public dialog: MatDialog,
       private organizationService: OrganizationService,
       private agentService: AgentService,
-      private translate: TranslateService
+      private translate: TranslateService,
+      private keycloakService: KeycloakService
   ) {
+    if (!this.keycloakService.isUserInRole('agent_online_bill_payment')) {
+			this.router.navigate(['/'])
+			this.layoutUtilService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+		}
   }
 
 

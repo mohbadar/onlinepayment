@@ -6,6 +6,8 @@ import { LayoutUtilsService, MessageType } from 'app/core/_base/crud';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Center } from '../../model/center.model';
 import { CenterService } from '../../service/center.service';
+import { KeycloakService } from 'keycloak-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'kt-update-center',
@@ -33,8 +35,17 @@ export class UpdateCenterComponent implements OnInit {
         private dataExchangeService: DataExchangeService,
         private router: Router,
         private layoutUtilService: LayoutUtilsService,
-        private spinner: NgxSpinnerService
-    ) { }
+        private spinner: NgxSpinnerService,
+        private keycloakService: KeycloakService,
+        private translate: TranslateService,
+        private layoutUtilsService: LayoutUtilsService
+
+    ) {
+        if (!this.keycloakService.isUserInRole('update_center')) {
+            this.router.navigate(['/'])
+            this.layoutUtilsService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+        }
+     }
 
     ngOnInit() {
 

@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { LayoutUtilsService, MessageType } from 'app/core/_base/crud';
 import { AgentService } from 'app/views/pages/onlinepayment/agent/service/agent.service';
@@ -38,8 +39,15 @@ export class ConfirmBillPaymentComponent implements OnInit {
       private agentService: AgentService,
       private spinner: NgxSpinnerService,
       private pagesService: PagesService,
-      private translate: TranslateService
-  ) { }
+      private translate: TranslateService,
+      private keycloakService: KeycloakService,
+      private router: Router
+  ) {
+    if (!this.keycloakService.isUserInRole('confirm_bill_payment')) {
+      this.router.navigate(['/'])
+      this.layoutUtilService.showActionNotification(this.translate.instant('UN_AUTHORIZED_ACCESS'));
+    }
+   }
 
   ngOnInit() {
       this.toDayDate= this.pagesService.getCurrentJalaliDate();
