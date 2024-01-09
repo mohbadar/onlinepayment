@@ -1,5 +1,14 @@
 ## Online Payment System BackOffice
 
+### Main Technologies: 
+- Spring Boot
+- Angular
+- PostgreSQL
+- Redis
+- Apache Kafka
+
+
+
 #### How to setup the project
 - Download Keycloak from (https://www.keycloak.org/downloads.html)
 - Setup Anar Framework
